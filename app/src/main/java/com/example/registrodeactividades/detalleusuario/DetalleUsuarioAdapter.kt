@@ -17,9 +17,7 @@ class DetalleUsuarioAdapter: RecyclerView.Adapter<DetalleUsuarioAdapter.UserView
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.list_item_user, parent, false)
-        return UserViewHolder(view)
+        return UserViewHolder.from(parent)
     }
 
     override fun getItemCount(): Int = data.size
@@ -30,7 +28,7 @@ class DetalleUsuarioAdapter: RecyclerView.Adapter<DetalleUsuarioAdapter.UserView
         holder.bind(item)
     }
 
-    class UserViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    class UserViewHolder private constructor(view: View) : RecyclerView.ViewHolder(view){
         //        val id: TextView = view.findViewById(R.id.id_item)
 //        val photo: ImageView = view.findViewById(R.id.image_item)
         val textNombre: TextView = view.findViewById(R.id.user_text)
@@ -67,5 +65,14 @@ class DetalleUsuarioAdapter: RecyclerView.Adapter<DetalleUsuarioAdapter.UserView
 //            textDinero.text = "S/. ${element.dinero}"
             //itemView.setOnClickListener { onClickListener(element) }
         }
+        companion object {
+            fun from(parent: ViewGroup): UserViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.list_item_user, parent, false)
+                return UserViewHolder(view)
+            }
+        }
     }
+
+
 }
