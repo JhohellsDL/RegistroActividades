@@ -19,7 +19,7 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> detalleUsuarioViewModel.onNewRegisterHijo()}"
+            android:onClick="@{() -> detalleUsuarioViewModel.onUnicoRegisterHijos()}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
         <androidx.appcompat.widget.AppCompatButton
@@ -28,6 +28,13 @@
             android:layout_height="wrap_content"
             android:onClick="@{() -> detalleUsuarioViewModel.onLimpiarResgistro()}"
             app:layout_constraintTop_toBottomOf="@id/button"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> detalleUsuarioViewModel.getUsuario()}"
+            app:layout_constraintTop_toBottomOf="@id/button2"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatTextView

@@ -9,15 +9,20 @@ import androidx.lifecycle.MutableLiveData
 import com.example.contadorcasino.database.Hijo
 import com.example.contadorcasino.database.HijosDataBaseDao
 import kotlinx.coroutines.*
+import java.util.*
 
 class DetalleUsuarioViewModel(
     val database: HijosDataBaseDao,
     application: Application
-): AndroidViewModel(application) {
+) : AndroidViewModel(application) {
 
     private var _hijo = MutableLiveData<Hijo>()
     val hijo: LiveData<Hijo>
         get() = _hijo
+
+    private var _hMatthew = MutableLiveData<Hijo>()
+    val hMatthew: LiveData<Hijo>
+        get() = _hMatthew
 
     val hijos = database.getAllHijos()
 
@@ -37,59 +42,103 @@ class DetalleUsuarioViewModel(
         }
     }
 
-    val hijoAux1 = Hijo(nombre = "Andrew")
-    val hijoAux2 = Hijo(nombre = "Matthew")
+    val hijoAndrew = Hijo(
+        //hijoId = 123456,
+        photoResourceId = 0,
+        nombre = "Andrew",
+        fecha = Date().toString(),
+        puntosPremio = 100,
+        puntosCastigo = 20,
+        puntosJuego = 500,
+        puntosAyer = 300,
+        puntosHoy = 200,
+        dinero = 15.5f
+    )
+    val hijoMatthew = Hijo(
+        //hijoId =123457,
+        photoResourceId = 0,
+        nombre = "Matthew",
+        fecha = Date().toString(),
+        puntosPremio = 100,
+        puntosCastigo = 20,
+        puntosJuego = 500,
+        puntosAyer = 300,
+        puntosHoy = 200,
+        dinero = 15.5f
+    )
     private suspend fun getHijoFromDataBase(): Hijo? {
-        return withContext(Dispatchers.IO){
+        return withContext(Dispatchers.IO) {
             var phijo = database.getHijoUser()
             phijo
         }
     }
-
-    fun onNewRegisterHijo(){
+    fun onUnicoRegisterHijos() {
         uiScope.launch {
-            val newRegistro = Hijo()
-            insert(hijoAux1)
+            insert(hijoAndrew)
+            insert(hijoMatthew)
             _hijo.value = getHijoFromDataBase()
-            Log.i("hijo","${_hijo.value?.hijoId}")
-            Log.i("hijo","${hijos}")
+            val idAndrew = _hijo.value?.hijoId?.minus(1)
+            _hMatthew.value = get(idAndrew!!)
+            Log.i("hijo", "${_hijo.value?.hijoId}")
+            Log.i("hijo", "${_hMatthew.value?.hijoId}")
         }
     }
+
     private suspend fun insert(newRegistro: Hijo) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             database.insert(newRegistro)
         }
     }
 
-    fun onRegisterActividades(){
+    fun getUsuario() {
         uiScope.launch {
-            var registro = _hijo.value ?: return@launch
+            var registro = get(29L)
+            registro?.nombre = "tatorio"
+            // Datos para actualizar
+            Log.i("hijo", "${registro?.hijoId}")
+            Log.i("hijo", "${registro}")
+            update(registro!!)
+        }
+    }
+
+    private suspend fun get(id: Long): Hijo? {
+        return withContext(Dispatchers.IO) {
+            var phijo = database.get(id)
+            phijo
+        }
+    }
+
+    fun onRegisterActividades() {
+        uiScope.launch {
+            var registro = database.get(29L)
+            registro.nombre = "tatorio"
             // Datos para actualizar
             update(registro)
         }
     }
+
     private suspend fun update(registro: Hijo) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             database.update(registro)
         }
     }
 
-    fun onLimpiarResgistro(){
+    fun onLimpiarResgistro() {
         uiScope.launch {
             limpiarRegistro()
             _hijo.value = Hijo()
-            Log.i("hijo","Limpiando...")
+            Log.i("hijo", "Limpiando...")
         }
     }
 
     private suspend fun limpiarRegistro() {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             database.clear()
         }
     }
 
     override fun onCleared() {
-        Log.i("viewmodel","Cerradasdfadfo!")
+        Log.i("viewmodel", "Cerradasdfadfo!")
         super.onCleared()
         viewModelJob.cancel()
     }
