@@ -1,9 +1,9 @@
 package com.example.registrodeactividades.detalleusuario
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contadorcasino.database.Hijo
@@ -15,8 +15,23 @@ class DetalleUsuarioAdapter: RecyclerView.Adapter<DetalleUsuarioAdapter.UserView
             field = value
             notifyDataSetChanged()
         }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val view = layoutInflater.inflate(R.layout.list_item_user, parent, false)
+        return UserViewHolder(view)
+    }
+
+    override fun getItemCount(): Int = data.size
+
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        val item = data[position]
+        //val res = holder.textNombre.context.resources
+        holder.bind(item)
+    }
+
     class UserViewHolder(view: View) : RecyclerView.ViewHolder(view){
-//        val id: TextView = view.findViewById(R.id.id_item)
+        //        val id: TextView = view.findViewById(R.id.id_item)
 //        val photo: ImageView = view.findViewById(R.id.image_item)
         val textNombre: TextView = view.findViewById(R.id.user_text)
         /*val textFecha: TextView = view.findViewById(R.id.text_fecha)
@@ -27,6 +42,14 @@ class DetalleUsuarioAdapter: RecyclerView.Adapter<DetalleUsuarioAdapter.UserView
         val textPuntosHoy: TextView = view.findViewById(R.id.puntosHoy)
         val textDinero: TextView = view.findViewById(R.id.dinero)*/
 
+        fun bind(
+            item: Hijo
+        ) {
+            if (item.nombre == "Andrew") {
+                textNombre.setTextColor(Color.RED)
+            }
+            textNombre.text = item.nombre
+        }
         fun render(
             //context: Context,
             element: Hijo,
@@ -45,18 +68,4 @@ class DetalleUsuarioAdapter: RecyclerView.Adapter<DetalleUsuarioAdapter.UserView
             //itemView.setOnClickListener { onClickListener(element) }
         }
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.list_item_user, parent, false)
-        return UserViewHolder(view)
-    }
-
-    override fun getItemCount(): Int = data.size
-
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val item = data[position]
-        holder.textNombre.text = item.nombre
-    }
-
 }
