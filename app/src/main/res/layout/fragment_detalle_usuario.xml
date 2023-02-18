@@ -47,16 +47,16 @@
             android:text="@{detalleUsuarioViewModel.hijo.fecha}"
             tools:text="Usuario"/>
 
-
-<!--        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_users"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/detalle_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginEnd="90dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/list_item_user"/>-->
+            tools:listitem="@layout/list_item_user"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

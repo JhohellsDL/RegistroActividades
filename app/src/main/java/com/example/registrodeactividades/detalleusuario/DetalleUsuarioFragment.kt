@@ -32,9 +32,18 @@ class DetalleUsuarioFragment : Fragment() {
 
         //-----------------------------------------------------------------------------------------------------------------------------------
 
+
+
+        //--------------------------------- Para el RECYCLERVIEW --------------------------------------------------------------
+        val adapter = DetalleUsuarioAdapter()
+        binding.detalleRecyclerview.adapter = adapter
+
         detalleUsuarioViewModel.hijos.observe(viewLifecycleOwner, Observer {
+            adapter.data = it
             Log.i("hijo"," lista ${it}")
         })
+        //-----------------------------------------------------------------------------------------------------------------------------------
+
 
         return binding.root
     }
