@@ -92,7 +92,7 @@ class DetalleUsuarioViewModel(
 
     fun getUsuario() {
         uiScope.launch {
-            var registro = get(29L)
+            var registro = get(123487L)
             registro?.nombre = "tatorio"
             // Datos para actualizar
             Log.i("hijo", "${registro?.hijoId}")

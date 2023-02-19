@@ -2,14 +2,14 @@ package com.example.registrodeactividades.detalleusuario
 
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contadorcasino.database.Hijo
-import com.example.registrodeactividades.R
+import com.example.registrodeactividades.databinding.ListItemUserBinding
 
-class DetalleUsuarioAdapter: RecyclerView.Adapter<DetalleUsuarioAdapter.UserViewHolder>() {
+class DetalleUsuarioAdapter(
+    private val onClickListener: (Hijo) -> Unit
+) : RecyclerView.Adapter<DetalleUsuarioAdapter.UserViewHolder>() {
     var data = listOf<Hijo>()
         set(value) {
             field = value
@@ -25,13 +25,11 @@ class DetalleUsuarioAdapter: RecyclerView.Adapter<DetalleUsuarioAdapter.UserView
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val item = data[position]
         //val res = holder.textNombre.context.resources
-        holder.bind(item)
+        holder.bind(item, onClickListener)
     }
 
-    class UserViewHolder private constructor(view: View) : RecyclerView.ViewHolder(view){
-        //        val id: TextView = view.findViewById(R.id.id_item)
-//        val photo: ImageView = view.findViewById(R.id.image_item)
-        val textNombre: TextView = view.findViewById(R.id.user_text)
+    class UserViewHolder private constructor(val binding: ListItemUserBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         /*val textFecha: TextView = view.findViewById(R.id.text_fecha)
         val textPuntosPremio: TextView = view.findViewById(R.id.puntosPremio)
         val textPuntosCastigo: TextView = view.findViewById(R.id.puntosCastigo)
@@ -41,13 +39,28 @@ class DetalleUsuarioAdapter: RecyclerView.Adapter<DetalleUsuarioAdapter.UserView
         val textDinero: TextView = view.findViewById(R.id.dinero)*/
 
         fun bind(
-            item: Hijo
+            item: Hijo,
+            onClickListener: (Hijo) -> Unit
         ) {
             if (item.nombre == "Andrew") {
-                textNombre.setTextColor(Color.RED)
+                binding.userText.setTextColor(Color.RED)
             }
-            textNombre.text = item.nombre
+            val cad = "ID: ${item.hijoId}\n" +
+                    "NOMBRE: ${item.nombre}\n" +
+                    "FOTO: ${item.photoResourceId}\n" +
+                    "FECHA: ${item.fecha}\n" +
+                    "PTS PREMIO: ${item.puntosPremio}\n" +
+                    "PTS CASTIGO: ${item.puntosCastigo}\n" +
+                    "PTS JUEGO: ${item.puntosJuego}\n" +
+                    "PTS AYER: ${item.puntosAyer}\n" +
+                    "PTS HOY: ${item.puntosHoy}\n" +
+                    "DINERO: ${item.dinero}\n"
+
+            binding.userText.text = cad
+            //binding.clickListener = item
+            itemView.setOnClickListener { onClickListener(item) }
         }
+
         fun render(
             //context: Context,
             element: Hijo,
@@ -55,7 +68,7 @@ class DetalleUsuarioAdapter: RecyclerView.Adapter<DetalleUsuarioAdapter.UserView
         ) {
 //            id.text = element.hijoId.toString()
 //            photo.setImageResource(element.photoResourceId)
-            textNombre.text = element.nombre
+            binding.userText.text = element.nombre
 //            textFecha.text = "Fecha:  ${element.fecha}"
 //            textPuntosPremio.text = element.puntosPremio.toString()
 //            textPuntosCastigo.text = element.puntosCastigo.toString()
@@ -65,14 +78,17 @@ class DetalleUsuarioAdapter: RecyclerView.Adapter<DetalleUsuarioAdapter.UserView
 //            textDinero.text = "S/. ${element.dinero}"
             //itemView.setOnClickListener { onClickListener(element) }
         }
+
         companion object {
             fun from(parent: ViewGroup): UserViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val view = layoutInflater.inflate(R.layout.list_item_user, parent, false)
-                return UserViewHolder(view)
+                val binding = ListItemUserBinding.inflate(layoutInflater, parent, false)
+                return UserViewHolder(binding)
             }
         }
     }
+}
 
-
+class ItemListener(val clickListener: (hijoId: Long) -> Unit) {
+    fun onClick(hijo: Hijo) = clickListener(hijo.hijoId)
 }
