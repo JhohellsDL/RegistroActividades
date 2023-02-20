@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.contadorcasino.database.Hijo
 import com.example.contadorcasino.database.HijosDataBase
 import com.example.registrodeactividades.R
@@ -43,15 +45,15 @@ class DetalleUsuarioFragment : Fragment() {
         val adapter = DetalleUsuarioAdapter(onClickListener = {
             Toast.makeText(context, "hola ${it.nombre}", Toast.LENGTH_SHORT).show()
             detalleUsuarioViewModel.onSleepNightClicked(it.hijoId) // Agregado para la navegacion
-            onClickListener()
         })
 
         //*********** PARA NAVEGACION *****************************
         detalleUsuarioViewModel.navigateToSleepDataQuality.observe(viewLifecycleOwner, Observer {night ->
             night?.let {
-                this.findNavController().navigate(R.id.action_detalleUsuarioFragment_to_registroPorUsuarioFragment)
+                //this.findNavController().navigate(R.id.action_detalleUsuarioFragment_to_registroPorUsuarioFragment)
+                this.findNavController().navigate(DetalleUsuarioFragmentDirections.actionDetalleUsuarioFragmentToRegistroPorUsuarioFragment(night))
                 detalleUsuarioViewModel.onSleepDataQualityNavigated()
-                Toast.makeText(context, "holaasdfdfd ${detalleUsuarioViewModel.navigateToSleepDataQuality.value}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "holaasdfdfd $night", Toast.LENGTH_SHORT).show()
             }
         })
         //**********************************************************
@@ -67,6 +69,4 @@ class DetalleUsuarioFragment : Fragment() {
 
         return binding.root
     }
-    private fun onClickListener() =
-        Navigation.createNavigateOnClickListener(R.id.action_inicioFragment_to_detalleUsuarioFragment)
 }

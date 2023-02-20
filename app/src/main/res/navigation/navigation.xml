@@ -27,5 +27,9 @@
         android:id="@+id/registroPorUsuarioFragment"
         android:name="com.example.registrodeactividades.registroporusuario.RegistroPorUsuarioFragment"
         android:label="fragment_registro_por_usuario"
-        tools:layout="@layout/fragment_registro_por_usuario" />
+        tools:layout="@layout/fragment_registro_por_usuario" >
+        <argument
+            android:name="userId"
+            app:argType="long" />
+    </fragment>
 </navigation>

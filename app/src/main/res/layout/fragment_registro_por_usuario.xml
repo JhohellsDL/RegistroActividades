@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".registroporusuario.RegistroPorUsuarioFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--<data>
+        <variable
+            name="hijo"
+            type="com.example.contadorcasino.database.Hijo" />
+        <variable
+            name="clickListener"
+            type="com.example.registrodeactividades.detalleusuario.ItemListener"/>
+    </data>-->
+    <data>
+        <variable
+            name="registroPorUsuarioViewModel"
+            type="com.example.registrodeactividades.registroporusuario.RegistroPorUsuarioViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@color/teal_200">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/user_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{registroPorUsuarioViewModel.user.nombre}" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="edit"
+            android:onClick="@{() -> registroPorUsuarioViewModel.getUsuario()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_text"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
