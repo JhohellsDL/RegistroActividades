@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.contadorcasino.database.Hijo
 import com.example.contadorcasino.database.HijosDataBase
 import com.example.registrodeactividades.R
 import com.example.registrodeactividades.databinding.FragmentDetalleUsuarioBinding
@@ -38,7 +42,19 @@ class DetalleUsuarioFragment : Fragment() {
         //--------------------------------- Para el RECYCLERVIEW --------------------------------------------------------------
         val adapter = DetalleUsuarioAdapter(onClickListener = {
             Toast.makeText(context, "hola ${it.nombre}", Toast.LENGTH_SHORT).show()
+            detalleUsuarioViewModel.onSleepNightClicked(it.hijoId) // Agregado para la navegacion
+            onClickListener()
         })
+
+        //*********** PARA NAVEGACION *****************************
+        detalleUsuarioViewModel.navigateToSleepDataQuality.observe(viewLifecycleOwner, Observer {night ->
+            night?.let {
+                this.findNavController().navigate(R.id.action_detalleUsuarioFragment_to_registroPorUsuarioFragment)
+                detalleUsuarioViewModel.onSleepDataQualityNavigated()
+                Toast.makeText(context, "holaasdfdfd ${detalleUsuarioViewModel.navigateToSleepDataQuality.value}", Toast.LENGTH_SHORT).show()
+            }
+        })
+        //**********************************************************
 
         binding.detalleRecyclerview.adapter = adapter
 
@@ -51,5 +67,6 @@ class DetalleUsuarioFragment : Fragment() {
 
         return binding.root
     }
-
+    private fun onClickListener() =
+        Navigation.createNavigateOnClickListener(R.id.action_inicioFragment_to_detalleUsuarioFragment)
 }

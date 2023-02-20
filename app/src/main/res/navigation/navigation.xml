@@ -18,5 +18,14 @@
         android:id="@+id/detalleUsuarioFragment"
         android:name="com.example.registrodeactividades.detalleusuario.DetalleUsuarioFragment"
         android:label="fragment_detalle_usuario"
-        tools:layout="@layout/fragment_detalle_usuario" />
+        tools:layout="@layout/fragment_detalle_usuario" >
+        <action
+            android:id="@+id/action_detalleUsuarioFragment_to_registroPorUsuarioFragment"
+            app:destination="@id/registroPorUsuarioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registroPorUsuarioFragment"
+        android:name="com.example.registrodeactividades.registroporusuario.RegistroPorUsuarioFragment"
+        android:label="fragment_registro_por_usuario"
+        tools:layout="@layout/fragment_registro_por_usuario" />
 </navigation>
