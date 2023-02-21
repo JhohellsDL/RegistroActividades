@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.contadorcasino.database.Hijo
 import com.example.contadorcasino.database.HijosDataBaseDao
+import com.example.registrodeactividades.database.DataSource
 import kotlinx.coroutines.*
 
 class ActividadesViewModel(
@@ -17,12 +18,19 @@ class ActividadesViewModel(
     val user: LiveData<Hijo>
         get() = _user
 
+    private var _ptsGanados = MutableLiveData<Int>()
+    val ptsGanados: LiveData<Int>
+        get() = _ptsGanados
+
+    val myPositiveDataset = DataSource().loadPositiveActions()
+
     //-----------------------------------para coroutinas------------------------------------------------
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope( Dispatchers.Main +viewModelJob)
     //--------------------------------------------------------------------------------------------------
 
     init {
+        _ptsGanados.value = 0
         initializeUser()
     }
 
@@ -61,5 +69,13 @@ class ActividadesViewModel(
             val pHijo = dataBaseDao.get(userId)
             pHijo
         }
+    }
+
+    fun onAccionPositivaClicked(id: Int){
+        _ptsGanados.value = _ptsGanados.value!! + id
+    }
+
+    fun onSleepDataQualityNavigated() {
+        _ptsGanados.value = null
     }
 }

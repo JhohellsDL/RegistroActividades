@@ -1,5 +1,41 @@
 <resources>
     <string name="app_name">Registro de Actividades</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="positiveAction1">Lavar platos</string>
+    <string name="positiveAction2">Arreglar la sala</string>
+    <string name="positiveAction3">Arreglar la cocina</string>
+    <string name="positiveAction4">Arreglar la ropa</string>
+    <string name="positiveAction5">Trapear</string>
+    <string name="positiveAction6">Lavar la cocina</string>
+    <string name="positiveAction7">Ser amable</string>
+    <string name="positiveAction8">Bañar al perro</string>
+    <string name="positiveAction9">Cuidar</string>
+    <string name="positiveAction10">Recoger juguetes</string>
+    <string name="positiveAction11">Lavar el baño</string>
+    <string name="positiveAction12">Ayudar</string>
+    <string name="positiveAction13">Cocinar</string>
+    <string name="positiveAction14">Jugar con Riley</string>
+    <string name="positiveAction15">Lavarse los pies</string>
+    <string name="positiveAction16">Llegar temprano</string>
+    <string name="positiveAction17">Hablar en ingles</string>
+
+    <string name="negativeAction1">Cara fea</string>
+    <string name="negativeAction2">Ser malo</string>
+    <string name="negativeAction3">Molestar</string>
+    <string name="negativeAction4">Golpear</string>
+    <string name="negativeAction5">No despedirse</string>
+    <string name="negativeAction6">Malcriado</string>
+    <string name="negativeAction7">Hacer problemas</string>
+    <string name="negativeAction8">Golpear al perro</string>
+    <string name="negativeAction9">Ser sucio</string>
+    <string name="negativeAction10">Mentiroso</string>
+    <string name="negativeAction11">Por sonso</string>
+    <string name="negativeAction12">Ser descuidado</string>
+    <string name="negativeAction13">Hablar groserias</string>
+    <string name="negativeAction14">Hablar feo</string>
+    <string name="negativeAction15">No lavarse los pies</string>
+    <string name="negativeAction16">No llegar temprano</string>
+    <string name="negativeAction17">No hablar en ingles</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
