@@ -15,14 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_200"
         android:padding="8dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="cvx" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
@@ -46,28 +39,30 @@
                     android:layout_marginStart="20dp"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    android:textColor="@color/orange"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Andrew"/>
                 <TextView
-                    android:id="@+id/id_item"
+                    android:id="@+id/text_id_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:textSize="10sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/user_text"
-                    tools:text="123456"/>
+                    tools:text="ID: 123456"
+                    tools:ignore="SmallSp" />
                 <TextView
                     android:id="@+id/text_fecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
                     android:textSize="9sp"
-                    android:text="Fecha 20/20/20"
+                    android:text="@string/fecha_test"
                     app:layout_constraintTop_toTopOf="@id/user_text"
                     app:layout_constraintBottom_toBottomOf="@id/user_text"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="SmallSp" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout_puntos"
@@ -79,43 +74,40 @@
                     app:layout_constraintTop_toBottomOf="@id/user_text"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/puntosAyer"
+                        android:id="@+id/text_puntos_ayer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
                         android:textSize="12sp"
                         android:layout_weight="1"
-                        android:text="Ayer 1 pts"/>
+                        android:text="@string/text_ayer_test"/>
                     <TextView
-                        android:id="@+id/puntosHoy"
+                        android:id="@+id/text_puntos_hoy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textColor="@color/white"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:layout_weight="1"
-                        android:text="Hoy 340 pts"/>
+                        android:text="@string/text_hoy_test"/>
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/dinero"
+                    android:id="@+id/text_dinero"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
                     android:textSize="28sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/linearLayout_puntos"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/linearLayout_puntos"
-                    android:text="S/. 13.50" />
+                    android:text="@string/text_dinero_test" />
 
                 <View
                     android:id="@+id/divider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/white"
                     android:layout_marginTop="20dp"
+                    android:background="?android:attr/listDivider"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/linearLayout_puntos"/>
@@ -138,28 +130,28 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/puntosPremio"
+                            android:id="@+id/text_puntos_premio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textColor="@color/white"
                             android:textSize="12sp"
-                            android:text="130"
+                            android:text="@string/nro_test"
                             tools:text="130" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textColor="@color/white"
                             android:textSize="12sp"
-                            android:text="Premios" />
+                            android:text="@string/premios" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <View
                         android:id="@+id/divider2"
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/white" />
+                        android:background="?android:attr/listDivider"
+                        android:layout_height="match_parent"/>
+
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -167,28 +159,29 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/puntosCastigo"
+                            android:id="@+id/text_puntos_castigo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textColor="@color/white"
                             android:textSize="12sp"
-                            android:text="130"
+                            android:text="@string/nro_test"
                             tools:text="130" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textColor="@color/white"
                             android:textSize="12sp"
-                            android:text="Castigo" />
+                            android:text="@string/castigo" />
+
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <View
                         android:id="@+id/divider3"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="@color/white" />
+                        android:background="?android:attr/listDivider"/>
+
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -196,26 +189,24 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/puntosJuego"
+                            android:id="@+id/text_puntos_juego"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textColor="@color/white"
                             android:textSize="12sp"
-                            android:text="130"
+                            android:text="@string/nro_test"
                             tools:text="130" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textColor="@color/white"
                             android:textSize="12sp"
-                            android:text="En Juego" />
+                            android:text="@string/en_juego" />
+
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -228,9 +219,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:cardCornerRadius="20dp">
+
             <ImageView
                 android:id="@+id/image_item"
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/andrew"/>

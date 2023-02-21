@@ -36,7 +36,7 @@ class RegistroPorUsuarioViewModel(
     }
     private suspend fun getUserFromDataBase(): Hijo? {
         return withContext(Dispatchers.IO){
-            val puser = dataBase.get(123497L)
+            val puser = dataBase.get(userId)
             Log.i("hijo","--puser ${puser.nombre}")
             puser
         }

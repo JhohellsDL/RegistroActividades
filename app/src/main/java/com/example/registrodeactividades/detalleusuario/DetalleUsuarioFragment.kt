@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -28,39 +27,40 @@ class DetalleUsuarioFragment : Fragment() {
         val datasource = HijosDataBase.getInstance(application).hijosDataBaseDao
         val viewModelFactory = DetalleUsuarioViewModelFactory(datasource, application)
 
-        val detalleUsuarioViewModel = ViewModelProvider(this, viewModelFactory)[DetalleUsuarioViewModel::class.java]
+        val detalleUsuarioViewModel =
+            ViewModelProvider(this, viewModelFactory)[DetalleUsuarioViewModel::class.java]
         binding.detalleUsuarioViewModel = detalleUsuarioViewModel
         binding.lifecycleOwner = this
-
         //-----------------------------------------------------------------------------------------------------------------------------------
 
-
-
         //--------------------------------- Para el RECYCLERVIEW --------------------------------------------------------------
-        val adapter = DetalleUsuarioAdapter(onClickListener = {
-            Toast.makeText(context, "hola ${it.nombre}", Toast.LENGTH_SHORT).show()
-            detalleUsuarioViewModel.onSleepNightClicked(it.hijoId) // Agregado para la navegacion
-        })
+        val adapter = DetalleUsuarioAdapter(
+            onClickListener = {
+                detalleUsuarioViewModel.onUserClicked(it.hijoId) // Agregado para la navegacion
+            })
 
         //*********** PARA NAVEGACION *****************************
-        detalleUsuarioViewModel.navigateToSleepDataQuality.observe(viewLifecycleOwner, Observer {night ->
-            night?.let {
-                //this.findNavController().navigate(R.id.action_detalleUsuarioFragment_to_registroPorUsuarioFragment)
-                this.findNavController().navigate(DetalleUsuarioFragmentDirections.actionDetalleUsuarioFragmentToRegistroPorUsuarioFragment(night))
-                detalleUsuarioViewModel.onSleepDataQualityNavigated()
-                Toast.makeText(context, "holaasdfdfd $night", Toast.LENGTH_SHORT).show()
-            }
-        })
+        detalleUsuarioViewModel.idUserForNavigation.observe(
+            viewLifecycleOwner,
+            Observer { id ->
+                id?.let {
+                    this.findNavController().navigate(
+                        DetalleUsuarioFragmentDirections.actionDetalleUsuarioFragmentToRegistroPorUsuarioFragment(
+                            id
+                        )
+                    )
+                    detalleUsuarioViewModel.onUserClickedNavigated()
+                }
+            })
         //**********************************************************
 
         binding.detalleRecyclerview.adapter = adapter
 
         detalleUsuarioViewModel.hijos.observe(viewLifecycleOwner, Observer {
             adapter.data = it
-            Log.i("hijo"," lista ${it}")
+            Log.i("hijo", "Lista : $it")
         })
         //-----------------------------------------------------------------------------------------------------------------------------------
-
 
         return binding.root
     }

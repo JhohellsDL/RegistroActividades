@@ -38,4 +38,14 @@
     <string name="negativeAction17">No hablar en ingles</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fecha_test">Mon Feb 20 10:52:12 GMT-05:00 2023</string>
+    <string name="text_ayer_test">Ayer 120 pts</string>
+    <string name="text_hoy_test">Hoy 340 pts</string>
+    <string name="text_dinero_test">S/. 13.50</string>
+    <string name="premios">Premios</string>
+    <string name="nro_test">130</string>
+    <string name="castigo">Castigo</string>
+    <string name="en_juego">En Juego</string>
+
+    <string name="soles">S/a , %s!</string>
 </resources>
