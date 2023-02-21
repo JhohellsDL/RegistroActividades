@@ -82,9 +82,9 @@ class DetalleUsuarioViewModel(
             _hMatthew.value = get(idNew!!)
         }
     }
-    private suspend fun get(id: Long): Hijo? {
+    private suspend fun get(id: Long): Hijo {
         return withContext(Dispatchers.IO) {
-            var phijo = database.get(id)
+            val phijo = database.get(id)
             phijo
         }
     }
@@ -125,11 +125,12 @@ class DetalleUsuarioViewModel(
             database.insert(newRegistro)
         }
     }
+    /*
     private suspend fun update(registro: Hijo) {
         withContext(Dispatchers.IO) {
             database.update(registro)
         }
-    }
+    }*/
     private suspend fun limpiarRegistro() {
         withContext(Dispatchers.IO) {
             database.clear()
