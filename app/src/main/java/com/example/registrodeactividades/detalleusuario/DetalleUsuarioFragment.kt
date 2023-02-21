@@ -10,13 +10,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
-import com.example.contadorcasino.database.Hijo
 import com.example.contadorcasino.database.HijosDataBase
-import com.example.registrodeactividades.R
 import com.example.registrodeactividades.databinding.FragmentDetalleUsuarioBinding
 
 class DetalleUsuarioFragment : Fragment() {

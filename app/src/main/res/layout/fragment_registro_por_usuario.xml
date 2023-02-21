@@ -30,12 +30,20 @@
             android:text="@{registroPorUsuarioViewModel.user.nombre}" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="edit"
             android:onClick="@{() -> registroPorUsuarioViewModel.getUsuario()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_text"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_registar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="registrar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_edit"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

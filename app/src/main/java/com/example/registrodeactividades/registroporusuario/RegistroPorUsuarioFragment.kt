@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.contadorcasino.database.HijosDataBase
 import com.example.registrodeactividades.R
 import com.example.registrodeactividades.databinding.FragmentRegistroPorUsuarioBinding
@@ -38,7 +39,11 @@ class RegistroPorUsuarioFragment : Fragment() {
         binding.lifecycleOwner = this
         //-------------------------------------------------------------------------------------------------------------------
 
+        binding.buttonRegistar.setOnClickListener {
+            it.findNavController().navigate(RegistroPorUsuarioFragmentDirections.actionRegistroPorUsuarioFragmentToActividadesFragment(args.userId))
+        }
         return binding.root
     }
+
 
 }
