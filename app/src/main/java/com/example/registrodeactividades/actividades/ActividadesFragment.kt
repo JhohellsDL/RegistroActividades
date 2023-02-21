@@ -27,6 +27,7 @@ class ActividadesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val myPositiveDataset = DataSource().loadPositiveActions()
+        val myNegativeDataser = DataSource().loadNegativeActions()
 
         binding = FragmentActividadesBinding.inflate(inflater)
 
@@ -50,12 +51,21 @@ class ActividadesFragment : Fragment() {
 
         //--------------------------------- Para el RECYCLERVIEW --------------------------------------------------------------
 
-        val adapter = ActividadesPositivasAdapter(onClickListener = {
-            Toast.makeText(context, "hola valo9r!! ${it.valor}", Toast.LENGTH_SHORT).show()
-            actividadesViewModel.onAccionPositivaClicked(it.valor)
-        }, data =  myPositiveDataset)
+        val adapterAccionesPositivas = ActividadesPositivasAdapter(
+            onClickListener = {
+                Toast.makeText(context, "hola valo9r!! ${it.valor}", Toast.LENGTH_SHORT).show()
+                actividadesViewModel.onAccionPositivaClicked(it.valor)
+            },
+            data = myPositiveDataset
+        )
 
-        binding.listaPositivas.adapter = adapter
+        val adapterAccionesNegativas = ActividadesNegativasAdapter(
+            onClickListener = { actividadesViewModel.onAccionNegativaClicked(it.valor) },
+            data = myNegativeDataser
+        )
+
+        binding.listaPositivas.adapter = adapterAccionesPositivas
+        binding.listaNegativas.adapter = adapterAccionesNegativas
 
         actividadesViewModel.ptsGanados.observe(viewLifecycleOwner, Observer {
             Log.i("hijo"," listaddd ${it}")

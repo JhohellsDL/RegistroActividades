@@ -74,7 +74,9 @@ class ActividadesViewModel(
     fun onAccionPositivaClicked(id: Int){
         _ptsGanados.value = _ptsGanados.value!! + id
     }
-
+    fun onAccionNegativaClicked(id: Int){
+        _ptsGanados.value = _ptsGanados.value!!- id
+    }
     fun onSleepDataQualityNavigated() {
         _ptsGanados.value = null
     }
