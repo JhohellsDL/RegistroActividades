@@ -1,18 +1,16 @@
 package com.example.registrodeactividades.registroporusuario
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.contadorcasino.database.Hijo
 import com.example.contadorcasino.database.HijosDataBaseDao
 import kotlinx.coroutines.*
-import okhttp3.Dispatcher
+import java.lang.reflect.Array.get
 
 class RegistroPorUsuarioViewModel(
-    val dataBase: HijosDataBaseDao,
+    private val dataBase: HijosDataBaseDao,
     private val userId: Long
 ): ViewModel() {
 
@@ -20,7 +18,7 @@ class RegistroPorUsuarioViewModel(
     val user : LiveData<Hijo>
         get() = _user
 
-    //-----------------------------------para coroutinas------------------------------------------------
+    //-----------------------------------para coroutines------------------------------------------------
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     //--------------------------------------------------------------------------------------------------
@@ -34,12 +32,54 @@ class RegistroPorUsuarioViewModel(
             _user.value = getUserFromDataBase()
         }
     }
-    private suspend fun getUserFromDataBase(): Hijo? {
+    private suspend fun getUserFromDataBase(): Hijo {
         return withContext(Dispatchers.IO){
-            val puser = dataBase.get(userId)
-            Log.i("hijo","--puser ${puser.nombre}")
-            puser
+            val userAux = dataBase.get(userId)
+            val cad = stringUserLog(userAux)
+            Log.i("hijo","userAux : $cad")
+            userAux
         }
+    }
+
+
+
+//************ editar**********************************
+    fun getUsuario() {
+        uiScope.launch {
+            var registro = get(userId)
+            registro?.nombre = "tatorio"
+            // Datos para actualizar
+            Log.i("hijo", "${registro?.hijoId}")
+            Log.i("hijo", "${registro}")
+            update(registro!!)
+            initializeUser()
+        }
+    }
+    private suspend fun get(id: Long): Hijo? {
+        return withContext(Dispatchers.IO){
+            val userAux = dataBase.get(id)
+            userAux
+        }
+    }
+    private suspend fun update(registro: Hijo) {
+        withContext(Dispatchers.IO) {
+            dataBase.update(registro)
+        }
+    }
+//*****************************************************
+
+    private fun stringUserLog(userAux: Hijo): String {
+        val cad = "ID: ${userAux.hijoId}\n" +
+                "NOMBRE: ${userAux.nombre}\n" +
+                "FOTO: ${userAux.photoResourceId}\n" +
+                "FECHA: ${userAux.fecha}\n" +
+                "PTS PREMIO: ${userAux.puntosPremio}\n" +
+                "PTS CASTIGO: ${userAux.puntosCastigo}\n" +
+                "PTS JUEGO: ${userAux.puntosJuego}\n" +
+                "PTS AYER: ${userAux.puntosAyer}\n" +
+                "PTS HOY: ${userAux.puntosHoy}\n" +
+                "DINERO: ${userAux.dinero}\n"
+        return cad
     }
 
     /*fun onRegisterActividades() {
@@ -51,7 +91,7 @@ class RegistroPorUsuarioViewModel(
             Log.i("hijo","--registro ${registro.nombre}")
             update(registro)
         }
-    }*/
+    }
 
     private suspend fun update(registro: Hijo) {
         withContext(Dispatchers.IO) {
@@ -71,10 +111,10 @@ class RegistroPorUsuarioViewModel(
         }
     }
 
-    private suspend fun get(id: Long): Hijo? {
+    private suspend fun get(id: Long): Hijo {
         return withContext(Dispatchers.IO) {
-            var phijo = dataBase.get(id)
-            phijo
+            val pHijo = dataBase.get(id)
+            pHijo
         }
-    }
+    }*/
 }

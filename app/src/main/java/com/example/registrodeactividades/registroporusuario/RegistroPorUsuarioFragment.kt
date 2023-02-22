@@ -1,18 +1,15 @@
 package com.example.registrodeactividades.registroporusuario
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.contadorcasino.database.HijosDataBase
-import com.example.registrodeactividades.R
 import com.example.registrodeactividades.databinding.FragmentRegistroPorUsuarioBinding
-import com.example.registrodeactividades.detalleusuario.DetalleUsuarioViewModel
-import com.example.registrodeactividades.detalleusuario.DetalleUsuarioViewModelFactory
 
 class RegistroPorUsuarioFragment : Fragment() {
 
@@ -37,11 +34,27 @@ class RegistroPorUsuarioFragment : Fragment() {
         val registroPorUsuarioViewModel = ViewModelProvider(this, viewModelFactory)[RegistroPorUsuarioViewModel::class.java]
         binding.registroPorUsuarioViewModel = registroPorUsuarioViewModel
         binding.lifecycleOwner = this
+
+        registroPorUsuarioViewModel.user.observe(viewLifecycleOwner){
+            binding.fotoItem.setImageResource(it.photoResourceId)
+            binding.textIdUser.text = "Id: ${it.hijoId}"
+            binding.textDineroTienes.text = "S/. ${it.dinero}"
+            binding.textPuntosJuego.text = it.puntosJuego.toString()
+            binding.textPuntosPremio.text = it.puntosPremio.toString()
+            binding.textPuntosCastigo.text = it.puntosCastigo.toString()
+        }
         //-------------------------------------------------------------------------------------------------------------------
 
+        //--------------------------------- Para el ENVIAR DATOS-----------------------------------------------------------
         binding.buttonRegistar.setOnClickListener {
             it.findNavController().navigate(RegistroPorUsuarioFragmentDirections.actionRegistroPorUsuarioFragmentToActividadesFragment(args.userId))
         }
+        //-------------------------------------------------------------------------------------------------------------------
+
+        binding.buttonEdit.setOnClickListener {
+            Toast.makeText(requireContext(), "Falta definir", Toast.LENGTH_SHORT).show()
+        }
+
         return binding.root
     }
 
