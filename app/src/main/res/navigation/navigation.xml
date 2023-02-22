@@ -39,6 +39,7 @@
         android:id="@+id/actividadesFragment"
         android:name="com.example.registrodeactividades.actividades.ActividadesFragment"
         android:label="fragment_actividades"
+        android:screenOrientation="portrait"
         tools:layout="@layout/fragment_actividades" >
         <argument
             android:name="userId"

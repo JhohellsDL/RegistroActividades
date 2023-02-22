@@ -3,6 +3,7 @@ package com.example.registrodeactividades.model
 data class AccionPositiva(
     val stringResourceId: Int,
     val imageResource: Int,
-    val valor: Int
+    val valor: Int,
+    var contador: Int
 ) {
 }

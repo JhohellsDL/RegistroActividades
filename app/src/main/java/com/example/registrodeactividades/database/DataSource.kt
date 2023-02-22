@@ -10,87 +10,104 @@ class DataSource {
             AccionPositiva(
                 stringResourceId = R.string.positiveAction1,
                 imageResource = R.drawable.platos_limpios,
-                valor = 35
+                valor = 35,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction2,
                 imageResource = R.drawable.arr_sala,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction3,
                 imageResource = R.drawable.arr_cocina,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction4,
                 imageResource = R.drawable.arr_ropa,
-                valor = 20
+                valor = 20,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction5,
                 imageResource = R.drawable.trapear,
-                valor = 30
+                valor = 30,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction6,
                 imageResource = R.drawable.lav_cocina,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction7,
                 imageResource = R.drawable.ser_amable,
-                valor = 20
+                valor = 20,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction8,
                 imageResource = R.drawable.ban_perro,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction9,
                 imageResource = R.drawable.cuidar,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction10,
                 imageResource = R.drawable.rec_juguetes,
-                valor = 5
+                valor = 5,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction11,
                 imageResource = R.drawable.lav_ba_o,
-                valor = 20
+                valor = 20,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction12,
                 imageResource = R.drawable.ayudar,
-                valor = 5
+                valor = 5,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction13,
                 imageResource = R.drawable.cocinar,
-                valor = 20
+                valor = 20,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction14,
                 imageResource = R.drawable.jug_riley,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction15,
                 imageResource = R.drawable.lav_pies,
-                valor = 5
+                valor = 5,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction16,
                 imageResource = R.drawable.lleg_temprano,
-                valor = 5
+                valor = 5,
+                contador = 0
             ),
             AccionPositiva(
                 stringResourceId = R.string.positiveAction17,
                 imageResource = R.drawable.hablar_ingles,
-                valor = 10
+                valor = 10,
+                contador = 0
             )
         )
     }

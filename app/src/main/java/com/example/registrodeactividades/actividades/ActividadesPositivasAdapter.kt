@@ -2,30 +2,26 @@ package com.example.registrodeactividades.actividades
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.ViewParent
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.registrodeactividades.database.DataSource
 import com.example.registrodeactividades.databinding.ListItemActividadesPositivasBinding
-import com.example.registrodeactividades.generated.callback.OnClickListener
 import com.example.registrodeactividades.model.AccionPositiva
 
 class ActividadesPositivasAdapter(
-    private val onClickListener: (AccionPositiva) -> Unit,
-    private val data: List<AccionPositiva>
-): RecyclerView.Adapter<ActividadesPositivasAdapter.ActividadesPositivasViewHolder>() {
+    private val onClickListener: (AccionPositiva) -> Unit
+): ListAdapter<AccionPositiva, ActividadesPositivasAdapter.ActividadesPositivasViewHolder>(AccionPoditivaDiffCallback()) {
 
-    /*var data = DataSource().loadPositiveActions()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }*/
     class ActividadesPositivasViewHolder private constructor(val binding: ListItemActividadesPositivasBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
             item: AccionPositiva,
             onClickListener: (AccionPositiva) -> Unit
         ) {
-            binding.actividadPositivaText.setText(item.stringResourceId)
+            binding.textPositive.setText(item.stringResourceId)
+            binding.textValorPositive.text = "${item.valor} pts"
+            binding.imagePositive.setImageResource(item.imageResource)
+            binding.textContadorItem.text = item.contador.toString()
             itemView.setOnClickListener { onClickListener(item) }
         }
 
@@ -45,10 +41,21 @@ class ActividadesPositivasAdapter(
         return ActividadesPositivasViewHolder.from(parent)
     }
 
-    override fun getItemCount(): Int = data.size
+    //override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: ActividadesPositivasViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item, onClickListener)
+    }
+
+    class AccionPoditivaDiffCallback :
+        DiffUtil.ItemCallback<AccionPositiva>() {
+        override fun areItemsTheSame(oldItem: AccionPositiva, newItem: AccionPositiva): Boolean {
+            return newItem.contador == oldItem.contador
+        }
+
+        override fun areContentsTheSame(oldItem: AccionPositiva, newItem: AccionPositiva): Boolean {
+            return oldItem == newItem
+        }
     }
 }

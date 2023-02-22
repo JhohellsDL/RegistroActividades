@@ -1,5 +1,6 @@
 package com.example.registrodeactividades.actividades
 
+import android.provider.ContactsContract.Data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.example.contadorcasino.database.Hijo
 import com.example.contadorcasino.database.HijosDataBaseDao
 import com.example.registrodeactividades.database.DataSource
+import com.example.registrodeactividades.model.AccionPositiva
 import kotlinx.coroutines.*
 
 class ActividadesViewModel(
@@ -18,11 +20,18 @@ class ActividadesViewModel(
     val user: LiveData<Hijo>
         get() = _user
 
+    private var _contadorItem = MutableLiveData<Int>()
+    val contadorItem: LiveData<Int>
+        get() = _contadorItem
+
     private var _ptsGanados = MutableLiveData<Int>()
     val ptsGanados: LiveData<Int>
         get() = _ptsGanados
 
-    val myPositiveDataset = DataSource().loadPositiveActions()
+    private val _myPositiveDataset = MutableLiveData<List<AccionPositiva>>()
+    val myPositiveDataset: LiveData<List<AccionPositiva>>
+        get() = _myPositiveDataset
+
 
     //-----------------------------------para coroutinas------------------------------------------------
     private val viewModelJob = Job()
@@ -30,7 +39,10 @@ class ActividadesViewModel(
     //--------------------------------------------------------------------------------------------------
 
     init {
+        _myPositiveDataset.value = DataSource().loadPositiveActions()
+        Log.i("hijo"," lista dentro view model ${_myPositiveDataset.value}")
         _ptsGanados.value = 0
+        _contadorItem.value = 0
         initializeUser()
     }
 
@@ -77,6 +89,18 @@ class ActividadesViewModel(
     fun onAccionNegativaClicked(id: Int){
         _ptsGanados.value = _ptsGanados.value!!- id
     }
+    fun onContadorItemClicked(){
+        _contadorItem.value = _contadorItem.value!! + 1
+    }
+
+    fun setItemList(list: List<AccionPositiva>) {
+        _myPositiveDataset.value = list
+    }
+
+    fun getItemList(): List<AccionPositiva> {
+        return _myPositiveDataset.value!!
+    }
+
     fun onSleepDataQualityNavigated() {
         _ptsGanados.value = null
     }
