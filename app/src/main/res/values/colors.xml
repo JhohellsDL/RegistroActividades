@@ -11,4 +11,11 @@
     <color name="red_1">#F44336</color>
     <color name="red_2">#E12618</color>
     <color name="orange">#FF9800</color>
+
+    <color name="orange_new">#FF6700</color>
+    <color name="white_new">#EBEBEB</color>
+    <color name="gray_new">#C0C0C0</color>
+    <color name="blue_new_1">#3A6EA5</color>
+    <color name="blue_new_2">#004E98</color>
+    <color name="transparente_new">#0CFFFFFF</color>
 </resources>

@@ -18,18 +18,18 @@
             android:id="@+id/card_foto_user"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="32dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat4"
             app:layout_constraintStart_toStartOf="parent"
-            app:cardCornerRadius="30dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/foto_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/matthew"/>
+                android:src="@drawable/matthew" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -37,7 +37,10 @@
             android:id="@+id/label_pts_ganados"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PUNTOS GANADOS: "
+            android:textSize="14sp"
+            android:layout_marginTop="-8dp"
+            android:layout_marginStart="32dp"
+            android:text="Ganados: "
             app:layout_constraintTop_toTopOf="@id/card_foto_user"
             app:layout_constraintStart_toEndOf="@id/card_foto_user"/>
         <TextView
@@ -45,16 +48,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100 pts"
-            app:layout_constraintTop_toTopOf="@id/card_foto_user"
+            android:textSize="14sp"
+            app:layout_constraintTop_toTopOf="@id/label_pts_ganados"
             app:layout_constraintStart_toEndOf="@id/label_pts_ganados"/>
 
         <TextView
             android:id="@+id/label_pts_perdidos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PUNTOS PERDIDOS: "
+            android:text="Perdidos: "
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/label_pts_ganados"
-            app:layout_constraintStart_toEndOf="@id/card_foto_user"/>
+            app:layout_constraintStart_toStartOf="@id/label_pts_ganados"/>
         <TextView
             android:id="@+id/text_puntos_perdidos"
             android:layout_width="wrap_content"
@@ -67,63 +72,88 @@
             android:id="@+id/label_pts_hoy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PUNTOS HOY: "
+            android:text="Total: "
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/label_pts_perdidos"
-            app:layout_constraintStart_toEndOf="@id/card_foto_user"/>
+            app:layout_constraintStart_toStartOf="@id/label_pts_ganados"/>
         <TextView
             android:id="@+id/text_puntos_hoy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100 pts"
+            android:textSize="14sp"
             app:layout_constraintTop_toTopOf="@id/label_pts_hoy"
             app:layout_constraintStart_toEndOf="@id/label_pts_hoy"/>
 
         <TextView
+            android:id="@+id/label_dinero_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Dinero: S/. "
+            android:textSize="14sp"
+            android:textColor="@color/orange_new"
+            app:layout_constraintTop_toBottomOf="@id/text_puntos_hoy"
+            app:layout_constraintStart_toStartOf="@id/label_pts_hoy"/>
+
+        <TextView
             android:id="@+id/text_dinero_total"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text = "fasdfsdf"
-            app:layout_constraintTop_toBottomOf="@id/card_foto_user"/>
+            android:textColor="@color/orange_new"
+            app:layout_constraintTop_toTopOf="@id/label_dinero_total"
+            app:layout_constraintStart_toEndOf="@id/label_dinero_total"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_cambiar"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="cambiar"
+            android:textSize="12sp"
+            android:layout_margin="16dp"
+            android:background="@color/transparente_new"
+            android:padding="12dp"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/baseline_swap_horiz"
             android:onClick="@{() -> actividadesViewModel.onVisible()}"
-            app:layout_constraintTop_toBottomOf="@id/text_dinero_total"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_guardarr"
-            android:layout_width="wrap_content"
+            android:id="@+id/button_guardar"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="guardar"
+            android:textSize="12sp"
+            android:layout_marginEnd="16dp"
+            android:padding="12dp"
+            android:drawablePadding="10dp"
+            android:background="@color/transparente_new"
+            android:drawableStart="@drawable/baseline_save"
             android:onClick="@{() -> actividadesViewModel.saveDatos()}"
-            app:layout_constraintTop_toBottomOf="@id/text_dinero_total"
-            app:layout_constraintStart_toEndOf="@id/button_cambiar"/>
+            app:layout_constraintTop_toBottomOf="@id/button_cambiar"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompat4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/button_cambiar">
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/button_guardar">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
                 android:id="@+id/lista_positivas"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:layout_constraintTop_toBottomOf="@id/text_dinero_total"
-                tools:listitem="@layout/list_item_actividades_positivas"/>
+                tools:listitem="@layout/list_item_actividades_positivas" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
                 android:id="@+id/lista_negativas"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:layout_constraintTop_toBottomOf="@id/text_dinero_total"
-                tools:listitem="@layout/list_item_actividades_negativas"/>
+                android:visibility="gone"
+                tools:listitem="@layout/list_item_actividades_negativas" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

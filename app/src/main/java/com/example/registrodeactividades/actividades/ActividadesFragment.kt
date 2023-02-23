@@ -81,6 +81,10 @@ class ActividadesFragment : Fragment() {
         binding.listaNegativas.layoutManager = manager2
         //-----------------------------------------------------------------------------------------------------------------------------------
 
+        actividadesViewModel.user.observe(viewLifecycleOwner){
+            binding.fotoItem.setImageResource(it.photoResourceId)
+        }
+
         actividadesViewModel.ptsGanados.observe(viewLifecycleOwner){
             binding.textPuntosGanados.text = it.toString()
         }

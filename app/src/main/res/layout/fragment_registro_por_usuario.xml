@@ -12,6 +12,7 @@
             type="com.example.registrodeactividades.detalleusuario.ItemListener"/>
     </data>-->
     <data>
+
         <variable
             name="registroPorUsuarioViewModel"
             type="com.example.registrodeactividades.registroporusuario.RegistroPorUsuarioViewModel" />
@@ -25,18 +26,18 @@
             android:id="@+id/card_foto_user"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:layout_marginTop="52dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="70dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:cardCornerRadius="70dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/foto_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/andrew"/>
+                android:src="@drawable/andrew" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -45,12 +46,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="24sp"
-            app:layout_constraintTop_toBottomOf="@id/card_foto_user"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:text="@{registroPorUsuarioViewModel.user.nombre}"
-            tools:text="Andrew"/>
+            android:textColor="@color/orange_new"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_foto_user"
+            tools:text="Andrew" />
 
         <TextView
             android:id="@+id/text_id_user"
@@ -58,21 +60,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@id/text_nombre_user"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Id : 123456"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_nombre_user"
+            tools:text="Id : 123456" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginHorizontal="26dp"
             android:layout_marginTop="52dp"
-            app:layout_constraintTop_toBottomOf="@id/text_id_user"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_id_user">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
@@ -86,22 +88,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:text="S/. 00.00" />
+                    android:text="S/. 00.00"
+                    android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:text="Ganaste" />
+                    android:text="Ganaste"
+                    android:textSize="12sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <View
                 android:id="@+id/divider1"
                 android:layout_width="1dp"
-                android:background="?android:attr/listDivider"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:background="?android:attr/listDivider" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
@@ -114,15 +117,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="18sp"
-                    android:text="S/. 54.00" />
+                    android:text="S/. 54.00"
+                    android:textColor="@color/orange_new"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="16sp"
-                    android:text="TIENES" />
+                    android:text="TIENES"
+                    android:textSize="16sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -130,7 +134,7 @@
                 android:id="@+id/divider2"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="?android:attr/listDivider"/>
+                android:background="?android:attr/listDivider" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
@@ -144,15 +148,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:text="S/. 00.00" />
+                    android:text="S/. 00.00"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:text="Perdiste" />
+                    android:text="Perdiste"
+                    android:textSize="12sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -162,24 +166,24 @@
             android:id="@+id/text_fecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:layout_marginTop="52dp"
             android:text="@{registroPorUsuarioViewModel.user.fecha}"
-            tools:text="@string/fecha_test"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat"
+            tools:text="@string/fecha_test" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="32dp"
             android:layout_marginHorizontal="26dp"
-            app:layout_constraintTop_toBottomOf="@id/text_fecha"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_fecha">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
@@ -194,20 +198,21 @@
                     android:layout_gravity="center"
                     android:textSize="12sp"
                     tools:text="130" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:text="@string/premios" />
+                    android:text="@string/premios"
+                    android:textSize="12sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <View
                 android:id="@+id/divider3"
                 android:layout_width="1dp"
-                android:background="?android:attr/listDivider"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:background="?android:attr/listDivider" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
@@ -227,8 +232,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:text="TIENES" />
+                    android:text="TIENES"
+                    android:textSize="12sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -236,7 +241,7 @@
                 android:id="@+id/divider4"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="?android:attr/listDivider"/>
+                android:background="?android:attr/listDivider" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
@@ -256,43 +261,60 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:text="@string/castigo" />
+                    android:text="@string/castigo"
+                    android:textSize="12sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_actualizar"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="32dp"
-            android:text="actualizar"
             android:onClick="@{() -> registroPorUsuarioViewModel.actualizarDatos()}"
-            app:layout_constraintStart_toStartOf="@id/linearLayoutCompat2"
-            app:layout_constraintBottom_toTopOf="@id/button_edit"/>
+            android:text="actualizar"
+            android:padding="12dp"
+            android:drawablePadding="8dp"
+            android:background="@color/transparente_new"
+            android:drawableTop="@drawable/actualizar_small"
+            app:layout_constraintBottom_toTopOf="@id/linearLayoutCompat3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat2"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_edit"
-            android:layout_width="120dp"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompat3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="32dp"
-            android:text="edit"
-            app:layout_constraintStart_toStartOf="@id/linearLayoutCompat2"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_registar"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="32dp"
-            android:text="registrar"
-            app:layout_constraintEnd_toEndOf="@id/linearLayoutCompat2"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutCompat2">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_edit"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:padding="12dp"
+                android:drawableStart="@drawable/baseline_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_new_1"
+                android:text="edit"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_registar"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"
+                android:drawableStart="@drawable/baseline_pending_actions_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_new_1"
+                android:text="registrar" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
