@@ -31,53 +31,37 @@ class DetalleUsuarioViewModel(
     //--------------------------------------------------------------------------------------------------
 
     init {
-        //initializeHijo()
     }
-    /*private fun initializeHijo() {
-        uiScope.launch {
-            //_hijo.value = getHijoFromDataBase()
-        }
-    }
-    private suspend fun getHijoFromDataBase(): Hijo? {
-        return withContext(Dispatchers.IO) {
-            var phijo = database.getHijoUser()
-            phijo
-        }
-    }*/
 
     val hijoAndrew = Hijo(
-        //hijoId = 123456,
         photoResourceId = R.drawable.andrew,
         nombre = "Andrew",
         fecha = Date().toString(),
-        puntosPremio = 100,
-        puntosCastigo = 20,
-        puntosJuego = 500,
-        puntosAyer = 300,
-        puntosHoy = 200,
-        dinero = 15.5f
+        puntosPremio = 0,
+        puntosCastigo = 0,
+        puntosJuego = 0,
+        puntosAyer = 0,
+        puntosHoy = 0,
+        dinero = 0.0f
     )
     val hijoMatthew = Hijo(
-        //hijoId =123457,
         photoResourceId = R.drawable.matthew,
         nombre = "Matthew",
         fecha = Date().toString(),
-        puntosPremio = 100,
-        puntosCastigo = 20,
-        puntosJuego = 500,
-        puntosAyer = 300,
-        puntosHoy = 200,
-        dinero = 15.5f
+        puntosPremio = 0,
+        puntosCastigo = 0,
+        puntosJuego = 0,
+        puntosAyer = 0,
+        puntosHoy = 0,
+        dinero = 0.0f
     )
 
     fun onReinicioRegistroHijos() {
         uiScope.launch {
             limpiarRegistro()
             _hijo.value = Hijo()
-
             insert(hijoAndrew)
             insert(hijoMatthew)
-            //_hijo.value = getHijoFromDataBase()
             val idNew = _hijo.value?.hijoId?.minus(1)
             _hMatthew.value = get(idNew!!)
         }
@@ -89,48 +73,11 @@ class DetalleUsuarioViewModel(
         }
     }
 
-/*
-
-    fun getUsuario() {
-        uiScope.launch {
-            var registro = get(123487L)
-            registro?.nombre = "tatorio"
-            // Datos para actualizar
-            Log.i("hijo", "${registro?.hijoId}")
-            Log.i("hijo", "${registro}")
-            update(registro!!)
-        }
-    }
-
-    fun onRegisterActividades() {
-        uiScope.launch {
-            var registro = database.get(29L)
-            registro.nombre = "tatorio"
-            // Datos para actualizar
-            update(registro)
-        }
-    }
-
-    fun onLimpiarResgistro() {
-        uiScope.launch {
-            limpiarRegistro()
-            _hijo.value = Hijo()
-            Log.i("hijo", "Limpiando...")
-        }
-    }
-*/
-
     private suspend fun insert(newRegistro: Hijo) {
         withContext(Dispatchers.IO) {
             database.insert(newRegistro)
         }
     }
-    /*
-    private suspend fun update(registro: Hijo) {
-        withContext(Dispatchers.IO) {
-            database.update(registro)
-        }
-    }*/
     private suspend fun limpiarRegistro() {
         withContext(Dispatchers.IO) {
             database.clear()

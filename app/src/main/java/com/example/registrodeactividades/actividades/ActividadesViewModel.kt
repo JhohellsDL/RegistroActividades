@@ -1,18 +1,20 @@
 package com.example.registrodeactividades.actividades
 
-import android.provider.ContactsContract.Data
 import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.contadorcasino.database.Hijo
 import com.example.contadorcasino.database.HijosDataBaseDao
 import com.example.registrodeactividades.database.DataSource
+import com.example.registrodeactividades.model.AccionNegativa
 import com.example.registrodeactividades.model.AccionPositiva
 import kotlinx.coroutines.*
 
 class ActividadesViewModel(
-    val dataBaseDao: HijosDataBaseDao,
+    private val dataBaseDao: HijosDataBaseDao,
     private val userId: Long
 ) : ViewModel() {
 
@@ -28,21 +30,61 @@ class ActividadesViewModel(
     val ptsGanados: LiveData<Int>
         get() = _ptsGanados
 
+    private var _ptsPerdidos = MutableLiveData<Int>()
+    val ptsPerdidos: LiveData<Int>
+        get() = _ptsPerdidos
+
+    private var _ptsTotal = MutableLiveData<Int>()
+    val ptsTotal: LiveData<Int>
+        get() = _ptsTotal
+
+    private var _dineroTotal = MutableLiveData<Float>()
+    val dineroTotal: LiveData<Float>
+        get() = _dineroTotal
+
+    private var _dineroGanado = MutableLiveData<Float>()
+    val dineroGanado: LiveData<Float>
+        get() = _dineroGanado
+
+    private var _dineroPerdido = MutableLiveData<Float>()
+    val dineroPerdido: LiveData<Float>
+        get() = _dineroPerdido
+
     private val _myPositiveDataset = MutableLiveData<List<AccionPositiva>>()
     val myPositiveDataset: LiveData<List<AccionPositiva>>
         get() = _myPositiveDataset
 
+    private val _myNegativeDataset = MutableLiveData<List<AccionNegativa>>()
+    val myNegativeDataset: LiveData<List<AccionNegativa>>
+        get() = _myNegativeDataset
+
+    private val _recyclerPositivoVisible = MutableLiveData<Boolean>()
+    val recyclerPositivoVisible: LiveData<Boolean>
+        get() = _recyclerPositivoVisible
+
+    private val _recyclerNegativoVisible = MutableLiveData<Boolean>()
+    val recyclerNegativoVisible: LiveData<Boolean>
+        get() = _recyclerNegativoVisible
+
 
     //-----------------------------------para coroutinas------------------------------------------------
     private val viewModelJob = Job()
-    private val uiScope = CoroutineScope( Dispatchers.Main +viewModelJob)
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     //--------------------------------------------------------------------------------------------------
 
     init {
         _myPositiveDataset.value = DataSource().loadPositiveActions()
-        Log.i("hijo"," lista dentro view model ${_myPositiveDataset.value}")
+        _myNegativeDataset.value = DataSource().loadNegativeActions()
+
+        _recyclerPositivoVisible.value = true
+        _recyclerNegativoVisible.value = false
+
         _ptsGanados.value = 0
+        _ptsPerdidos.value = 0
+        _ptsTotal.value = 0
+        _dineroTotal.value = 0.0f
         _contadorItem.value = 0
+
         initializeUser()
     }
 
@@ -52,56 +94,103 @@ class ActividadesViewModel(
         }
     }
 
-    private suspend fun getUserFromDataBase(): Hijo? {
-        return withContext(Dispatchers.IO){
+    private suspend fun getUserFromDataBase(): Hijo {
+        return withContext(Dispatchers.IO) {
             val pUser = dataBaseDao.get(userId)
-            Log.i("hijo","--pUser ${pUser.nombre}")
+            val cad = stringUserLog(pUser)
+            Log.i("hijo", "userAux : $cad")
             pUser
         }
     }
 
-    fun actualizarRegistroUsuario(){
+    //************ editar**********************************
+    fun registroDatos() {
         uiScope.launch {
-            val pRegistro = getUserFromDataBase2()
-            pRegistro.nombre = "nombre Registrado"
-            actualizar(pRegistro)
-
+            val register = get(userId)
+            register?.puntosPremio = register?.puntosPremio!! + _ptsGanados.value!!
+            register.puntosCastigo = register.puntosCastigo + _ptsPerdidos.value!!
+            register.puntosHoy = register.puntosHoy + _ptsTotal.value!!
+            register.dinero = register.dinero + _dineroTotal.value!!
+            Log.i(
+                "hijo",
+                "edit ganados1: ${register.puntosPremio} - ${register.puntosCastigo} - ${register.puntosHoy} - ${register.dinero}"
+            )
+            Log.i(
+                "hijo",
+                "edit ganados2: ${_ptsGanados.value} - ${_ptsPerdidos.value} - ${_ptsTotal.value} - ${_dineroTotal.value}"
+            )
+            update(register!!)
+            initializeUser()
         }
     }
 
-    private suspend fun actualizar(hijo: Hijo) {
-        withContext(Dispatchers.IO){
-            dataBaseDao.update(hijo)
-            Log.i("hijo","Actualizado -- ${hijo.nombre}")
+    private suspend fun get(id: Long): Hijo? {
+        return withContext(Dispatchers.IO) {
+            val userAux = dataBaseDao.get(id)
+            userAux
         }
     }
 
-    private suspend fun getUserFromDataBase2(): Hijo {
-        return withContext(Dispatchers.IO){
-            val pHijo = dataBaseDao.get(userId)
-            pHijo
+    private suspend fun update(registro: Hijo) {
+        withContext(Dispatchers.IO) {
+            dataBaseDao.update(registro)
         }
     }
+    //*****************************************************
 
-    fun onAccionPositivaClicked(id: Int){
-        _ptsGanados.value = _ptsGanados.value!! + id
-    }
-    fun onAccionNegativaClicked(id: Int){
-        _ptsGanados.value = _ptsGanados.value!!- id
-    }
-    fun onContadorItemClicked(){
-        _contadorItem.value = _contadorItem.value!! + 1
+    fun onAccionPositivaClicked(valor: Int) {
+        _ptsGanados.value = _ptsGanados.value!! + valor
+        _ptsTotal.value = _ptsTotal.value!! + valor
+        _dineroTotal.value = _ptsTotal.value!! * 0.025f
     }
 
-    fun setItemList(list: List<AccionPositiva>) {
+    fun onAccionNegativaClicked(valor: Int) {
+        _ptsPerdidos.value = _ptsPerdidos.value!! + valor
+        _ptsTotal.value = _ptsTotal.value!! - valor
+        _dineroTotal.value = _ptsTotal.value!! * 0.025f
+    }
+
+    fun setItemPositiveList(list: List<AccionPositiva>) {
         _myPositiveDataset.value = list
+    }
+    fun setItemNegativeList(list: List<AccionNegativa>) {
+        _myNegativeDataset.value = list
     }
 
     fun getItemList(): List<AccionPositiva> {
         return _myPositiveDataset.value!!
     }
 
-    fun onSleepDataQualityNavigated() {
-        _ptsGanados.value = null
+    fun saveDatos() {
+        registroDatos()
+    }
+
+    fun onVisible() {
+        if (_recyclerPositivoVisible.value!!) {
+            _recyclerPositivoVisible.value = false
+            _recyclerNegativoVisible.value = true
+        } else {
+            _recyclerPositivoVisible.value = true
+            _recyclerNegativoVisible.value = false
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
+    private fun stringUserLog(userAux: Hijo): String {
+        val cad = "ID: ${userAux.hijoId}\n" +
+                "NOMBRE: ${userAux.nombre}\n" +
+                "FOTO: ${userAux.photoResourceId}\n" +
+                "FECHA: ${userAux.fecha}\n" +
+                "PTS PREMIO: ${userAux.puntosPremio}\n" +
+                "PTS CASTIGO: ${userAux.puntosCastigo}\n" +
+                "PTS JUEGO: ${userAux.puntosJuego}\n" +
+                "PTS AYER: ${userAux.puntosAyer}\n" +
+                "PTS HOY: ${userAux.puntosHoy}\n" +
+                "DINERO: ${userAux.dinero}\n"
+        return cad
     }
 }

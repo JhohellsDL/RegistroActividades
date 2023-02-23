@@ -57,7 +57,6 @@ class DetalleUsuarioFragment : Fragment() {
             viewLifecycleOwner,
         ) {
             adapter.data = it
-            Log.i("hijo", "Lista : $it")
         }
         //-----------------------------------------------------------------------------------------------------------------------------------
 

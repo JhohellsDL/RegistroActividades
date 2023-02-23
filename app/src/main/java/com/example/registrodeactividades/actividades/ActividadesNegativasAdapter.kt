@@ -2,6 +2,8 @@ package com.example.registrodeactividades.actividades
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.registrodeactividades.databinding.ListItemActividadesNegativasBinding
 import com.example.registrodeactividades.databinding.ListItemActividadesPositivasBinding
@@ -10,18 +12,19 @@ import com.example.registrodeactividades.model.AccionNegativa
 import com.example.registrodeactividades.model.AccionPositiva
 
 class ActividadesNegativasAdapter(
-    private val onClickListener: (AccionNegativa) -> Unit,
-    private val data: List<AccionNegativa>
-): RecyclerView.Adapter<ActividadesNegativasAdapter.ActividadesNegativasViewHolder>() {
+    private val onClickListener: (AccionNegativa) -> Unit
+): ListAdapter<AccionNegativa, ActividadesNegativasAdapter.ActividadesNegativasViewHolder>(AccionNegativaDiffCallback()) {
 
     class ActividadesNegativasViewHolder private constructor(val binding: ListItemActividadesNegativasBinding) :
     RecyclerView.ViewHolder(binding.root){
-
         fun bind(
             item: AccionNegativa,
             onClickListener: (AccionNegativa) -> Unit
         ){
-            binding.actividadNegativaText.setText(item.stringResourceId)
+            binding.textValorNegativo.text = "${item.valor} pts"
+            binding.textNegativa.setText(item.stringResourceId)
+            binding.imageNegativa.setImageResource(item.imageResource)
+            binding.textContadorItem.text = item.contador.toString()
             itemView.setOnClickListener { onClickListener(item) }
         }
 
@@ -42,11 +45,20 @@ class ActividadesNegativasAdapter(
         return ActividadesNegativasViewHolder.from(parent)
     }
 
-    override fun getItemCount(): Int = data.size
-
     override fun onBindViewHolder(holder: ActividadesNegativasViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item, onClickListener)
+    }
+
+    class AccionNegativaDiffCallback :
+        DiffUtil.ItemCallback<AccionNegativa>() {
+        override fun areItemsTheSame(oldItem: AccionNegativa, newItem: AccionNegativa): Boolean {
+            return newItem.contador == oldItem.contador
+        }
+
+        override fun areContentsTheSame(oldItem: AccionNegativa, newItem: AccionNegativa): Boolean {
+            return oldItem == newItem
+        }
     }
 
 }

@@ -216,7 +216,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/text_puntos_castigo"
+                    android:id="@+id/text_puntos_hoy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -228,7 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textSize="12sp"
-                    android:text="@string/castigo" />
+                    android:text="TIENES" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -245,7 +245,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/text_puntos_juego"
+                    android:id="@+id/text_puntos_castigo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -257,11 +257,23 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textSize="12sp"
-                    android:text="@string/en_juego" />
+                    android:text="@string/castigo" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
+
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_actualizar"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="32dp"
+            android:text="actualizar"
+            android:onClick="@{() -> registroPorUsuarioViewModel.actualizarDatos()}"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutCompat2"
+            app:layout_constraintBottom_toTopOf="@id/button_edit"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_edit"

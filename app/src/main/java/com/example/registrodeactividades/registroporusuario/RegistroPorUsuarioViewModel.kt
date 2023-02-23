@@ -15,8 +15,16 @@ class RegistroPorUsuarioViewModel(
 ): ViewModel() {
 
     private var _user = MutableLiveData<Hijo>()
-    val user : LiveData<Hijo>
+    val user: LiveData<Hijo>
         get() = _user
+
+    private var _dineroGanado = MutableLiveData<Float>()
+    val dineroGanado: LiveData<Float>
+        get() = _dineroGanado
+
+    private var _dineroPerdido = MutableLiveData<Float>()
+    val dineroPerdido: LiveData<Float>
+        get() = _dineroPerdido
 
     //-----------------------------------para coroutines------------------------------------------------
     private val viewModelJob = Job()
@@ -25,25 +33,38 @@ class RegistroPorUsuarioViewModel(
 
     init {
         initializeUser()
+
+        _dineroGanado.value = 0.0f
+        _dineroPerdido.value = 0.0f
     }
 
     private fun initializeUser() {
         uiScope.launch {
             _user.value = getUserFromDataBase()
+            _dineroPerdido.value = _user.value?.puntosCastigo!! * 0.025f
+            _dineroGanado.value = _user.value?.puntosPremio!! * 0.025f
         }
     }
+
     private suspend fun getUserFromDataBase(): Hijo {
-        return withContext(Dispatchers.IO){
+        return withContext(Dispatchers.IO) {
             val userAux = dataBase.get(userId)
-            val cad = stringUserLog(userAux)
-            Log.i("hijo","userAux : $cad")
             userAux
         }
     }
 
+    fun actualizarDatos() {
+        initializeUser()
+    }
 
-
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+}
+/*
 //************ editar**********************************
+ */
     fun getUsuario() {
         uiScope.launch {
             var registro = get(userId)
@@ -82,7 +103,7 @@ class RegistroPorUsuarioViewModel(
         return cad
     }
 
-    /*fun onRegisterActividades() {
+    fun onRegisterActividades() {
         uiScope.launch {
             Log.i("hijo","--registro $userId")
             val registro = dataBase.get(123497L)
@@ -116,5 +137,6 @@ class RegistroPorUsuarioViewModel(
             val pHijo = dataBase.get(id)
             pHijo
         }
-    }*/
-}
+    }
+    */
+ */

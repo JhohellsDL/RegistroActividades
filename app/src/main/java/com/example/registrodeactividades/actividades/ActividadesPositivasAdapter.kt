@@ -41,8 +41,6 @@ class ActividadesPositivasAdapter(
         return ActividadesPositivasViewHolder.from(parent)
     }
 
-    //override fun getItemCount(): Int = data.size
-
     override fun onBindViewHolder(holder: ActividadesPositivasViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item, onClickListener)

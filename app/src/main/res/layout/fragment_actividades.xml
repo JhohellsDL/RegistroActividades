@@ -14,34 +14,115 @@
         android:layout_height="match_parent"
         tools:context=".actividades.ActividadesFragment">
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_foto_user"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:cardCornerRadius="30dp">
+
+            <ImageView
+                android:id="@+id/foto_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/matthew"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
         <TextView
-            android:id="@+id/text_user_prueba"
+            android:id="@+id/label_pts_ganados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PUNTOS GANADOS: "
+            app:layout_constraintTop_toTopOf="@id/card_foto_user"
+            app:layout_constraintStart_toEndOf="@id/card_foto_user"/>
+        <TextView
+            android:id="@+id/text_puntos_ganados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 pts"
+            app:layout_constraintTop_toTopOf="@id/card_foto_user"
+            app:layout_constraintStart_toEndOf="@id/label_pts_ganados"/>
+
+        <TextView
+            android:id="@+id/label_pts_perdidos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PUNTOS PERDIDOS: "
+            app:layout_constraintTop_toBottomOf="@id/label_pts_ganados"
+            app:layout_constraintStart_toEndOf="@id/card_foto_user"/>
+        <TextView
+            android:id="@+id/text_puntos_perdidos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 pts"
+            app:layout_constraintTop_toTopOf="@id/label_pts_perdidos"
+            app:layout_constraintStart_toEndOf="@id/label_pts_perdidos"/>
+
+        <TextView
+            android:id="@+id/label_pts_hoy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PUNTOS HOY: "
+            app:layout_constraintTop_toBottomOf="@id/label_pts_perdidos"
+            app:layout_constraintStart_toEndOf="@id/card_foto_user"/>
+        <TextView
+            android:id="@+id/text_puntos_hoy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 pts"
+            app:layout_constraintTop_toTopOf="@id/label_pts_hoy"
+            app:layout_constraintStart_toEndOf="@id/label_pts_hoy"/>
+
+        <TextView
+            android:id="@+id/text_dinero_total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Actividades positivas"
-            app:layout_constraintTop_toTopOf="parent"/>
+            tools:text = "fasdfsdf"
+            app:layout_constraintTop_toBottomOf="@id/card_foto_user"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_cambiar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cambiar"
+            android:onClick="@{() -> actividadesViewModel.onVisible()}"
+            app:layout_constraintTop_toBottomOf="@id/text_dinero_total"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_guardarr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="guardar"
+            android:onClick="@{() -> actividadesViewModel.saveDatos()}"
+            app:layout_constraintTop_toBottomOf="@id/text_dinero_total"
+            app:layout_constraintStart_toEndOf="@id/button_cambiar"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/text_user_prueba">
+            app:layout_constraintTop_toBottomOf="@id/button_cambiar">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
                 android:id="@+id/lista_positivas"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:layout_constraintTop_toBottomOf="@id/text_user_prueba"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/text_dinero_total"
                 tools:listitem="@layout/list_item_actividades_positivas"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
                 android:id="@+id/lista_negativas"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:layout_constraintTop_toBottomOf="@id/text_user_prueba"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/text_dinero_total"
                 tools:listitem="@layout/list_item_actividades_negativas"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>

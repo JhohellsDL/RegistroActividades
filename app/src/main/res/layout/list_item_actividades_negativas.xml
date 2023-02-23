@@ -15,14 +15,100 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_200">
+        android:layout_marginTop="12dp"
+        android:paddingHorizontal="12dp">
 
-        <TextView
-            android:id="@+id/actividad_negativa_text"
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="item!" />
+            android:layout_marginVertical="12dp"
+            android:padding="16dp"
+            app:cardCornerRadius="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="12dp">
+                <!--
+                                <androidx.appcompat.widget.AppCompatImageButton
+                                    android:id="@+id/btnRestar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/transparent"
+                                    android:layout_marginTop="8dp"
+                                    android:src="@drawable/ic_baseline_remove_circle"
+                                    app:layout_constraintTop_toBottomOf="@id/imageViewPositive"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
+                                <androidx.appcompat.widget.AppCompatImageButton
+                                    android:id="@+id/btnSumar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/transparent"
+                                    android:src="@drawable/ic_baseline_add_circle"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_negativa"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/lavando_platos"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_valor_negativo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="30 pts"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="@id/image_negativa"
+                    app:layout_constraintStart_toEndOf="@id/image_negativa"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_negativa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="No hablar en ingles"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@id/image_negativa"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_negativa" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/orange">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_contador_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

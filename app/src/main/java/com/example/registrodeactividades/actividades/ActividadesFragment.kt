@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.contadorcasino.database.HijosDataBase
 import com.example.registrodeactividades.database.DataSource
 import com.example.registrodeactividades.databinding.FragmentActividadesBinding
@@ -17,21 +19,16 @@ import com.example.registrodeactividades.model.AccionPositiva
 class ActividadesFragment : Fragment() {
 
     private lateinit var binding: FragmentActividadesBinding
-
+    private val myPositiveDataset = DataSource().loadPositiveActions()
+    private val myNegativeDataset = DataSource().loadNegativeActions()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val myPositiveDataset = DataSource().loadPositiveActions()
-        val myNegativeDataser = DataSource().loadNegativeActions()
-
         binding = FragmentActividadesBinding.inflate(inflater)
 
         //--------------------------------- Para el RECIBIR DATOS-----------------------------------------------------------
-        /*val args = RegistroPorUsuarioFragmentArgs.fromBundle(requireArguments())
-        Toast.makeText(context, "numero recibido ffff!!: ${args.userId} !!!", Toast.LENGTH_SHORT).show()*/
         val args = ActividadesFragmentArgs.fromBundle(requireArguments())
-        Toast.makeText(context, "numero recibido ffff!!: ${args.userId} !!!", Toast.LENGTH_SHORT).show()
         //-------------------------------------------------------------------------------------------------------------------
 
         //--------------------------------- Para el VIEWMODEL --------------------------------------------------------------
@@ -44,57 +41,71 @@ class ActividadesFragment : Fragment() {
         binding.lifecycleOwner = this
         //-------------------------------------------------------------------------------------------------------------------
 
-
         //--------------------------------- Para el RECYCLERVIEW --------------------------------------------------------------
-
-        var lista = listOf<AccionPositiva>()
-
         val adapterAccionesPositivas = ActividadesPositivasAdapter(
             onClickListener = {
                 it.contador = it.contador + 1
-                Toast.makeText(context, "Contador: ${it.contador}", Toast.LENGTH_SHORT).show()
-
-
-                val rec = it.stringResourceId
-
-                myPositiveDataset.forEach { accionDentro ->
-                    if (accionDentro.stringResourceId == rec){
-                        accionDentro.contador = it.contador
-                        Log.i("hijo"," lista dentro onclick  ${accionDentro.contador} y ${it.contador}")
-                        actividadesViewModel.setItemList(myPositiveDataset)
+                myPositiveDataset.forEach { newAction ->
+                    if (newAction.stringResourceId == it.stringResourceId) {
+                        newAction.contador = it.contador
+                        actividadesViewModel.setItemPositiveList(myPositiveDataset)
                     }
                 }
-
                 actividadesViewModel.onAccionPositivaClicked(it.valor)
             }
         )
 
+        val adapterAccionesNegativas = ActividadesNegativasAdapter(
+            onClickListener = {
+                it.contador = it.contador + 1
+                myNegativeDataset.forEach { newNegative ->
+                    if (newNegative.stringResourceId == it.stringResourceId) {
+                        newNegative.contador = it.contador
+                        actividadesViewModel.setItemNegativeList(myNegativeDataset)
+                    }
+                }
+                actividadesViewModel.onAccionNegativaClicked(it.valor)
+            }
+        )
+
+        actividadesViewModel.recyclerPositivoVisible.observe(viewLifecycleOwner){
+            binding.listaPositivas.isVisible = it
+        }
+        actividadesViewModel.recyclerNegativoVisible.observe(viewLifecycleOwner){
+            binding.listaNegativas.isVisible = it
+        }
+
+        val manager = GridLayoutManager(activity, 3)
+        binding.listaPositivas.layoutManager = manager
+        val manager2 = GridLayoutManager(activity, 3)
+        binding.listaNegativas.layoutManager = manager2
+        //-----------------------------------------------------------------------------------------------------------------------------------
+
+        actividadesViewModel.ptsGanados.observe(viewLifecycleOwner){
+            binding.textPuntosGanados.text = it.toString()
+        }
+        actividadesViewModel.ptsPerdidos.observe(viewLifecycleOwner, Observer {
+            binding.textPuntosPerdidos.text = it.toString()
+        })
+        actividadesViewModel.ptsTotal.observe(viewLifecycleOwner, Observer {
+            binding.textPuntosHoy.text = it.toString()
+        })
+        actividadesViewModel.dineroTotal.observe(viewLifecycleOwner){
+            binding.textDineroTotal.text = it.toString()
+        }
+
         actividadesViewModel.myPositiveDataset.observe(viewLifecycleOwner){
             it?.let {
-                Log.i("hijo"," lista dentro ${it}")
-               adapterAccionesPositivas.submitList(it)
+                adapterAccionesPositivas.submitList(it)
                 binding.listaPositivas.adapter = adapterAccionesPositivas
             }
         }
-
-
-        //actividadesViewModel.setItemList(lista)
-        //Log.i("hijo"," lista fuera $lista")
-
-
-        val adapterAccionesNegativas = ActividadesNegativasAdapter(
-            onClickListener = { actividadesViewModel.onAccionNegativaClicked(it.valor) },
-            data = myNegativeDataser
-        )
-
-
-        binding.listaNegativas.adapter = adapterAccionesNegativas
-
-        actividadesViewModel.ptsGanados.observe(viewLifecycleOwner, Observer {
-            Log.i("hijo"," listaddd ${it}")
-        })
-        //-----------------------------------------------------------------------------------------------------------------------------------
-
+        actividadesViewModel.myNegativeDataset.observe(viewLifecycleOwner){
+            it?.let {
+                adapterAccionesNegativas.submitList(it)
+                binding.listaNegativas.adapter = adapterAccionesNegativas
+            }
+        }
 
         return binding.root
     }

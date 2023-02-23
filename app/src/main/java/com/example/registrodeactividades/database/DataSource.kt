@@ -116,87 +116,104 @@ class DataSource {
             AccionNegativa(
                 stringResourceId = R.string.negativeAction1,
                 imageResource = R.drawable.cara_fea,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction2,
                 imageResource = R.drawable.ser_malo,
-                valor = 20
+                valor = 20,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction3,
                 imageResource = R.drawable.molestar,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction4,
                 imageResource = R.drawable.golpear,
-                valor = 30
+                valor = 30,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction5,
                 imageResource = R.drawable.adios,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction6,
                 imageResource = R.drawable.comportamiento,
-                valor = 30
+                valor = 30,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction7,
                 imageResource = R.drawable.problema,
-                valor = 30
+                valor = 30,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction8,
                 imageResource = R.drawable.enfermo,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction9,
                 imageResource = R.drawable.sucio__1_,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction10,
                 imageResource = R.drawable.mentiroso,
-                valor = 20
+                valor = 20,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction11,
                 imageResource = R.drawable.incomodo,
-                valor = 20
+                valor = 20,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction12,
                 imageResource = R.drawable.incomodo__1_,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction13,
                 imageResource = R.drawable.jugador,
-                valor = 20
+                valor = 20,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction14,
                 imageResource = R.drawable.abuso_verbal,
-                valor = 15
+                valor = 15,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction15,
                 imageResource = R.drawable.reflexologia,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction16,
                 imageResource = R.drawable.tarde,
-                valor = 10
+                valor = 10,
+                contador = 0
             ),
             AccionNegativa(
                 stringResourceId = R.string.negativeAction17,
                 imageResource = R.drawable.no_hablar_ingles,
-                valor = 10
+                valor = 10,
+                contador = 0
             )
         )
     }

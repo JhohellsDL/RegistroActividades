@@ -32,17 +32,6 @@ class DetalleUsuarioAdapter(
             item: Hijo,
             onClickListener: (Hijo) -> Unit
         ) {
-            /*val cad = "ID: ${item.hijoId}\n" +
-                    "NOMBRE: ${item.nombre}\n" +
-                    "FOTO: ${item.photoResourceId}\n" +
-                    "FECHA: ${item.fecha}\n" +
-                    "PTS PREMIO: ${item.puntosPremio}\n" +
-                    "PTS CASTIGO: ${item.puntosCastigo}\n" +
-                    "PTS JUEGO: ${item.puntosJuego}\n" +
-                    "PTS AYER: ${item.puntosAyer}\n" +
-                    "PTS HOY: ${item.puntosHoy}\n" +
-                    "DINERO: ${item.dinero}\n"*/
-
             binding.textIdItem.text = "ID: ${item.hijoId}"
             binding.userText.text = item.nombre
             binding.imageItem.setImageResource(item.photoResourceId)
@@ -53,7 +42,6 @@ class DetalleUsuarioAdapter(
             binding.textPuntosAyer.text = "Ayer ${item.puntosAyer} puntos"
             binding.textPuntosHoy.text = "Hoy ${item.puntosHoy} puntos"
             binding.textDinero.text = "S/. ${item.dinero}"
-
             itemView.setOnClickListener { onClickListener(item) }
         }
 

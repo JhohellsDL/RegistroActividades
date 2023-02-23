@@ -23,7 +23,6 @@ class RegistroPorUsuarioFragment : Fragment() {
 
         //--------------------------------- Para el RECIBIR DATOS-----------------------------------------------------------
         val args = RegistroPorUsuarioFragmentArgs.fromBundle(requireArguments())
-        Toast.makeText(context, "numero recibido!!: ${args.userId} !!!", Toast.LENGTH_SHORT).show()
         //-------------------------------------------------------------------------------------------------------------------
 
         //--------------------------------- Para el VIEWMODEL --------------------------------------------------------------
@@ -39,10 +38,18 @@ class RegistroPorUsuarioFragment : Fragment() {
             binding.fotoItem.setImageResource(it.photoResourceId)
             binding.textIdUser.text = "Id: ${it.hijoId}"
             binding.textDineroTienes.text = "S/. ${it.dinero}"
-            binding.textPuntosJuego.text = it.puntosJuego.toString()
+            binding.textPuntosHoy.text = it.puntosHoy.toString()
             binding.textPuntosPremio.text = it.puntosPremio.toString()
             binding.textPuntosCastigo.text = it.puntosCastigo.toString()
         }
+
+        registroPorUsuarioViewModel.dineroGanado.observe(viewLifecycleOwner){
+            binding.textDineroGanaste.text = "S/. $it"
+        }
+        registroPorUsuarioViewModel.dineroPerdido.observe(viewLifecycleOwner){
+            binding.textDineroPerdiste.text = "S/. $it"
+        }
+
         //-------------------------------------------------------------------------------------------------------------------
 
         //--------------------------------- Para el ENVIAR DATOS-----------------------------------------------------------
