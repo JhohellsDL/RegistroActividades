@@ -52,4 +52,5 @@
     <string name="en_juego">En Juego</string>
 
     <string name="soles">S/a , %s!</string>
+    <string name="signo_soles">S/.  </string>
 </resources>

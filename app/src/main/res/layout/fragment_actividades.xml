@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="actividadesViewModel"
             type="com.example.registrodeactividades.actividades.ActividadesViewModel" />
@@ -18,9 +19,9 @@
             android:id="@+id/card_foto_user"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
             app:cardCornerRadius="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -33,118 +34,215 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:id="@+id/label_pts_ganados"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginStart="32dp"
-            android:text="Ganados: "
-            app:layout_constraintTop_toTopOf="@id/card_foto_user"
-            app:layout_constraintStart_toEndOf="@id/card_foto_user"/>
-        <TextView
-            android:id="@+id/text_puntos_ganados"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="100 pts"
-            android:textSize="14sp"
-            app:layout_constraintTop_toTopOf="@id/label_pts_ganados"
-            app:layout_constraintStart_toEndOf="@id/label_pts_ganados"/>
-
-        <TextView
-            android:id="@+id/label_pts_perdidos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Perdidos: "
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/label_pts_ganados"
-            app:layout_constraintStart_toStartOf="@id/label_pts_ganados"/>
-        <TextView
-            android:id="@+id/text_puntos_perdidos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="100 pts"
-            app:layout_constraintTop_toTopOf="@id/label_pts_perdidos"
-            app:layout_constraintStart_toEndOf="@id/label_pts_perdidos"/>
-
-        <TextView
-            android:id="@+id/label_pts_hoy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total: "
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/label_pts_perdidos"
-            app:layout_constraintStart_toStartOf="@id/label_pts_ganados"/>
-        <TextView
-            android:id="@+id/text_puntos_hoy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="100 pts"
-            android:textSize="14sp"
-            app:layout_constraintTop_toTopOf="@id/label_pts_hoy"
-            app:layout_constraintStart_toEndOf="@id/label_pts_hoy"/>
-
-        <TextView
-            android:id="@+id/label_dinero_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text = "Dinero: S/. "
-            android:textSize="14sp"
-            android:textColor="@color/orange_new"
-            app:layout_constraintTop_toBottomOf="@id/text_puntos_hoy"
-            app:layout_constraintStart_toStartOf="@id/label_pts_hoy"/>
-
-        <TextView
-            android:id="@+id/text_dinero_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text = "fasdfsdf"
-            android:textColor="@color/orange_new"
-            app:layout_constraintTop_toTopOf="@id/label_dinero_total"
-            app:layout_constraintStart_toEndOf="@id/label_dinero_total"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_cambiar"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="cambiar"
-            android:textSize="12sp"
             android:layout_margin="16dp"
-            android:background="@color/transparente_new"
-            android:padding="12dp"
-            android:drawablePadding="10dp"
-            android:drawableStart="@drawable/baseline_swap_horiz"
-            android:onClick="@{() -> actividadesViewModel.onVisible()}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_cambiar2"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="cambiar2"
-            android:textSize="12sp"
-            android:layout_margin="16dp"
-            android:background="@color/transparente_new"
-            android:padding="12dp"
-            android:drawablePadding="10dp"
-            android:drawableStart="@drawable/baseline_swap_horiz"
-            android:onClick="@{() -> actividadesViewModel.onVisible()}"
-            app:layout_constraintTop_toBottomOf="@id/button_cambiar"
-            app:layout_constraintEnd_toEndOf="parent"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_guardar"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="guardar"
-            android:textSize="12sp"
-            android:layout_marginEnd="16dp"
-            android:padding="12dp"
-            android:drawablePadding="10dp"
-            android:background="@color/transparente_new"
-            android:drawableStart="@drawable/baseline_save"
-            app:layout_constraintTop_toBottomOf="@id/button_cambiar2"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/card_foto_user"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/label_pts_hoy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/signo_soles"
+                    android:textColor="@color/green_new"
+                    android:fontFamily="@font/montserrat_alternates"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/text_dinero_actual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_alternates"
+                    tools:text="154.00"
+                    android:textColor="@color/green_new"
+                    android:textSize="24sp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toEndOf="@id/label_pts_hoy"
+                    app:layout_constraintTop_toTopOf="@id/label_pts_hoy" />
+
+                <TextView
+                    android:id="@+id/label_dinero_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_alternates"
+                    android:text="Ahora: S/. "
+                    android:textColor="@color/orange_new"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/label_pts_hoy"
+                    app:layout_constraintTop_toBottomOf="@id/text_dinero_actual" />
+
+                <TextView
+                    android:id="@+id/text_dinero_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_alternates"
+                    android:textColor="@color/orange_new"
+                    app:layout_constraintStart_toEndOf="@id/label_dinero_total"
+                    app:layout_constraintTop_toTopOf="@id/label_dinero_total"
+                    tools:text="124" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="1dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="?android:attr/listDivider" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <TextView
+                    android:id="@+id/label_dinero_suma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/signo_soles"
+                    android:textColor="@color/orange"
+                    android:fontFamily="@font/montserrat_alternates"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <TextView
+                    android:id="@+id/text_dinero_suma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_alternates"
+                    tools:text="154.00"
+                    android:textColor="@color/orange"
+                    android:layout_marginStart="8dp"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toEndOf="@id/label_dinero_suma"
+                    app:layout_constraintTop_toTopOf="@id/label_dinero_suma" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linear_layout_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/card_foto_user">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:onClick="@{() -> actividadesViewModel.onVisibleBuenas()}"
+                android:layout_weight="1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_buena_card"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/buenas2"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_buenas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:text="Buenas\nacciones"
+                        android:textSize="11dp"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/image_buena_card"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                        android:id="@+id/text_puntos_ganados"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:text="0 pts"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/image_buena_card"
+                        app:layout_constraintTop_toBottomOf="@id/label_buenas"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:onClick="@{() -> actividadesViewModel.onVisibleMalas()}"
+                android:layout_weight="1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_mala_card"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/malas2"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_malas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:text="Malas\nacciones"
+                        android:textSize="11dp"
+                        android:gravity="center"
+                        android:fontFamily="@font/montserrat_alternates"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/image_mala_card"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                        android:id="@+id/text_puntos_perdidos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:text="0 pts"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/image_mala_card"
+                        app:layout_constraintTop_toBottomOf="@id/label_malas"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/button_guardar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/salvar"
+                android:scaleType="centerCrop"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center"
+                android:background="@color/transparente_new"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat4"
@@ -153,7 +251,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_guardar">
+            app:layout_constraintTop_toBottomOf="@id/linear_layout_buttons">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lista_positivas"
@@ -171,7 +269,6 @@
                 tools:listitem="@layout/list_item_actividades_negativas" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

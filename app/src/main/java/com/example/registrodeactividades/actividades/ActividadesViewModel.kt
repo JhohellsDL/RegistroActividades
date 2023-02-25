@@ -80,7 +80,6 @@ class ActividadesViewModel(
         _recyclerNegativoVisible.value = false
 
         iniciarEnCero()
-
         initializeUser()
     }
 
@@ -180,16 +179,18 @@ class ActividadesViewModel(
         _dineroTotal.value = 0.0f*/
     }
 
-    fun onVisible() {
-        if (_recyclerPositivoVisible.value!!) {
-            _recyclerPositivoVisible.value = false
-            _recyclerNegativoVisible.value = true
-        } else {
+    fun onVisibleBuenas() {
+        if (!_recyclerPositivoVisible.value!!) {
             _recyclerPositivoVisible.value = true
             _recyclerNegativoVisible.value = false
         }
     }
-
+    fun onVisibleMalas() {
+        if (_recyclerPositivoVisible.value!!) {
+            _recyclerPositivoVisible.value = false
+            _recyclerNegativoVisible.value = true
+        }
+    }
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()

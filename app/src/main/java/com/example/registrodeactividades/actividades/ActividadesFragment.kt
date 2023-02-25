@@ -1,11 +1,7 @@
 package com.example.registrodeactividades.actividades
 
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +20,9 @@ class ActividadesFragment : Fragment() {
     private lateinit var binding: FragmentActividadesBinding
     private val myPositiveDataset = DataSource().loadPositiveActions()
     private val myNegativeDataset = DataSource().loadNegativeActions()
+
+    private var aux1: Float = 0f
+    private var aux2: Float = 0f
 
     private var dineroAux: Float = 0f
     override fun onCreateView(
@@ -86,8 +85,15 @@ class ActividadesFragment : Fragment() {
         binding.listaNegativas.layoutManager = manager2
         //-----------------------------------------------------------------------------------------------------------------------------------
 
+
         actividadesViewModel.user.observe(viewLifecycleOwner){
             binding.fotoItem.setImageResource(it.photoResourceId)
+            binding.textDineroActual.text = it.dinero.toString()
+            aux1 = it.dinero
+            Log.i(
+                "hijo",
+                "dinero actual: $aux1"
+            )
         }
 
         actividadesViewModel.ptsGanados.observe(viewLifecycleOwner){
@@ -96,11 +102,14 @@ class ActividadesFragment : Fragment() {
         actividadesViewModel.ptsPerdidos.observe(viewLifecycleOwner) {
             binding.textPuntosPerdidos.text = it.toString()
         }
-        actividadesViewModel.ptsTotal.observe(viewLifecycleOwner) {
-            binding.textPuntosHoy.text = it.toString()
-        }
         actividadesViewModel.dineroTotal.observe(viewLifecycleOwner){
             binding.textDineroTotal.text = it.toString()
+            aux2 = it +aux1
+            Log.i(
+                "hijo",
+                "dinero actual2: $it + $aux2"
+            )
+            binding.textDineroSuma.text = aux2.toString()
             dineroAux = it
         }
 

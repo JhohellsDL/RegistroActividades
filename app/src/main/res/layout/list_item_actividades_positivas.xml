@@ -18,13 +18,25 @@
         android:layout_marginTop="4dp"
         android:paddingHorizontal="4dp">
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="102dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="12dp"
+            android:backgroundTint="@color/green_new_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="12dp"
+            android:layout_width="112dp"
+            android:layout_height="84dp"
+            android:layout_marginTop="12dp"
             android:padding="16dp"
             app:cardCornerRadius="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -35,8 +47,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image_positive"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/lavando_platos"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -49,6 +61,7 @@
                     android:text="30 pts"
                     android:textSize="14sp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_alternates"
                     app:layout_constraintBottom_toBottomOf="@id/image_positive"
                     app:layout_constraintTop_toTopOf="@id/image_positive"
                     app:layout_constraintStart_toEndOf="@id/image_positive"/>
@@ -58,10 +71,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_alternates"
                     android:text="No hablar en ingles"
-                    android:textSize="10sp"
+                    android:textSize="9sp"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/image_positive"
-                    app:layout_constraintStart_toStartOf="@id/image_positive"/>
+                    app:layout_constraintStart_toStartOf="parent"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -83,6 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
+                    android:fontFamily="@font/montserrat_alternates"
                     android:textStyle="bold"
                     android:textSize="12sp"
                     app:layout_constraintTop_toTopOf="parent"
