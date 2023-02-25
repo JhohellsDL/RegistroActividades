@@ -1,26 +1,31 @@
 package com.example.registrodeactividades.actividades
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.contadorcasino.database.HijosDataBase
 import com.example.registrodeactividades.database.DataSource
 import com.example.registrodeactividades.databinding.FragmentActividadesBinding
-import com.example.registrodeactividades.model.AccionPositiva
+
 
 class ActividadesFragment : Fragment() {
 
     private lateinit var binding: FragmentActividadesBinding
     private val myPositiveDataset = DataSource().loadPositiveActions()
     private val myNegativeDataset = DataSource().loadNegativeActions()
+
+    private var dineroAux: Float = 0f
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -88,14 +93,15 @@ class ActividadesFragment : Fragment() {
         actividadesViewModel.ptsGanados.observe(viewLifecycleOwner){
             binding.textPuntosGanados.text = it.toString()
         }
-        actividadesViewModel.ptsPerdidos.observe(viewLifecycleOwner, Observer {
+        actividadesViewModel.ptsPerdidos.observe(viewLifecycleOwner) {
             binding.textPuntosPerdidos.text = it.toString()
-        })
-        actividadesViewModel.ptsTotal.observe(viewLifecycleOwner, Observer {
+        }
+        actividadesViewModel.ptsTotal.observe(viewLifecycleOwner) {
             binding.textPuntosHoy.text = it.toString()
-        })
+        }
         actividadesViewModel.dineroTotal.observe(viewLifecycleOwner){
             binding.textDineroTotal.text = it.toString()
+            dineroAux = it
         }
 
         actividadesViewModel.myPositiveDataset.observe(viewLifecycleOwner){
@@ -109,6 +115,11 @@ class ActividadesFragment : Fragment() {
                 adapterAccionesNegativas.submitList(it)
                 binding.listaNegativas.adapter = adapterAccionesNegativas
             }
+        }
+
+        binding.buttonGuardar.setOnClickListener {
+            actividadesViewModel.registroDatos()
+            Toast.makeText(requireContext(), "Guardado: $dineroAux soles", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root

@@ -108,6 +108,18 @@ class DataSource {
                 imageResource = R.drawable.hablar_ingles,
                 valor = 10,
                 contador = 0
+            ),
+            AccionPositiva(
+                stringResourceId = R.string.positiveAction18,
+                imageResource = R.drawable.groseria,
+                valor = 25,
+                contador = 0
+            ),
+            AccionPositiva(
+                stringResourceId = R.string.positiveAction19,
+                imageResource = R.drawable.no_escuchar,
+                valor = 50,
+                contador = 0
             )
         )
     }
@@ -213,6 +225,18 @@ class DataSource {
                 stringResourceId = R.string.negativeAction17,
                 imageResource = R.drawable.no_hablar_ingles,
                 valor = 10,
+                contador = 0
+            ),
+            AccionNegativa(
+                stringResourceId = R.string.negativeAction18,
+                imageResource = R.drawable.no_escuchar,
+                valor = 50,
+                contador = 0
+            ),
+            AccionNegativa(
+                stringResourceId = R.string.negativeAction19,
+                imageResource = R.drawable.silencio,
+                valor = 50,
                 contador = 0
             )
         )

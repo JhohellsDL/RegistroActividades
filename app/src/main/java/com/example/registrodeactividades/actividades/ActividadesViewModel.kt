@@ -79,11 +79,7 @@ class ActividadesViewModel(
         _recyclerPositivoVisible.value = true
         _recyclerNegativoVisible.value = false
 
-        _ptsGanados.value = 0
-        _ptsPerdidos.value = 0
-        _ptsTotal.value = 0
-        _dineroTotal.value = 0.0f
-        _contadorItem.value = 0
+        iniciarEnCero()
 
         initializeUser()
     }
@@ -121,7 +117,17 @@ class ActividadesViewModel(
             )
             update(register!!)
             initializeUser()
+
+            iniciarEnCero()
         }
+    }
+
+    private fun iniciarEnCero() {
+        _ptsGanados.value = 0
+        _ptsPerdidos.value = 0
+        _ptsTotal.value = 0
+        _dineroTotal.value = 0.0f
+        _contadorItem.value = 0
     }
 
     private suspend fun get(id: Long): Hijo? {
@@ -163,6 +169,15 @@ class ActividadesViewModel(
 
     fun saveDatos() {
         registroDatos()
+
+        Log.i(
+            "hijo",
+            "edit ganados4: ${_ptsGanados.value} - ${_ptsPerdidos.value} - ${_ptsTotal.value} - ${_dineroTotal.value}"
+        )
+        /*_ptsGanados.value = 0
+        _ptsPerdidos.value = 0
+        _ptsTotal.value = 0
+        _dineroTotal.value = 0.0f*/
     }
 
     fun onVisible() {

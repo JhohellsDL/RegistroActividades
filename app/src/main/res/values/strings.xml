@@ -18,6 +18,8 @@
     <string name="positiveAction15">Lavarse los pies</string>
     <string name="positiveAction16">Llegar temprano</string>
     <string name="positiveAction17">Hablar en ingles</string>
+    <string name="positiveAction18">Papa grosero</string>
+    <string name="positiveAction19">Papa no escucha</string>
 
     <string name="negativeAction1">Cara fea</string>
     <string name="negativeAction2">Ser malo</string>
@@ -36,6 +38,8 @@
     <string name="negativeAction15">No lavarse los pies</string>
     <string name="negativeAction16">No llegar temprano</string>
     <string name="negativeAction17">No hablar en ingles</string>
+    <string name="negativeAction18">No escuchar</string>
+    <string name="negativeAction19">No contestar</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fecha_test">Mon Feb 20 10:52:12 GMT-05:00 2023</string>

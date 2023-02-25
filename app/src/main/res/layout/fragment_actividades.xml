@@ -119,6 +119,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_cambiar2"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="cambiar2"
+            android:textSize="12sp"
+            android:layout_margin="16dp"
+            android:background="@color/transparente_new"
+            android:padding="12dp"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/baseline_swap_horiz"
+            android:onClick="@{() -> actividadesViewModel.onVisible()}"
+            app:layout_constraintTop_toBottomOf="@id/button_cambiar"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_guardar"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
@@ -129,15 +143,16 @@
             android:drawablePadding="10dp"
             android:background="@color/transparente_new"
             android:drawableStart="@drawable/baseline_save"
-            android:onClick="@{() -> actividadesViewModel.saveDatos()}"
-            app:layout_constraintTop_toBottomOf="@id/button_cambiar"
+            app:layout_constraintTop_toBottomOf="@id/button_cambiar2"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_guardar">
 
             <androidx.recyclerview.widget.RecyclerView
