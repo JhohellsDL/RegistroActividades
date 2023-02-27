@@ -79,9 +79,9 @@ class ActividadesFragment : Fragment() {
             binding.listaNegativas.isVisible = it
         }
 
-        val manager = GridLayoutManager(activity, 3)
+        val manager = GridLayoutManager(activity, 4)
         binding.listaPositivas.layoutManager = manager
-        val manager2 = GridLayoutManager(activity, 3)
+        val manager2 = GridLayoutManager(activity, 4)
         binding.listaNegativas.layoutManager = manager2
         //-----------------------------------------------------------------------------------------------------------------------------------
 
