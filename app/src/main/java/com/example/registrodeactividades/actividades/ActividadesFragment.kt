@@ -10,7 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.contadorcasino.database.HijosDataBase
+import com.example.registrodeactividades.database.HijosDataBase
 import com.example.registrodeactividades.database.DataSource
 import com.example.registrodeactividades.databinding.FragmentActividadesBinding
 
@@ -21,8 +21,8 @@ class ActividadesFragment : Fragment() {
     private val myPositiveDataset = DataSource().loadPositiveActions()
     private val myNegativeDataset = DataSource().loadNegativeActions()
 
-    private var aux1: Float = 0f
-    private var aux2: Float = 0f
+    private var dineroInicial: Float = 0f
+    private var dineroFinal: Float = 0f
 
     private var dineroAux: Float = 0f
     override fun onCreateView(
@@ -89,10 +89,10 @@ class ActividadesFragment : Fragment() {
         actividadesViewModel.user.observe(viewLifecycleOwner){
             binding.fotoItem.setImageResource(it.photoResourceId)
             binding.textDineroActual.text = it.dinero.toString()
-            aux1 = it.dinero
+            dineroInicial = it.dinero
             Log.i(
                 "hijo",
-                "dinero actual: $aux1"
+                "dinero actual: $dineroInicial"
             )
         }
 
@@ -102,14 +102,25 @@ class ActividadesFragment : Fragment() {
         actividadesViewModel.ptsPerdidos.observe(viewLifecycleOwner) {
             binding.textPuntosPerdidos.text = it.toString()
         }
+        actividadesViewModel.dineroGanado.observe(viewLifecycleOwner){
+            binding.textDineroGanado.text = it.toString()
+        }
+        actividadesViewModel.dineroPerdido.observe(viewLifecycleOwner){
+            binding.textDineroPerdido.text = it.toString()
+        }
+
         actividadesViewModel.dineroTotal.observe(viewLifecycleOwner){
             binding.textDineroTotal.text = it.toString()
-            aux2 = it +aux1
+            dineroFinal = it + dineroInicial
             Log.i(
                 "hijo",
-                "dinero actual2: $it + $aux2"
+                "dinero actual2: $it + $dineroFinal"
             )
-            binding.textDineroSuma.text = aux2.toString()
+            Log.i(
+                "hijo",
+                "dinero actual: $dineroInicial"
+            )
+            binding.textDineroSuma.text = dineroFinal.toString()
             dineroAux = it
         }
 

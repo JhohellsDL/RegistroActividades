@@ -1,16 +1,15 @@
 package com.example.registrodeactividades.actividades
 
 import android.util.Log
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.contadorcasino.database.Hijo
+import com.example.registrodeactividades.database.Hijo
 import com.example.contadorcasino.database.HijosDataBaseDao
 import com.example.registrodeactividades.database.DataSource
 import com.example.registrodeactividades.model.AccionNegativa
 import com.example.registrodeactividades.model.AccionPositiva
+import com.example.registrodeactividades.utils.Precios
 import kotlinx.coroutines.*
 
 class ActividadesViewModel(
@@ -102,7 +101,7 @@ class ActividadesViewModel(
     fun registroDatos() {
         uiScope.launch {
             val register = get(userId)
-            register?.puntosPremio = register?.puntosPremio!! + _ptsGanados.value!!
+            register.puntosPremio = register.puntosPremio + _ptsGanados.value!!
             register.puntosCastigo = register.puntosCastigo + _ptsPerdidos.value!!
             register.puntosHoy = register.puntosHoy + _ptsTotal.value!!
             register.dinero = register.dinero + _dineroTotal.value!!
@@ -112,9 +111,10 @@ class ActividadesViewModel(
             )
             Log.i(
                 "hijo",
-                "edit ganados2: ${_ptsGanados.value} - ${_ptsPerdidos.value} - ${_ptsTotal.value} - ${_dineroTotal.value}"
+                "funcion registroDatos : ${_ptsGanados.value} - ${_ptsPerdidos.value} - ${_ptsTotal.value} - ${_dineroTotal.value}"
             )
-            update(register!!)
+            update(register)
+
             initializeUser()
 
             iniciarEnCero()
@@ -126,10 +126,12 @@ class ActividadesViewModel(
         _ptsPerdidos.value = 0
         _ptsTotal.value = 0
         _dineroTotal.value = 0.0f
+        _dineroGanado.value = 0f
+        _dineroPerdido.value = 0f
         _contadorItem.value = 0
     }
 
-    private suspend fun get(id: Long): Hijo? {
+    private suspend fun get(id: Long): Hijo {
         return withContext(Dispatchers.IO) {
             val userAux = dataBaseDao.get(id)
             userAux
@@ -143,16 +145,24 @@ class ActividadesViewModel(
     }
     //*****************************************************
 
-    fun onAccionPositivaClicked(valor: Int) {
-        _ptsGanados.value = _ptsGanados.value!! + valor
-        _ptsTotal.value = _ptsTotal.value!! + valor
-        _dineroTotal.value = _ptsTotal.value!! * 0.025f
+    fun onAccionPositivaClicked(valorActividad: Int) {
+        Log.i("hijo","positive antes :_ ${_ptsGanados.value} - ${_ptsTotal.value} -- ${_dineroPerdido.value} -- ${_dineroGanado.value} --- ${_dineroTotal.value}")
+        _ptsGanados.value = _ptsGanados.value!! + valorActividad
+        _ptsTotal.value = _ptsTotal.value!! + valorActividad
+        //_dineroTotal.value = _ptsTotal.value!! * Precios.ACTIVIDAD_POSITIVA.value //0.035f
+        _dineroGanado.value = _dineroGanado.value!! + (Precios.ACTIVIDAD_POSITIVA.value * valorActividad)
+        _dineroTotal.value = _dineroGanado.value!! - _dineroPerdido.value!!
+        Log.i("hijo","positive despues :_ ${_ptsGanados.value} - ${_ptsTotal.value} -- ${_dineroPerdido.value} -- ${_dineroGanado.value} --- ${_dineroTotal.value}")
     }
 
-    fun onAccionNegativaClicked(valor: Int) {
-        _ptsPerdidos.value = _ptsPerdidos.value!! + valor
-        _ptsTotal.value = _ptsTotal.value!! - valor
-        _dineroTotal.value = _ptsTotal.value!! * 0.025f
+    fun onAccionNegativaClicked(valorActividad: Int) {
+        Log.i("hijo","negative antes :_ ${_ptsPerdidos.value} - ${_ptsTotal.value} -- ${_dineroPerdido.value} -- ${_dineroGanado.value} --- ${_dineroTotal.value}")
+        _ptsPerdidos.value = _ptsPerdidos.value!! + valorActividad
+        _ptsTotal.value = _ptsTotal.value!! - valorActividad
+        //_dineroTotal.value = _ptsTotal.value!! * Precios.ACTIVIDAD_NEGATIVA.value //0.015f
+        _dineroPerdido.value = _dineroPerdido.value!! + (Precios.ACTIVIDAD_NEGATIVA.value * valorActividad)
+        _dineroTotal.value = _dineroGanado.value!! - _dineroPerdido.value!!
+        Log.i("hijo","negative despues :_ ${_ptsPerdidos.value} - ${_ptsTotal.value} -- ${_dineroPerdido.value} -- ${_dineroGanado.value} --- ${_dineroTotal.value}")
     }
 
     fun setItemPositiveList(list: List<AccionPositiva>) {
