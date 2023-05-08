@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+    <!--<data>
         <variable
             name="hijo"
             type="com.example.registrodeactividades.database.Hijo" />
         <variable
             name="clickListener"
             type="com.example.registrodeactividades.detalleusuario.ItemListener"/>
-    </data>
+    </data>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:ignore="SmallSp" />
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:id="@+id/linearLayout_puntos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                         android:textSize="12sp"
                         android:layout_weight="1"
                         android:text="@string/text_hoy_test"/>
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <TextView
                     android:id="@+id/text_dinero"
@@ -98,21 +98,11 @@
                     android:textSize="28sp"
                     android:textStyle="bold"
                     android:textColor="@color/orange_new"
-                    app:layout_constraintBottom_toBottomOf="@+id/linearLayout_puntos"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/linearLayout_puntos"
+                    app:layout_constraintStart_toStartOf="@id/user_text"
+                    app:layout_constraintTop_toBottomOf="@id/text_id_item"
                     android:text="@string/text_dinero_test" />
 
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_puntos"/>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <!--<androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/linearLayoutCompat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -206,7 +196,7 @@
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

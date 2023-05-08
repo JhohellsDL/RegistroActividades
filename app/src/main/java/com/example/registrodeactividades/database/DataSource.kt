@@ -50,12 +50,6 @@ class DataSource {
                 contador = 0
             ),
             AccionPositiva(
-                stringResourceId = R.string.positiveAction8,
-                imageResource = R.drawable.ban_perro,
-                valor = 10,
-                contador = 0
-            ),
-            AccionPositiva(
                 stringResourceId = R.string.positiveAction9,
                 imageResource = R.drawable.cuidar,
                 valor = 10,
@@ -165,12 +159,6 @@ class DataSource {
                 stringResourceId = R.string.negativeAction7,
                 imageResource = R.drawable.problema,
                 valor = 30,
-                contador = 0
-            ),
-            AccionNegativa(
-                stringResourceId = R.string.negativeAction8,
-                imageResource = R.drawable.enfermo,
-                valor = 10,
                 contador = 0
             ),
             AccionNegativa(

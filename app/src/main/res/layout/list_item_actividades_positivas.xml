@@ -6,7 +6,7 @@
     <data>
         <!--<variable
             name="hijo"
-            type="com.example.contadorcasino.database.Hijo" />
+            type="com.example.registrodeactividades.database.Hijo" />
         <variable
             name="clickListener"
             type="com.example.registrodeactividades.detalleusuario.ItemListener"/>-->

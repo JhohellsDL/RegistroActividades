@@ -1,13 +1,12 @@
 package com.example.registrodeactividades.registroporusuario
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.contadorcasino.database.Hijo
+import com.example.registrodeactividades.database.Hijo
 import com.example.contadorcasino.database.HijosDataBaseDao
+import com.example.registrodeactividades.utils.Precios
 import kotlinx.coroutines.*
-import java.lang.reflect.Array.get
 
 class RegistroPorUsuarioViewModel(
     private val dataBase: HijosDataBaseDao,
@@ -34,15 +33,15 @@ class RegistroPorUsuarioViewModel(
     init {
         initializeUser()
 
-        _dineroGanado.value = 0.0f
-        _dineroPerdido.value = 0.0f
+        /*_dineroGanado.value = 0.0f
+        _dineroPerdido.value = 0.0f*/
     }
 
     private fun initializeUser() {
         uiScope.launch {
             _user.value = getUserFromDataBase()
-            _dineroPerdido.value = _user.value?.puntosCastigo!! * 0.025f
-            _dineroGanado.value = _user.value?.puntosPremio!! * 0.025f
+            _dineroPerdido.value = _user.value?.puntosCastigo!! * Precios.ACTIVIDAD_NEGATIVA.value
+            _dineroGanado.value = _user.value?.puntosPremio!! * Precios.ACTIVIDAD_POSITIVA.value
         }
     }
 

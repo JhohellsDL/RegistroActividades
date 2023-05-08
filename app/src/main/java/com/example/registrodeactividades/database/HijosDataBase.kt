@@ -1,9 +1,10 @@
-package com.example.contadorcasino.database
+package com.example.registrodeactividades.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.contadorcasino.database.HijosDataBaseDao
 
 @Database(entities = [Hijo::class], version = 1, exportSchema = false)
 abstract class HijosDataBase : RoomDatabase() {
@@ -15,7 +16,7 @@ abstract class HijosDataBase : RoomDatabase() {
         @Volatile
         private var INSTANCE: HijosDataBase? = null
 
-        fun getInstance(context: Context) : HijosDataBase{
+        fun getInstance(context: Context) : HijosDataBase {
             synchronized(this){
                 var instance = INSTANCE
                 if (instance == null){

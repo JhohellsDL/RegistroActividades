@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.contadorcasino.database.Hijo
+import com.example.registrodeactividades.database.Hijo
 import com.example.contadorcasino.database.HijosDataBaseDao
 import com.example.registrodeactividades.R
 import kotlinx.coroutines.*

@@ -1,4 +1,4 @@
-package com.example.contadorcasino.database
+package com.example.registrodeactividades.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

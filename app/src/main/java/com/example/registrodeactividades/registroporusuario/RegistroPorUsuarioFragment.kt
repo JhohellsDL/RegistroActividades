@@ -8,8 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.example.contadorcasino.database.HijosDataBase
+import com.example.registrodeactividades.database.HijosDataBase
 import com.example.registrodeactividades.databinding.FragmentRegistroPorUsuarioBinding
+import java.text.DecimalFormat
 
 class RegistroPorUsuarioFragment : Fragment() {
 
@@ -37,17 +38,17 @@ class RegistroPorUsuarioFragment : Fragment() {
         registroPorUsuarioViewModel.user.observe(viewLifecycleOwner){
             binding.fotoItem.setImageResource(it.photoResourceId)
             binding.textIdUser.text = "Id: ${it.hijoId}"
-            binding.textDineroTienes.text = "S/. ${it.dinero}"
+            binding.textDineroTienes.text = formatDecimalNumber(it.dinero)
             binding.textPuntosHoy.text = it.puntosHoy.toString()
             binding.textPuntosPremio.text = it.puntosPremio.toString()
             binding.textPuntosCastigo.text = it.puntosCastigo.toString()
         }
 
         registroPorUsuarioViewModel.dineroGanado.observe(viewLifecycleOwner){
-            binding.textDineroGanaste.text = "S/. $it"
+            binding.textDineroGanaste.text = formatDecimalNumber(it)
         }
         registroPorUsuarioViewModel.dineroPerdido.observe(viewLifecycleOwner){
-            binding.textDineroPerdiste.text = "S/. $it"
+            binding.textDineroPerdiste.text = formatDecimalNumber(it)
         }
 
         //-------------------------------------------------------------------------------------------------------------------
@@ -65,5 +66,9 @@ class RegistroPorUsuarioFragment : Fragment() {
         return binding.root
     }
 
+    private fun formatDecimalNumber(number: Float): String {
+        val df = DecimalFormat("#.###")
+        return df.format(number)
+    }
 
 }

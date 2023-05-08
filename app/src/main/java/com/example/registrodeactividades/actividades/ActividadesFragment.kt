@@ -88,7 +88,7 @@ class ActividadesFragment : Fragment() {
 
         actividadesViewModel.user.observe(viewLifecycleOwner) {
             binding.fotoItem.setImageResource(it.photoResourceId)
-            binding.textDineroActual.text = it.dinero.toString()
+            binding.textDineroActual.text = formatDecimalNumber(it.dinero)
             dineroInicial = it.dinero
         }
 

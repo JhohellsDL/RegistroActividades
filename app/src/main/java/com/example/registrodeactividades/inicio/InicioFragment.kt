@@ -27,6 +27,14 @@ class InicioFragment : Fragment() {
         binding.buttonGotoActividades.setOnClickListener (
             Navigation.createNavigateOnClickListener(R.id.action_inicioFragment_to_detalleUsuarioFragment)
         )
+
+        binding.buttonGotoAgua.setOnClickListener (
+            Navigation.createNavigateOnClickListener(R.id.action_inicioFragment_to_detalleAguaFragment)
+        )
+
+        binding.buttonGotoVidas.setOnClickListener (
+            Navigation.createNavigateOnClickListener(R.id.action_inicioFragment_to_vidasScrollingFragment)
+        )
         //------------------------------------------------------------------------------------------------------------------------------------
 
         return binding.root

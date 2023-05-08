@@ -11,6 +11,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -24,6 +25,28 @@
                 android:background="@color/blue_new_1"
                 android:drawableStart="@drawable/baseline_pending_actions_24"
                 android:text="Registro de actividades"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_goto_agua"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
+                android:padding="18dp"
+                android:background="@color/blue_new_1"
+                android:drawableStart="@drawable/baseline_pending_actions_24"
+                android:layout_marginTop="16dp"
+                android:text="Registro de agua"
+                android:visibility="gone"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_goto_vidas"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
+                android:padding="18dp"
+                android:background="@color/blue_new_1"
+                android:drawableStart="@drawable/baseline_pending_actions_24"
+                android:layout_marginTop="16dp"
+                android:text="Registro de vidas"
+                android:visibility="gone"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

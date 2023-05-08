@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_inicioFragment_to_detalleUsuarioFragment"
             app:destination="@id/detalleUsuarioFragment" />
+        <action
+            android:id="@+id/action_inicioFragment_to_detalleAguaFragment"
+            app:destination="@id/detalleAguaFragment" />
+        <action
+            android:id="@+id/action_inicioFragment_to_vidasScrollingFragment"
+            app:destination="@id/vidasScrollingFragment" />
     </fragment>
     <fragment
         android:id="@+id/detalleUsuarioFragment"
@@ -45,4 +51,14 @@
             android:name="userId"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/detalleAguaFragment"
+        android:name="com.example.registrodeactividades.detalleagua.DetalleAguaFragment"
+        android:label="fragment_detalle_agua"
+        tools:layout="@layout/fragment_detalle_agua" />
+    <fragment
+        android:id="@+id/vidasScrollingFragment"
+        android:name="com.example.registrodeactividades.detallevidas.VidasScrollingFragment"
+        android:label="fragment_vidas_scrolling"
+        tools:layout="@layout/fragment_vidas_scrolling" />
 </navigation>

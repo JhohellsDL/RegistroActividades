@@ -3,7 +3,7 @@ package com.example.registrodeactividades.detalleusuario
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.contadorcasino.database.Hijo
+import com.example.registrodeactividades.database.Hijo
 import com.example.registrodeactividades.databinding.ListItemUserBinding
 
 class DetalleUsuarioAdapter(

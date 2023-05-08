@@ -3,8 +3,8 @@ package com.example.registrodeactividades
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.contadorcasino.database.Hijo
-import com.example.contadorcasino.database.HijosDataBase
+import com.example.registrodeactividades.database.Hijo
+import com.example.registrodeactividades.database.HijosDataBase
 import com.example.contadorcasino.database.HijosDataBaseDao
 import org.junit.After
 
