@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.registrodeactividades.database.HijosDataBase
 import com.example.registrodeactividades.database.DataSource
 import com.example.registrodeactividades.databinding.FragmentActividadesBinding
+import java.text.DecimalFormat
 
 
 class ActividadesFragment : Fragment() {
@@ -98,16 +99,16 @@ class ActividadesFragment : Fragment() {
             binding.textPuntosPerdidos.text = it.toString()
         }
         actividadesViewModel.dineroGanado.observe(viewLifecycleOwner) {
-            binding.textDineroGanado.text = it.toString()
+            binding.textDineroGanado.text = formatDecimalNumber(it)
         }
         actividadesViewModel.dineroPerdido.observe(viewLifecycleOwner) {
-            binding.textDineroPerdido.text = it.toString()
+            binding.textDineroPerdido.text = formatDecimalNumber(it)
         }
 
         actividadesViewModel.dineroTotal.observe(viewLifecycleOwner) {
-            binding.textDineroTotal.text = it.toString()
+            binding.textDineroTotal.text = formatDecimalNumber(it)
             dineroFinal = it + dineroInicial
-            binding.textDineroSuma.text = dineroFinal.toString()
+            binding.textDineroSuma.text = formatDecimalNumber(dineroFinal)
         }
 
         actividadesViewModel.myPositiveDataset.observe(viewLifecycleOwner) {
@@ -129,5 +130,10 @@ class ActividadesFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun formatDecimalNumber(number: Float): String {
+        val df = DecimalFormat("#.###")
+        return df.format(number)
     }
 }
