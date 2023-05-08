@@ -21,10 +21,6 @@ class ActividadesViewModel(
     val user: LiveData<Hijo>
         get() = _user
 
-    private var _contadorItem = MutableLiveData<Int>()
-    val contadorItem: LiveData<Int>
-        get() = _contadorItem
-
     private var _ptsGanados = MutableLiveData<Int>()
     val ptsGanados: LiveData<Int>
         get() = _ptsGanados
@@ -32,10 +28,6 @@ class ActividadesViewModel(
     private var _ptsPerdidos = MutableLiveData<Int>()
     val ptsPerdidos: LiveData<Int>
         get() = _ptsPerdidos
-
-    private var _ptsTotal = MutableLiveData<Int>()
-    val ptsTotal: LiveData<Int>
-        get() = _ptsTotal
 
     private var _dineroTotal = MutableLiveData<Float>()
     val dineroTotal: LiveData<Float>
@@ -103,20 +95,11 @@ class ActividadesViewModel(
             val register = get(userId)
             register.puntosPremio = register.puntosPremio + _ptsGanados.value!!
             register.puntosCastigo = register.puntosCastigo + _ptsPerdidos.value!!
-            register.puntosHoy = register.puntosHoy + _ptsTotal.value!!
+            register.puntosHoy = register.puntosHoy
             register.dinero = register.dinero + _dineroTotal.value!!
-            Log.i(
-                "hijo",
-                "edit ganados1: ${register.puntosPremio} - ${register.puntosCastigo} - ${register.puntosHoy} - ${register.dinero}"
-            )
-            Log.i(
-                "hijo",
-                "funcion registroDatos : ${_ptsGanados.value} - ${_ptsPerdidos.value} - ${_ptsTotal.value} - ${_dineroTotal.value}"
-            )
+
             update(register)
-
             initializeUser()
-
             iniciarEnCero()
         }
     }
@@ -124,11 +107,9 @@ class ActividadesViewModel(
     private fun iniciarEnCero() {
         _ptsGanados.value = 0
         _ptsPerdidos.value = 0
-        _ptsTotal.value = 0
         _dineroTotal.value = 0.0f
         _dineroGanado.value = 0f
         _dineroPerdido.value = 0f
-        _contadorItem.value = 0
     }
 
     private suspend fun get(id: Long): Hijo {
@@ -146,47 +127,29 @@ class ActividadesViewModel(
     //*****************************************************
 
     fun onAccionPositivaClicked(valorActividad: Int) {
-        Log.i("hijo","positive antes :_ ${_ptsGanados.value} - ${_ptsTotal.value} -- ${_dineroPerdido.value} -- ${_dineroGanado.value} --- ${_dineroTotal.value}")
         _ptsGanados.value = _ptsGanados.value!! + valorActividad
-        _ptsTotal.value = _ptsTotal.value!! + valorActividad
-        //_dineroTotal.value = _ptsTotal.value!! * Precios.ACTIVIDAD_POSITIVA.value //0.035f
-        _dineroGanado.value = _dineroGanado.value!! + (Precios.ACTIVIDAD_POSITIVA.value * valorActividad)
+        _dineroGanado.value =
+            _dineroGanado.value!! + (Precios.ACTIVIDAD_POSITIVA.value * valorActividad)
         _dineroTotal.value = _dineroGanado.value!! - _dineroPerdido.value!!
-        Log.i("hijo","positive despues :_ ${_ptsGanados.value} - ${_ptsTotal.value} -- ${_dineroPerdido.value} -- ${_dineroGanado.value} --- ${_dineroTotal.value}")
     }
 
     fun onAccionNegativaClicked(valorActividad: Int) {
-        Log.i("hijo","negative antes :_ ${_ptsPerdidos.value} - ${_ptsTotal.value} -- ${_dineroPerdido.value} -- ${_dineroGanado.value} --- ${_dineroTotal.value}")
         _ptsPerdidos.value = _ptsPerdidos.value!! + valorActividad
-        _ptsTotal.value = _ptsTotal.value!! - valorActividad
-        //_dineroTotal.value = _ptsTotal.value!! * Precios.ACTIVIDAD_NEGATIVA.value //0.015f
-        _dineroPerdido.value = _dineroPerdido.value!! + (Precios.ACTIVIDAD_NEGATIVA.value * valorActividad)
+        _dineroPerdido.value =
+            _dineroPerdido.value!! + (Precios.ACTIVIDAD_NEGATIVA.value * valorActividad)
         _dineroTotal.value = _dineroGanado.value!! - _dineroPerdido.value!!
-        Log.i("hijo","negative despues :_ ${_ptsPerdidos.value} - ${_ptsTotal.value} -- ${_dineroPerdido.value} -- ${_dineroGanado.value} --- ${_dineroTotal.value}")
     }
 
     fun setItemPositiveList(list: List<AccionPositiva>) {
         _myPositiveDataset.value = list
     }
+
     fun setItemNegativeList(list: List<AccionNegativa>) {
         _myNegativeDataset.value = list
     }
 
-    fun getItemList(): List<AccionPositiva> {
-        return _myPositiveDataset.value!!
-    }
-
     fun saveDatos() {
         registroDatos()
-
-        Log.i(
-            "hijo",
-            "edit ganados4: ${_ptsGanados.value} - ${_ptsPerdidos.value} - ${_ptsTotal.value} - ${_dineroTotal.value}"
-        )
-        /*_ptsGanados.value = 0
-        _ptsPerdidos.value = 0
-        _ptsTotal.value = 0
-        _dineroTotal.value = 0.0f*/
     }
 
     fun onVisibleBuenas() {
@@ -195,19 +158,21 @@ class ActividadesViewModel(
             _recyclerNegativoVisible.value = false
         }
     }
+
     fun onVisibleMalas() {
         if (_recyclerPositivoVisible.value!!) {
             _recyclerPositivoVisible.value = false
             _recyclerNegativoVisible.value = true
         }
     }
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
     }
 
     private fun stringUserLog(userAux: Hijo): String {
-        val cad = "ID: ${userAux.hijoId}\n" +
+        return "ID: ${userAux.hijoId}\n" +
                 "NOMBRE: ${userAux.nombre}\n" +
                 "FOTO: ${userAux.photoResourceId}\n" +
                 "FECHA: ${userAux.fecha}\n" +
@@ -217,6 +182,5 @@ class ActividadesViewModel(
                 "PTS AYER: ${userAux.puntosAyer}\n" +
                 "PTS HOY: ${userAux.puntosHoy}\n" +
                 "DINERO: ${userAux.dinero}\n"
-        return cad
     }
 }

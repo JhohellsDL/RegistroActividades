@@ -30,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/matthew" />
+                android:src="@drawable/matthew"
+                android:contentDescription="@string/imagen_de_usuario"/>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -51,7 +52,7 @@
                     android:id="@+id/label_dinero_antes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Antes"
+                    android:text="@string/antes"
                     android:textColor="@color/green_new"
                     android:fontFamily="@font/montserrat_alternates"
                     android:textSize="14sp"
@@ -86,7 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_alternates"
-                    android:text="Ahorita: S/. "
+                    android:text="@string/ahorita_s"
                     android:textColor="@color/orange_new"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/label_pts_hoy"
@@ -121,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_alternates"
-                    android:text="Ahora:"
+                    android:text="@string/ahora"
                     android:textColor="@color/orange"
                     android:textSize="14sp"
                     app:layout_constraintTop_toTopOf="parent"
@@ -154,7 +155,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linear_layout_buttons"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="130dp"
             android:padding="16dp"
             app:layout_constraintTop_toBottomOf="@id/layout_detalle">
 
@@ -177,40 +178,64 @@
                         android:layout_marginStart="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/label_buenas"/>
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/label_buenas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="12dp"
                         android:fontFamily="@font/montserrat_alternates"
-                        android:text="Buenas\nacciones"
-                        android:textSize="11dp"
+                        android:text="@string/buenas_acciones"
+                        android:textSize="11sp"
                         android:gravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/image_buena_card"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
+
                     <TextView
                         android:id="@+id/text_puntos_ganados"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_alternates"
-                        android:text="0 pts"
+                        android:layout_marginStart="16dp"
+                        tools:text="122"
                         android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/image_buena_card"
-                        app:layout_constraintTop_toBottomOf="@id/label_buenas" />
+                        app:layout_constraintTop_toTopOf="@id/image_buena_card" />
+
+                    <TextView
+                        android:id="@+id/label_puntos_ganados"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/pts"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@id/text_puntos_ganados"
+                        app:layout_constraintTop_toTopOf="@id/text_puntos_ganados" />
+
+                    <TextView
+                        android:id="@+id/label_dinero_ganado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:text="@string/signo_soles"
+                        android:textSize="11sp"
+                        app:layout_constraintStart_toStartOf="@id/text_puntos_ganados"
+                        app:layout_constraintTop_toBottomOf="@id/text_puntos_ganados"
+                        app:layout_constraintBottom_toBottomOf="@id/image_buena_card" />
+
                     <TextView
                         android:id="@+id/text_dinero_ganado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_alternates"
-                        android:text="42 pts"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/image_buena_card"
+                        tools:text="444"
+                        android:textSize="11sp"
+                        app:layout_constraintStart_toEndOf="@id/label_dinero_ganado"
                         app:layout_constraintTop_toBottomOf="@id/text_puntos_ganados"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="@id/image_buena_card" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -235,40 +260,63 @@
                         android:layout_marginStart="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/label_malas" />
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/label_malas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="12dp"
-                        android:text="Malas\nacciones"
-                        android:textSize="11dp"
+                        android:text="@string/malas_acciones"
+                        android:textSize="11sp"
                         android:gravity="center"
                         android:fontFamily="@font/montserrat_alternates"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/image_mala_card"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
                         android:id="@+id/text_puntos_perdidos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_alternates"
-                        android:text="0 pts"
+                        android:layout_marginStart="16dp"
+                        tools:text="100"
                         android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/image_mala_card"
-                        app:layout_constraintTop_toBottomOf="@id/label_malas" />
+                        app:layout_constraintTop_toTopOf="@id/image_mala_card" />
+                    <TextView
+                        android:id="@+id/label_puntos_perdidos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/pts"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@id/text_puntos_perdidos"
+                        app:layout_constraintTop_toTopOf="@id/text_puntos_perdidos" />
+
+                    <TextView
+                        android:id="@+id/label_dinero_perdido"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:text="@string/signo_soles"
+                        android:textSize="11sp"
+                        app:layout_constraintStart_toStartOf="@id/text_puntos_perdidos"
+                        app:layout_constraintTop_toBottomOf="@id/text_puntos_perdidos"
+                        app:layout_constraintBottom_toBottomOf="@id/image_mala_card" />
+
                     <TextView
                         android:id="@+id/text_dinero_perdido"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_alternates"
-                        android:text="0 pts"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/image_mala_card"
+                        android:layout_marginStart="4dp"
+                        tools:text="444"
+                        android:textSize="11sp"
+                        app:layout_constraintStart_toEndOf="@id/label_dinero_perdido"
                         app:layout_constraintTop_toBottomOf="@id/text_puntos_perdidos"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="@id/image_mala_card" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -276,12 +324,13 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/button_guardar"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/salvar"
                 android:scaleType="centerCrop"
                 android:layout_marginStart="16dp"
                 android:layout_gravity="center"
+                android:contentDescription="@string/guardar_datos"
                 android:background="@color/transparente_new"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>

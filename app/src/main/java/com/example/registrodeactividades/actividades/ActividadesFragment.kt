@@ -1,7 +1,6 @@
 package com.example.registrodeactividades.actividades
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +23,6 @@ class ActividadesFragment : Fragment() {
     private var dineroInicial: Float = 0f
     private var dineroFinal: Float = 0f
 
-    private var dineroAux: Float = 0f
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,11 +34,12 @@ class ActividadesFragment : Fragment() {
         //-------------------------------------------------------------------------------------------------------------------
 
         //--------------------------------- Para el VIEWMODEL --------------------------------------------------------------
-        val application = requireNotNull(this.activity).application
+        val application = requireActivity()
         val dataSource = HijosDataBase.getInstance(application).hijosDataBaseDao
         val viewModelFactory = ActividadesViewModelFactory(args.userId, dataSource)
 
-        val actividadesViewModel = ViewModelProvider(this, viewModelFactory)[ActividadesViewModel::class.java]
+        val actividadesViewModel =
+            ViewModelProvider(this, viewModelFactory)[ActividadesViewModel::class.java]
         binding.actividadesViewModel = actividadesViewModel
         binding.lifecycleOwner = this
         //-------------------------------------------------------------------------------------------------------------------
@@ -72,10 +71,10 @@ class ActividadesFragment : Fragment() {
             }
         )
 
-        actividadesViewModel.recyclerPositivoVisible.observe(viewLifecycleOwner){
+        actividadesViewModel.recyclerPositivoVisible.observe(viewLifecycleOwner) {
             binding.listaPositivas.isVisible = it
         }
-        actividadesViewModel.recyclerNegativoVisible.observe(viewLifecycleOwner){
+        actividadesViewModel.recyclerNegativoVisible.observe(viewLifecycleOwner) {
             binding.listaNegativas.isVisible = it
         }
 
@@ -86,51 +85,38 @@ class ActividadesFragment : Fragment() {
         //-----------------------------------------------------------------------------------------------------------------------------------
 
 
-        actividadesViewModel.user.observe(viewLifecycleOwner){
+        actividadesViewModel.user.observe(viewLifecycleOwner) {
             binding.fotoItem.setImageResource(it.photoResourceId)
             binding.textDineroActual.text = it.dinero.toString()
             dineroInicial = it.dinero
-            Log.i(
-                "hijo",
-                "dinero actual: $dineroInicial"
-            )
         }
 
-        actividadesViewModel.ptsGanados.observe(viewLifecycleOwner){
+        actividadesViewModel.ptsGanados.observe(viewLifecycleOwner) {
             binding.textPuntosGanados.text = it.toString()
         }
         actividadesViewModel.ptsPerdidos.observe(viewLifecycleOwner) {
             binding.textPuntosPerdidos.text = it.toString()
         }
-        actividadesViewModel.dineroGanado.observe(viewLifecycleOwner){
+        actividadesViewModel.dineroGanado.observe(viewLifecycleOwner) {
             binding.textDineroGanado.text = it.toString()
         }
-        actividadesViewModel.dineroPerdido.observe(viewLifecycleOwner){
+        actividadesViewModel.dineroPerdido.observe(viewLifecycleOwner) {
             binding.textDineroPerdido.text = it.toString()
         }
 
-        actividadesViewModel.dineroTotal.observe(viewLifecycleOwner){
+        actividadesViewModel.dineroTotal.observe(viewLifecycleOwner) {
             binding.textDineroTotal.text = it.toString()
             dineroFinal = it + dineroInicial
-            Log.i(
-                "hijo",
-                "dinero actual2: $it + $dineroFinal"
-            )
-            Log.i(
-                "hijo",
-                "dinero actual: $dineroInicial"
-            )
             binding.textDineroSuma.text = dineroFinal.toString()
-            dineroAux = it
         }
 
-        actividadesViewModel.myPositiveDataset.observe(viewLifecycleOwner){
+        actividadesViewModel.myPositiveDataset.observe(viewLifecycleOwner) {
             it?.let {
                 adapterAccionesPositivas.submitList(it)
                 binding.listaPositivas.adapter = adapterAccionesPositivas
             }
         }
-        actividadesViewModel.myNegativeDataset.observe(viewLifecycleOwner){
+        actividadesViewModel.myNegativeDataset.observe(viewLifecycleOwner) {
             it?.let {
                 adapterAccionesNegativas.submitList(it)
                 binding.listaNegativas.adapter = adapterAccionesNegativas
@@ -138,8 +124,8 @@ class ActividadesFragment : Fragment() {
         }
 
         binding.buttonGuardar.setOnClickListener {
-            actividadesViewModel.registroDatos()
-            Toast.makeText(requireContext(), "Guardado: $dineroAux soles", Toast.LENGTH_SHORT).show()
+            actividadesViewModel.saveDatos()
+            Toast.makeText(requireContext(), "Guardado correctamente", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root
