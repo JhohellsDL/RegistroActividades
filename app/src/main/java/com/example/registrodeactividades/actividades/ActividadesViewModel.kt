@@ -90,7 +90,7 @@ class ActividadesViewModel(
     }
 
     //************ editar**********************************
-    fun registroDatos() {
+    private fun registroDatos() {
         uiScope.launch {
             val register = get(userId)
             register.puntosPremio = register.puntosPremio + _ptsGanados.value!!
@@ -181,6 +181,7 @@ class ActividadesViewModel(
                 "PTS JUEGO: ${userAux.puntosJuego}\n" +
                 "PTS AYER: ${userAux.puntosAyer}\n" +
                 "PTS HOY: ${userAux.puntosHoy}\n" +
-                "DINERO: ${userAux.dinero}\n"
+                "DINERO: ${userAux.dinero}\n" +
+                "VIDAS: ${userAux.vidas}"
     }
 }

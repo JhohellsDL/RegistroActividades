@@ -18,6 +18,9 @@ data class Hijo(
     @ColumnInfo(name = "fecha")
     var fecha: String = "hijo1",
 
+    @ColumnInfo(name = "fecha_actual")
+    var fechaACtual: String = "hijoactual",
+
     @ColumnInfo(name = "puntos_premio")
     var puntosPremio: Int = 0,
 
@@ -34,5 +37,8 @@ data class Hijo(
     var puntosHoy: Int = 0,
 
     @ColumnInfo(name = "dinero")
-    var dinero: Float = -1f
+    var dinero: Float = -1f,
+
+    @ColumnInfo(name = "vidas")
+    var vidas: Int = 21
 )

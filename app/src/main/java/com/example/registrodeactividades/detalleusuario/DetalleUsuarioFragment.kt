@@ -3,12 +3,14 @@ package com.example.registrodeactividades.detalleusuario
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.registrodeactividades.database.HijosDataBase
@@ -20,6 +22,7 @@ class DetalleUsuarioFragment : Fragment() {
     private lateinit var binding: FragmentDetalleUsuarioBinding
     private lateinit var bindingDialog: CardAlertReiniciarBinding
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

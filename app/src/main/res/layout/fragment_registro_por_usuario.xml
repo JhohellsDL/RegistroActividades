@@ -3,16 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!--<data>
-        <variable
-            name="hijo"
-            type="com.example.registrodeactividades.database.Hijo" />
-        <variable
-            name="clickListener"
-            type="com.example.registrodeactividades.detalleusuario.ItemListener"/>
-    </data>-->
     <data>
-
         <variable
             name="registroPorUsuarioViewModel"
             type="com.example.registrodeactividades.registroporusuario.RegistroPorUsuarioViewModel" />
@@ -32,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/foto_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -70,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="26dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +198,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
-            android:text="@{registroPorUsuarioViewModel.user.fecha}"
+            android:text="@{registroPorUsuarioViewModel.fecha}"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -217,7 +208,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_marginHorizontal="26dp"
             android:layout_marginTop="32dp"
             android:orientation="horizontal"
@@ -225,28 +216,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_fecha">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:onClick="@{() -> registroPorUsuarioViewModel.menosVidas()}"
+                android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/text_puntos_premio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textSize="12sp"
-                    tools:text="130" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/premios"
-                    android:textSize="12sp" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_menos_vidas"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/menos"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <View
                 android:id="@+id/divider3"
@@ -258,6 +251,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_gravity="center"
                 android:orientation="vertical">
 
                 <TextView
@@ -265,15 +259,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="12sp"
-                    tools:text="130" />
+                    android:textSize="16sp"
+                    android:text="@{String.valueOf(registroPorUsuarioViewModel.vidas)}"
+                    tools:text="21" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="TIENES"
-                    android:textSize="12sp" />
+                    android:text="@string/vidas_capital"
+                    android:textSize="14sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -283,45 +278,72 @@
                 android:layout_height="match_parent"
                 android:background="?android:attr/listDivider" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_margin ="8dp"
+                android:onClick="@{() -> registroPorUsuarioViewModel.masVidas()}"
+                android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/text_puntos_castigo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textSize="12sp"
-                    tools:text="130" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/castigo"
-                    android:textSize="12sp" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_mas_vidas"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/anadir"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/button_actualizar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> registroPorUsuarioViewModel.actualizarDatos()}"
-            android:text="actualizar"
-            android:padding="12dp"
-            android:drawablePadding="8dp"
-            android:background="@color/transparente_new"
-            android:drawableTop="@drawable/actualizar_small"
+            android:layout_margin="16dp"
             app:layout_constraintBottom_toTopOf="@id/linearLayoutCompat3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat2"/>
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_actualize"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/actualizar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/actualizar"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/image_actualize"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat3"

@@ -35,19 +35,19 @@ class RegistroPorUsuarioFragment : Fragment() {
         binding.registroPorUsuarioViewModel = registroPorUsuarioViewModel
         binding.lifecycleOwner = this
 
-        registroPorUsuarioViewModel.user.observe(viewLifecycleOwner){
+        registroPorUsuarioViewModel.user.observe(viewLifecycleOwner) {
             binding.fotoItem.setImageResource(it.photoResourceId)
             binding.textIdUser.text = "Id: ${it.hijoId}"
             binding.textDineroTienes.text = formatDecimalNumber(it.dinero)
-            binding.textPuntosHoy.text = it.puntosHoy.toString()
-            binding.textPuntosPremio.text = it.puntosPremio.toString()
-            binding.textPuntosCastigo.text = it.puntosCastigo.toString()
         }
 
-        registroPorUsuarioViewModel.dineroGanado.observe(viewLifecycleOwner){
+        registroPorUsuarioViewModel.dineroTotal.observe(viewLifecycleOwner) {
+            binding.textDineroTienes.text = formatDecimalNumber(it)
+        }
+        registroPorUsuarioViewModel.dineroGanado.observe(viewLifecycleOwner) {
             binding.textDineroGanaste.text = formatDecimalNumber(it)
         }
-        registroPorUsuarioViewModel.dineroPerdido.observe(viewLifecycleOwner){
+        registroPorUsuarioViewModel.dineroPerdido.observe(viewLifecycleOwner) {
             binding.textDineroPerdiste.text = formatDecimalNumber(it)
         }
 
@@ -55,12 +55,20 @@ class RegistroPorUsuarioFragment : Fragment() {
 
         //--------------------------------- Para el ENVIAR DATOS-----------------------------------------------------------
         binding.buttonRegistar.setOnClickListener {
-            it.findNavController().navigate(RegistroPorUsuarioFragmentDirections.actionRegistroPorUsuarioFragmentToActividadesFragment(args.userId))
+            it.findNavController().navigate(
+                RegistroPorUsuarioFragmentDirections.actionRegistroPorUsuarioFragmentToActividadesFragment(
+                    args.userId
+                )
+            )
         }
         //-------------------------------------------------------------------------------------------------------------------
 
         binding.buttonEdit.setOnClickListener {
             Toast.makeText(requireContext(), "Falta definir", Toast.LENGTH_SHORT).show()
+        }
+        binding.buttonActualizar.setOnClickListener {
+            val vidas = binding.textPuntosHoy.text
+            registroPorUsuarioViewModel.actualizarVidas(vidas.toString().toInt())
         }
 
         return binding.root

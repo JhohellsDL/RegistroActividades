@@ -1,6 +1,8 @@
 package com.example.registrodeactividades.detalleusuario
 
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,6 +10,7 @@ import com.example.registrodeactividades.database.Hijo
 import com.example.contadorcasino.database.HijosDataBaseDao
 import com.example.registrodeactividades.R
 import kotlinx.coroutines.*
+import java.time.LocalDateTime
 import java.util.*
 
 class DetalleUsuarioViewModel(
@@ -33,21 +36,11 @@ class DetalleUsuarioViewModel(
     init {
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     val hijoAndrew = Hijo(
         photoResourceId = R.drawable.andrew,
         nombre = "Andrew",
-        fecha = Date().toString(),
-        puntosPremio = 0,
-        puntosCastigo = 0,
-        puntosJuego = 0,
-        puntosAyer = 0,
-        puntosHoy = 0,
-        dinero = 0.0f
-    )
-    val hijoMatthew = Hijo(
-        photoResourceId = R.drawable.matthew,
-        nombre = "Matthew",
-        fecha = Date().toString(),
+        fecha = LocalDateTime.now().toString(),
         puntosPremio = 0,
         puntosCastigo = 0,
         puntosJuego = 0,
@@ -56,6 +49,20 @@ class DetalleUsuarioViewModel(
         dinero = 0.0f
     )
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    val hijoMatthew = Hijo(
+        photoResourceId = R.drawable.matthew,
+        nombre = "Matthew",
+        fecha = LocalDateTime.now().toString(),
+        puntosPremio = 0,
+        puntosCastigo = 0,
+        puntosJuego = 0,
+        puntosAyer = 0,
+        puntosHoy = 0,
+        dinero = 0.0f
+    )
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun onReinicioRegistroHijos() {
         uiScope.launch {
             limpiarRegistro()

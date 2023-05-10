@@ -36,7 +36,7 @@ class DetalleUsuarioAdapter(
             binding.userText.text = item.nombre
             binding.imageItem.setImageResource(item.photoResourceId)
             binding.textFecha.text = item.fecha
-            binding.textPuntosPremio.text = item.puntosPremio.toString()
+            binding.textVidas.text = item.vidas.toString()
             binding.textPuntosCastigo.text = item.puntosCastigo.toString()
             binding.textPuntosJuego.text = item.puntosJuego.toString()
             binding.textPuntosAyer.text = "Ayer ${item.puntosAyer} puntos"
