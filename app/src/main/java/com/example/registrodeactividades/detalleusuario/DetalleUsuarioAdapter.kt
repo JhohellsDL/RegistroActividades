@@ -1,9 +1,13 @@
 package com.example.registrodeactividades.detalleusuario
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.registrodeactividades.R
 import com.example.registrodeactividades.database.Hijo
 import com.example.registrodeactividades.databinding.ListItemUserBinding
 import java.text.DecimalFormat
@@ -48,6 +52,11 @@ class DetalleUsuarioAdapter(
             binding.textDineroDespues.text = "S/. ${formatDecimalNumber(item.dineroUltimo)}"
             binding.textDinero.text = "S/. ${formatDecimalNumber(item.dinero)}"
             itemView.setOnClickListener { onClickListener(item) }
+
+            if (item.vidas < 15){
+                binding.textVidas.setTextColor(ContextCompat.getColor(binding.root.context, R.color.red_1_new))
+                binding.labelVidas.setTextColor(ContextCompat.getColor(binding.root.context, R.color.red_1_new))
+            }
         }
 
         private fun formatDecimalNumber(number: Float): String {
