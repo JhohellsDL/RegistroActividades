@@ -64,16 +64,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:ignore="SmallSp" />
 
-                <TextView
-                    android:id="@+id/text_fecha_actual"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:text="@string/fecha_test"
-                    app:layout_constraintTop_toBottomOf="@id/user_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:ignore="SmallSp" />
-
                 <LinearLayout
                     android:id="@+id/linearLayout_puntos"
                     android:layout_width="wrap_content"
@@ -87,18 +77,19 @@
                         android:id="@+id/text_puntos_ayer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
+                        android:textSize="10sp"
                         android:layout_weight="1"
-                        android:text="@string/text_ayer_test"/>
+                        android:text="@string/fecha_ultimo_registro"/>
                     <TextView
-                        android:id="@+id/text_puntos_hoy"
+                        android:id="@+id/text_fecha_actual"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:layout_weight="1"
-                        android:text="@string/text_hoy_test"/>
+                        android:textColor="@color/orange_new"
+                        tools:text="12/05/2023 08:23:27"/>
                 </LinearLayout>
 
                 <TextView

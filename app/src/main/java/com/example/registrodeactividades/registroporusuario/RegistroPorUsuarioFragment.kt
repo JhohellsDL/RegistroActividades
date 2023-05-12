@@ -39,6 +39,7 @@ class RegistroPorUsuarioFragment : Fragment() {
             binding.fotoItem.setImageResource(it.photoResourceId)
             binding.textIdUser.text = "Id: ${it.hijoId}"
             binding.textDineroTienes.text = formatDecimalNumber(it.dinero)
+            binding.textFecha.text = it.fechaACtual
         }
 
         registroPorUsuarioViewModel.dineroTotal.observe(viewLifecycleOwner) {

@@ -1,10 +1,14 @@
 package com.example.registrodeactividades.detalleusuario
 
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.registrodeactividades.database.Hijo
 import com.example.registrodeactividades.databinding.ListItemUserBinding
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DetalleUsuarioAdapter(
     private val onClickListener: (Hijo) -> Unit
@@ -36,11 +40,10 @@ class DetalleUsuarioAdapter(
             binding.userText.text = item.nombre
             binding.imageItem.setImageResource(item.photoResourceId)
             binding.textFecha.text = item.fecha
+            binding.textFechaActual.text = item.fechaACtual
             binding.textVidas.text = item.vidas.toString()
             binding.textPuntosCastigo.text = item.puntosCastigo.toString()
             binding.textPuntosJuego.text = item.puntosJuego.toString()
-            binding.textPuntosAyer.text = "Ayer ${item.puntosAyer} puntos"
-            binding.textPuntosHoy.text = "Hoy ${item.puntosHoy} puntos"
             binding.textDinero.text = "S/. ${item.dinero}"
             itemView.setOnClickListener { onClickListener(item) }
         }

@@ -96,9 +96,10 @@ class RegistroPorUsuarioViewModel(
             _dineroPerdido.value = register.puntosCastigo * Precios.ACTIVIDAD_NEGATIVA.value
             _dineroGanado.value = register.puntosPremio * Precios.ACTIVIDAD_POSITIVA.value
             _dineroTotal.value = register.dinero
+            register.fechaACtual = _fecha.value.toString()
             register.vidas = vidas
             val cad = stringUserLog(register)
-            Log.i("hijo", "registro Datos : $cad")
+            Log.i("hijo", "registro - Datos : $cad")
 
             update(register)
 
@@ -116,6 +117,7 @@ class RegistroPorUsuarioViewModel(
                 "NOMBRE: ${userAux.nombre}\n" +
                 "FOTO: ${userAux.photoResourceId}\n" +
                 "FECHA: ${userAux.fecha}\n" +
+                "FECHA ACTUAL: ${userAux.fechaACtual}\n" +
                 "PTS PREMIO: ${userAux.puntosPremio}\n" +
                 "PTS CASTIGO: ${userAux.puntosCastigo}\n" +
                 "PTS JUEGO: ${userAux.puntosJuego}\n" +
