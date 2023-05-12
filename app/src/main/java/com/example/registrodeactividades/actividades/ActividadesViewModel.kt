@@ -37,6 +37,14 @@ class ActividadesViewModel(
     val dineroGanado: LiveData<Float>
         get() = _dineroGanado
 
+    private var _dineroAntes = MutableLiveData<Float>()
+    val dineroAntes: LiveData<Float>
+        get() = _dineroAntes
+
+    private var _dineroUltimo = MutableLiveData<Float>()
+    val dineroUltimo: LiveData<Float>
+        get() = _dineroUltimo
+
     private var _dineroPerdido = MutableLiveData<Float>()
     val dineroPerdido: LiveData<Float>
         get() = _dineroPerdido
@@ -72,11 +80,13 @@ class ActividadesViewModel(
 
         iniciarEnCero()
         initializeUser()
+
     }
 
     private fun initializeUser() {
         uiScope.launch {
             _user.value = getUserFromDataBase()
+            _dineroAntes.value = _user.value?.dinero
         }
     }
 
@@ -95,7 +105,8 @@ class ActividadesViewModel(
             val register = get(userId)
             register.puntosPremio = register.puntosPremio + _ptsGanados.value!!
             register.puntosCastigo = register.puntosCastigo + _ptsPerdidos.value!!
-            register.dineroUltimo = register.dineroUltimo
+            register.dineroAntes = _dineroAntes.value!!
+            register.dineroUltimo =  _dineroTotal.value!!
             register.dinero = register.dinero + _dineroTotal.value!!
 
             update(register)

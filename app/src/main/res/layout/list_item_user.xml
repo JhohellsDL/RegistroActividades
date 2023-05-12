@@ -166,7 +166,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:textSize="12sp"
-                            android:text="@string/vidas" />
+                            android:text="@string/vidas_antes" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 

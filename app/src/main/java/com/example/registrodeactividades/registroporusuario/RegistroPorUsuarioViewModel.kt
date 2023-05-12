@@ -36,6 +36,10 @@ class RegistroPorUsuarioViewModel(
     val vidas: LiveData<Int>
         get() = _vidas
 
+    private var _vidasAntes = MutableLiveData<Int>()
+    val vidasAntes: LiveData<Int>
+        get() = _vidasAntes
+
     private var _fecha = MutableLiveData<String>()
     val fecha: LiveData<String>
         get() = _fecha
@@ -54,6 +58,7 @@ class RegistroPorUsuarioViewModel(
             _dineroPerdido.value = _user.value?.puntosCastigo!! * Precios.ACTIVIDAD_NEGATIVA.value
             _dineroGanado.value = _user.value?.puntosPremio!! * Precios.ACTIVIDAD_POSITIVA.value
             _vidas.value = _user.value?.vidas
+            _vidasAntes.value = _user.value?.vidas
             _fecha.value = formatGMTDate ()
             val cad = stringUserLog(user.value!!)
             Log.i("hijo", "USER INICIALIZADO : $cad")
@@ -98,6 +103,7 @@ class RegistroPorUsuarioViewModel(
             _dineroTotal.value = register.dinero
             register.fechaACtual = _fecha.value.toString()
             register.vidas = vidas
+            register.vidasAntes = _vidasAntes.value!!
             val cad = stringUserLog(register)
             Log.i("hijo", "registro - Datos : $cad")
 

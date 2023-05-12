@@ -19,7 +19,7 @@ data class Hijo(
     var fecha: String = "hijo1",
 
     @ColumnInfo(name = "fecha_actual")
-    var fechaACtual: String = "hijoactual",
+    var fechaACtual: String = "--",
 
     @ColumnInfo(name = "puntos_premio")
     var puntosPremio: Int = 0,

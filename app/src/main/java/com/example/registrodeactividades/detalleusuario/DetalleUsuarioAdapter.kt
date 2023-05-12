@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.registrodeactividades.database.Hijo
 import com.example.registrodeactividades.databinding.ListItemUserBinding
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -43,10 +44,15 @@ class DetalleUsuarioAdapter(
             binding.textFechaActual.text = item.fechaACtual
             binding.textVidas.text = item.vidas.toString()
             binding.textVidasAntes.text = item.vidasAntes.toString()
-            binding.textDineroAntes.text = "S/. ${item.dineroAntes}"
-            binding.textDineroDespues.text = "S/. ${item.dineroUltimo}"
-            binding.textDinero.text = "S/. ${item.dinero}"
+            binding.textDineroAntes.text = "S/. ${formatDecimalNumber(item.dineroAntes)}"
+            binding.textDineroDespues.text = "S/. ${formatDecimalNumber(item.dineroUltimo)}"
+            binding.textDinero.text = "S/. ${formatDecimalNumber(item.dinero)}"
             itemView.setOnClickListener { onClickListener(item) }
+        }
+
+        private fun formatDecimalNumber(number: Float): String {
+            val df = DecimalFormat("#.###")
+            return df.format(number)
         }
 
         companion object {
