@@ -30,15 +30,18 @@ data class Hijo(
     @ColumnInfo(name = "puntos_juego")
     var puntosJuego: Int = 0,
 
-    @ColumnInfo(name = "puntos_ayer")
-    var puntosAyer: Int = 0,
+    @ColumnInfo(name = "dinero_antes")
+    var dineroAntes: Float = 0f,
 
-    @ColumnInfo(name = "puntos_hoy")
-    var puntosHoy: Int = 0,
+    @ColumnInfo(name = "dinero_ultimo")
+    var dineroUltimo: Float = 0f,
 
     @ColumnInfo(name = "dinero")
     var dinero: Float = -1f,
 
     @ColumnInfo(name = "vidas")
-    var vidas: Int = 21
+    var vidas: Int = 21,
+
+    @ColumnInfo(name = "vidas_antes")
+    var vidasAntes: Int = 21
 )

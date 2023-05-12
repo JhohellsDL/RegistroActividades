@@ -44,8 +44,8 @@ class DetalleUsuarioViewModel(
         puntosPremio = 0,
         puntosCastigo = 0,
         puntosJuego = 0,
-        puntosAyer = 0,
-        puntosHoy = 0,
+        dineroAntes = 0f,
+        dineroUltimo = 0f,
         dinero = 0.0f
     )
 
@@ -57,8 +57,8 @@ class DetalleUsuarioViewModel(
         puntosPremio = 0,
         puntosCastigo = 0,
         puntosJuego = 0,
-        puntosAyer = 0,
-        puntosHoy = 0,
+        dineroAntes = 0f,
+        dineroUltimo = 0f,
         dinero = 0.0f
     )
 

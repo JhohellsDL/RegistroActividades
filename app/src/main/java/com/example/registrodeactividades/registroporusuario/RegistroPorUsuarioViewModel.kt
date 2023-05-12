@@ -121,8 +121,8 @@ class RegistroPorUsuarioViewModel(
                 "PTS PREMIO: ${userAux.puntosPremio}\n" +
                 "PTS CASTIGO: ${userAux.puntosCastigo}\n" +
                 "PTS JUEGO: ${userAux.puntosJuego}\n" +
-                "PTS AYER: ${userAux.puntosAyer}\n" +
-                "PTS HOY: ${userAux.puntosHoy}\n" +
+                "PTS AYER: ${userAux.dineroAntes}\n" +
+                "PTS HOY: ${userAux.dineroUltimo}\n" +
                 "DINERO: ${userAux.dinero}\n" +
                 "VIDAS: ${userAux.vidas}"
     }

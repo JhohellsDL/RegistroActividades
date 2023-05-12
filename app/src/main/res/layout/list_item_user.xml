@@ -155,13 +155,12 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/text_puntos_premio"
+                            android:id="@+id/text_vidas_antes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:textSize="12sp"
-                            android:text="@string/_21"
-                            tools:text="130" />
+                            tools:text="15" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -184,20 +183,19 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/text_puntos_castigo"
+                            android:id="@+id/text_dinero_antes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:textSize="12sp"
-                            android:text="@string/nro_test"
-                            tools:text="130" />
+                            tools:text="S/. 20.00" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:textSize="12sp"
-                            android:text="@string/castigo" />
+                            android:text="Dinero antes" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -214,20 +212,19 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/text_puntos_juego"
+                            android:id="@+id/text_dinero_despues"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:textSize="12sp"
-                            android:text="@string/nro_test"
-                            tools:text="130" />
+                            tools:text="S/. 3.40" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:textSize="12sp"
-                            android:text="@string/en_juego" />
+                            android:text="Dinero ultimo" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 

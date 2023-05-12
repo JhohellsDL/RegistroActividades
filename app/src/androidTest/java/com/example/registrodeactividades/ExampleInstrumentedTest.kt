@@ -46,6 +46,6 @@ class ExampleInstrumentedTest {
         val night = Hijo()
         sleepDao.insert(night)
         val hijo = sleepDao.getHijoUser()
-        assertEquals(hijo?.puntosHoy, 0)
+        assertEquals(hijo?.dineroUltimo, 0)
     }
 }

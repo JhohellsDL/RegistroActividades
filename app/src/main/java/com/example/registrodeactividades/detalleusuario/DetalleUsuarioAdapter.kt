@@ -42,8 +42,9 @@ class DetalleUsuarioAdapter(
             binding.textFecha.text = item.fecha
             binding.textFechaActual.text = item.fechaACtual
             binding.textVidas.text = item.vidas.toString()
-            binding.textPuntosCastigo.text = item.puntosCastigo.toString()
-            binding.textPuntosJuego.text = item.puntosJuego.toString()
+            binding.textVidasAntes.text = item.vidasAntes.toString()
+            binding.textDineroAntes.text = "S/. ${item.dineroAntes}"
+            binding.textDineroDespues.text = "S/. ${item.dineroUltimo}"
             binding.textDinero.text = "S/. ${item.dinero}"
             itemView.setOnClickListener { onClickListener(item) }
         }
