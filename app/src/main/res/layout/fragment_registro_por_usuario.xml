@@ -194,14 +194,25 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_fecha"
+            android:id="@+id/label_text_fecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="32dp"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat"
+            tools:text="Fecha de ultimo registro:" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            android:textColor="@color/orange_new"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_text_fecha"
             tools:text="@string/fecha_test" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -216,10 +227,10 @@
             app:layout_constraintTop_toBottomOf="@id/text_fecha">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_button_menos"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                android:onClick="@{() -> registroPorUsuarioViewModel.menosVidas()}"
                 android:layout_weight="1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -278,10 +289,10 @@
                 android:background="?android:attr/listDivider" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_button_mas"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin ="8dp"
-                android:onClick="@{() -> registroPorUsuarioViewModel.masVidas()}"
                 android:layout_weight="1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -304,6 +315,19 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label_text_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/red_1_new"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat2"
+            android:text="Por favor ACTUALIZE antes de realizar otra accion"
+            android:visibility="gone"/>
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/button_actualizar"
             android:layout_width="match_parent"
@@ -312,7 +336,7 @@
             app:layout_constraintBottom_toTopOf="@id/linearLayoutCompat3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat2">
+            app:layout_constraintTop_toBottomOf="@id/label_text_information">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -349,6 +373,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
+            android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/linearLayoutCompat2">
 

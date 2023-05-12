@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.registrodeactividades.R
 import com.example.registrodeactividades.database.HijosDataBase
 import com.example.registrodeactividades.database.DataSource
 import com.example.registrodeactividades.databinding.FragmentActividadesBinding
+import com.google.android.material.snackbar.Snackbar
 import java.text.DecimalFormat
 
 
@@ -126,7 +129,9 @@ class ActividadesFragment : Fragment() {
 
         binding.buttonGuardar.setOnClickListener {
             actividadesViewModel.saveDatos()
-            Toast.makeText(requireContext(), "Guardado correctamente", Toast.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, "Guardado correctamente", Toast.LENGTH_SHORT)
+                .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.orange_new))
+                .show()
         }
 
         return binding.root

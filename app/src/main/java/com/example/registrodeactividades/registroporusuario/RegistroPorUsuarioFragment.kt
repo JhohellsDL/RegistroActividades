@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.registrodeactividades.R
 import com.example.registrodeactividades.database.HijosDataBase
 import com.example.registrodeactividades.databinding.FragmentRegistroPorUsuarioBinding
+import com.google.android.material.snackbar.Snackbar
 import java.text.DecimalFormat
 
 class RegistroPorUsuarioFragment : Fragment() {
@@ -64,12 +68,25 @@ class RegistroPorUsuarioFragment : Fragment() {
         }
         //-------------------------------------------------------------------------------------------------------------------
 
+        binding.cardButtonMas.setOnClickListener {
+            registroPorUsuarioViewModel.masVidas()
+            binding.labelTextInformation.visibility = View.VISIBLE
+        }
+
+        binding.cardButtonMenos.setOnClickListener {
+            registroPorUsuarioViewModel.menosVidas()
+            binding.labelTextInformation.visibility = View.VISIBLE
+        }
+
         binding.buttonEdit.setOnClickListener {
             Toast.makeText(requireContext(), "Falta definir", Toast.LENGTH_SHORT).show()
         }
         binding.buttonActualizar.setOnClickListener {
             val vidas = binding.textPuntosHoy.text
             registroPorUsuarioViewModel.actualizarVidas(vidas.toString().toInt())
+            Snackbar.make(binding.root, "Actualizado y Guardado correctamente", Toast.LENGTH_SHORT)
+                .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.orange_new))
+                .show()
         }
 
         return binding.root
