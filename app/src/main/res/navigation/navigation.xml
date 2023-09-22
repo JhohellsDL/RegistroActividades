@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/inicioFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/inicioFragment"
@@ -61,4 +61,18 @@
         android:name="com.example.registrodeactividades.detallevidas.VidasScrollingFragment"
         android:label="fragment_vidas_scrolling"
         tools:layout="@layout/fragment_vidas_scrolling" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.registrodeactividades.login.loginUser.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_loginActivity2"
+            app:destination="@id/loginActivity2" />
+    </fragment>
+    <activity
+        android:id="@+id/loginActivity2"
+        android:name="com.example.registrodeactividades.login.loginUser.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>
