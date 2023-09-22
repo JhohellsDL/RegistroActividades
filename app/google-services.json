@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "385141225861",
+    "project_id": "registro-de-actividades-f7a0e",
+    "storage_bucket": "registro-de-actividades-f7a0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385141225861:android:fe431ba15f43ecd504acec",
+        "android_client_info": {
+          "package_name": "com.example.registrodeactividades"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385141225861-jlnd3u36ockusi1spgt73d39tbhik8ng.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.registrodeactividades",
+            "certificate_hash": "14e1866742c17672f07b36b72611765f576dfe1f"
+          }
+        },
+        {
+          "client_id": "385141225861-r87q8jae7ftt1jnr62sdipdbcmqlcrmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjd4RrSCsUv1ktI0yc5yZXJjILfOnD8RU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385141225861-r87q8jae7ftt1jnr62sdipdbcmqlcrmd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
