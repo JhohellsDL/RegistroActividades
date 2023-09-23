@@ -333,7 +333,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/guardar_datos"
-                android:background="@color/transparente_new"/>
+                android:background="@color/transparente_total"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
