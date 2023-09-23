@@ -62,7 +62,7 @@ class LoginFragment : Fragment() {
         binding.buttonRegisterGoogleUser.setOnClickListener {
 
             val signInIntent =
-                Auth.GoogleSignInApi.getSignInIntent(mGoogleAuthProvider.getGoogleApiClient())
+                Auth.GoogleSignInApi.getSignInIntent(mGoogleAuthProvider.getClient())
             startActivityForResult(signInIntent, GOOGLE_SING_IN)
 
         }

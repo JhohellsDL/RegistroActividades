@@ -1,13 +1,12 @@
 package com.example.registrodeactividades.providers
 
-import android.app.Activity
 import android.content.Context
-import android.provider.Settings.Global.getString
 import androidx.fragment.app.FragmentActivity
-import com.example.registrodeactividades.R
 import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.ResultCallback
 
 class AuthProviderGoogle(context: Context, activity: FragmentActivity) {
 
@@ -25,7 +24,36 @@ class AuthProviderGoogle(context: Context, activity: FragmentActivity) {
             .build()
     }
 
-    fun getGoogleApiClient(): GoogleApiClient {
+    fun getClient(): GoogleApiClient {
         return mGoogleApiClient
+    }
+
+    fun silentSignIn(callback: (GoogleSignInAccount?) -> Unit) {
+        if (mGoogleApiClient == null) {
+            callback(null)
+            return
+        }
+
+        val opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient)
+        opr.setResultCallback(ResultCallback {
+            if (it.isSuccess) {
+                val account = it.signInAccount
+                callback(account)
+            } else {
+                callback(null)
+            }
+        })
+    }
+
+    fun signOut() {
+        if (mGoogleApiClient != null && mGoogleApiClient!!.isConnected) {
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback {}
+        }
+    }
+
+    fun disconnect() {
+        if (mGoogleApiClient != null && mGoogleApiClient!!.isConnected) {
+            Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback {}
+        }
     }
 }
