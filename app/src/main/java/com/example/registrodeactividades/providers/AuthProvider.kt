@@ -2,8 +2,10 @@ package com.example.registrodeactividades.providers
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class AuthProvider {
 
@@ -19,6 +21,14 @@ class AuthProvider {
 
     fun getId(): String {
         return  auth.currentUser?.uid ?: ""
+    }
+
+    fun getCurrentUser(): FirebaseUser? {
+        return auth.currentUser
+    }
+
+    fun loginWithCredentials(credential: AuthCredential): Task<AuthResult> {
+        return auth.signInWithCredential(credential)
     }
 
     fun existSession(): Boolean {
