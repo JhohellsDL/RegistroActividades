@@ -2,14 +2,17 @@ package com.example.registrodeactividades.login.loginUser
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.registrodeactividades.databinding.FragmentLoginBinding
 import com.example.registrodeactividades.providers.AuthProvider
 import com.example.registrodeactividades.providers.AuthProviderGoogle
+import com.example.registrodeactividades.providers.UserProvider
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.GoogleAuthProvider
@@ -22,52 +25,61 @@ class LoginFragment : Fragment() {
     private var authProvider = AuthProvider()
     private lateinit var mGoogleAuthProvider: AuthProviderGoogle
 
+    private val userProvider = UserProvider()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater)
-        mGoogleAuthProvider = AuthProviderGoogle(requireContext(), requireActivity())
-
-        if (authProvider.existSession()) {
-            Toast.makeText(requireContext(), "si hay session!2", Toast.LENGTH_SHORT).show()
-        }
 
         binding.buttonRegisterUser.setOnClickListener {
-            val email = binding.editTextEmail.text.toString()
-            val password = binding.editTextPassword.text.toString()
-
-            authProvider.register(email, password).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(requireContext(), "correcto", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), "mal", Toast.LENGTH_SHORT).show()
-                }
-            }
+            registerUser()
         }
 
         binding.buttonLoginUser.setOnClickListener {
-            val email = binding.editTextEmail.text.toString()
-            val password = binding.editTextPassword.text.toString()
-
-            authProvider.login(email, password).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(requireContext(), "correcto", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), "mal", Toast.LENGTH_SHORT).show()
-                }
-            }
+            loginUser()
         }
 
         binding.buttonRegisterGoogleUser.setOnClickListener {
-
-            val signInIntent =
-                Auth.GoogleSignInApi.getSignInIntent(mGoogleAuthProvider.getClient())
-            startActivityForResult(signInIntent, GOOGLE_SING_IN)
+            loginGoogleUser()
 
         }
 
         return binding.root
+    }
+
+    private fun loginGoogleUser() {
+        mGoogleAuthProvider = AuthProviderGoogle(requireContext(), requireActivity())
+        val signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleAuthProvider.getClient())
+        Log.d("asdasd", "Client: ${mGoogleAuthProvider.getClient()}")
+        startActivityForResult(signInIntent, GOOGLE_SING_IN)
+    }
+
+    private fun loginUser() {
+        val email = binding.editTextEmail.text.toString()
+        val password = binding.editTextPassword.text.toString()
+
+        authProvider.login(email, password).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Toast.makeText(requireContext(), "correcto", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "mal", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun registerUser() {
+        val email = binding.editTextEmail.text.toString()
+        val password = binding.editTextPassword.text.toString()
+
+        authProvider.register(email, password).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Toast.makeText(requireContext(), "correcto", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "mal", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -101,6 +113,7 @@ class LoginFragment : Fragment() {
                         "¡Bienvenido, ${user?.displayName}!",
                         Toast.LENGTH_SHORT
                     ).show()
+                    goToInicio()
                 } else {
                     Toast.makeText(
                         requireContext(),
@@ -110,4 +123,18 @@ class LoginFragment : Fragment() {
                 }
             }
     }
+
+    private fun goToInicio() {
+        findNavController().navigate(
+            LoginFragmentDirections.actionLoginFragmentToInicioFragment()
+        )
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (authProvider.existSession()) {
+            goToInicio()
+        }
+    }
+
 }

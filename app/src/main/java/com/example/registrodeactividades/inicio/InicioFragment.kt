@@ -1,17 +1,22 @@
 package com.example.registrodeactividades.inicio
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.registrodeactividades.R
 import com.example.registrodeactividades.databinding.FragmentInicioBinding
+import com.example.registrodeactividades.providers.AuthProvider
 
 class InicioFragment : Fragment() {
 
     private lateinit var binding: FragmentInicioBinding
+    private var authProvider = AuthProvider()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,6 +24,17 @@ class InicioFragment : Fragment() {
     ): View {
 
         binding = FragmentInicioBinding.inflate(inflater)
+
+        val nameUser = authProvider.getCurrentUser()?.displayName
+        Log.d("asdasd", "name user : $nameUser")
+        binding.nameUserActive.text = nameUser
+
+
+        binding.buttonLogout.setOnClickListener {
+            authProvider.auth.signOut()
+            Toast.makeText(requireContext(), "Session cerrada", Toast.LENGTH_SHORT).show()
+            goToLogin()
+        }
 
         //--------------------------------- AMBOS FUNCIONAN PARA LA NAVEGACION --------------------------------------------------------------
         /*binding.button.setOnClickListener { view: View ->
@@ -38,5 +54,11 @@ class InicioFragment : Fragment() {
         //------------------------------------------------------------------------------------------------------------------------------------
 
         return binding.root
+
+    }
+    fun goToLogin() {
+        findNavController().navigate(
+            InicioFragmentDirections.actionInicioFragmentToLoginFragment()
+        )
     }
 }

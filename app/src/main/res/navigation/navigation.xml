@@ -19,6 +19,11 @@
         <action
             android:id="@+id/action_inicioFragment_to_vidasScrollingFragment"
             app:destination="@id/vidasScrollingFragment" />
+        <action
+            android:id="@+id/action_inicioFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/inicioFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/detalleUsuarioFragment"
@@ -67,8 +72,8 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_loginActivity2"
-            app:destination="@id/loginActivity2" />
+            android:id="@+id/action_loginFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
     </fragment>
     <activity
         android:id="@+id/loginActivity2"
