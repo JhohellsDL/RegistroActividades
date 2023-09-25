@@ -13,11 +13,13 @@ import androidx.navigation.findNavController
 import com.example.registrodeactividades.R
 import com.example.registrodeactividades.database.HijosDataBase
 import com.example.registrodeactividades.databinding.FragmentRegistroPorUsuarioBinding
+import com.example.registrodeactividades.providers.AuthProvider
 import com.google.android.material.snackbar.Snackbar
 import java.text.DecimalFormat
 
 class RegistroPorUsuarioFragment : Fragment() {
 
+    private val authProvider = AuthProvider()
     private lateinit var binding: FragmentRegistroPorUsuarioBinding
 
     override fun onCreateView(
@@ -35,7 +37,8 @@ class RegistroPorUsuarioFragment : Fragment() {
         val datasource = HijosDataBase.getInstance(application).hijosDataBaseDao
         val viewModelFactory = RegistroPorUsuarioViewModelFactory(datasource, args.userId)
 
-        val registroPorUsuarioViewModel = ViewModelProvider(this, viewModelFactory)[RegistroPorUsuarioViewModel::class.java]
+        val registroPorUsuarioViewModel =
+            ViewModelProvider(this, viewModelFactory)[RegistroPorUsuarioViewModel::class.java]
         binding.registroPorUsuarioViewModel = registroPorUsuarioViewModel
         binding.lifecycleOwner = this
 
@@ -95,6 +98,19 @@ class RegistroPorUsuarioFragment : Fragment() {
     private fun formatDecimalNumber(number: Float): String {
         val df = DecimalFormat("#.###")
         return df.format(number)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (authProvider.getCurrentUser()?.email == "jhohellserick@gmail.com" ||
+            authProvider.getCurrentUser()?.email == "rudyjudithapazamendoza@gmail.com"
+        ) {
+            binding.buttonEdit.isVisible = true
+            binding.buttonRegistar.isVisible = true
+        } else {
+            binding.buttonEdit.isVisible = false
+            binding.buttonRegistar.isVisible = false
+        }
     }
 
 }

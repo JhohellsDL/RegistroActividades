@@ -25,7 +25,7 @@ class InicioFragment : Fragment() {
 
         binding = FragmentInicioBinding.inflate(inflater)
 
-        val nameUser = authProvider.getCurrentUser()?.displayName
+        val nameUser = authProvider.getCurrentUser()?.email
         Log.d("asdasd", "name user : $nameUser")
         binding.nameUserActive.text = nameUser
 
