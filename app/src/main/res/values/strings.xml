@@ -159,5 +159,6 @@
     <string name="vidas_capital">VIDAS</string>
     <string name="actualizar">Actualizar</string>
     <string name="fecha_ultimo_registro">Fecha ultimo registro</string>
+    <string name="fecha_inicio_registro">Fecha inicio de registro</string>
     <string name="vidas_antes">Vidas antes</string>
 </resources>

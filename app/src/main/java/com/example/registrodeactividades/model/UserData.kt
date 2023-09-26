@@ -5,6 +5,7 @@ data class UserData(
     var currentMoney: String = "00.00",
     var dailyLives: Int = 0,
     var date: String = "",
+    var recentDate: String = "",
     var extras: Int = 0,
     var lives: Int = 0,
     var lostMoney: String = "00.00",
@@ -18,9 +19,11 @@ data class UserData(
 
 fun mapToUserData(data: Map<String, Any>): UserData {
     return UserData(
+        id = data["id"] as? String ?: "",
         currentMoney = data["currentMoney"] as? String ?: "00.00",
         dailyLives = (data["dailyLives"] as? Long)?.toInt() ?: 0,
         date = data["date"] as? String ?: "",
+        recentDate = data["recentDate"] as? String ?: "",
         extras = (data["extras"] as? Long)?.toInt() ?: 0,
         lives = (data["lives"] as? Long)?.toInt() ?: 0,
         lostMoney = data["lostMoney"] as? String ?: "00.00",
