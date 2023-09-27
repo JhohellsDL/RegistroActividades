@@ -161,4 +161,8 @@
     <string name="fecha_ultimo_registro">Fecha ultimo registro</string>
     <string name="fecha_inicio_registro">Fecha inicio de registro</string>
     <string name="vidas_antes">Vidas antes</string>
+
+    <string name="format_text_money">S/. %s</string>
+    <string name="format_text_points">%d puntos.</string>
+
 </resources>

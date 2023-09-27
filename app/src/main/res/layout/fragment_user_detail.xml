@@ -398,7 +398,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_button_mas_2"
+            android:id="@+id/card_button_add_lives"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginEnd="-25dp"
@@ -433,8 +433,8 @@
             android:layout_marginTop="16dp"
             android:src="@drawable/baseline_favorite"
             android:tint="@color/purple_200"
-            app:layout_constraintStart_toStartOf="@id/card_button_mas_2"
-            app:layout_constraintTop_toBottomOf="@id/card_button_mas_2" />
+            app:layout_constraintStart_toStartOf="@id/card_button_add_lives"
+            app:layout_constraintTop_toBottomOf="@id/card_button_add_lives" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_lives"
             android:layout_width="wrap_content"
@@ -448,7 +448,7 @@
             app:layout_constraintTop_toTopOf="@id/image_lives"
             tools:text="@string/_21" />
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_button_menos_2"
+            android:id="@+id/card_button_remove_lives"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"

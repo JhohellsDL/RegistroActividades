@@ -63,6 +63,7 @@ class LoginFragment : Fragment() {
         authProvider.login(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
                 Toast.makeText(requireContext(), "correcto", Toast.LENGTH_SHORT).show()
+                goToInicio()
             } else {
                 Toast.makeText(requireContext(), "mal", Toast.LENGTH_SHORT).show()
             }

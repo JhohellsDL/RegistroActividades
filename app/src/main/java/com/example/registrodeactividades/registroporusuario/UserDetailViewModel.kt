@@ -10,16 +10,21 @@ import com.example.registrodeactividades.providers.UserProvider
 class UserDetailViewModel(
     private val userProvider: UserProvider,
     private val userId: String
-): ViewModel() {
+) : ViewModel() {
 
     private var _currentUser = MutableLiveData<UserData>()
     val currentUser: LiveData<UserData>
         get() = _currentUser
 
+    private var _isAdmin = MutableLiveData<Boolean>()
+    val isAdmin: LiveData<Boolean>
+        get() = _isAdmin
+
     init {
         getCurrentUser(userId)
     }
-    private fun getCurrentUser(userId: String){
+
+    private fun getCurrentUser(userId: String) {
         userProvider.getUserData(userId).addOnSuccessListener { it2 ->
             if (it2.exists()) {
                 it2.data?.let {
@@ -27,6 +32,10 @@ class UserDetailViewModel(
                 }
             }
         }
+    }
+
+    fun setIsAdmin(value: Boolean) {
+        _isAdmin.value = value
     }
 
 }
