@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_detalleUsuarioFragment_to_registroPorUsuarioFragment"
             app:destination="@id/registroPorUsuarioFragment" />
+        <action
+            android:id="@+id/action_detalleUsuarioFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/registroPorUsuarioFragment"
@@ -80,4 +83,13 @@
         android:name="com.example.registrodeactividades.login.loginUser.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.registrodeactividades.registroporusuario.UserDetailFragment"
+        android:label="UserDetailFragment"
+        tools:layout="@layout/fragment_user_detail">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </fragment>
 </navigation>

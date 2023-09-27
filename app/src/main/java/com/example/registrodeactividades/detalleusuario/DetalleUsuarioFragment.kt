@@ -53,20 +53,28 @@ class DetalleUsuarioFragment : Fragment() {
         val adapter = ItemUserAdapter(
             onClickListener = {
                 Log.d("asdasd", "click en el item ${it.name}")
+                it.let {
+                    this.findNavController().navigate(
+                        DetalleUsuarioFragmentDirections.actionDetalleUsuarioFragmentToUserDetailFragment(
+                            it.id
+                        )
+                    )
+                }
             })
 
         //*********** PARA NAVEGACION *****************************
         detalleUsuarioViewModel.idUserForNavigation.observe(
-            viewLifecycleOwner) {
-                it?.let {
-                    this.findNavController().navigate(
-                        DetalleUsuarioFragmentDirections.actionDetalleUsuarioFragmentToRegistroPorUsuarioFragment(
-                            it
-                        )
+            viewLifecycleOwner
+        ) {
+            it?.let {
+                this.findNavController().navigate(
+                    DetalleUsuarioFragmentDirections.actionDetalleUsuarioFragmentToRegistroPorUsuarioFragment(
+                        it
                     )
-                    detalleUsuarioViewModel.onUserClickedNavigated()
-                }
+                )
+                detalleUsuarioViewModel.onUserClickedNavigated()
             }
+        }
         //**********************************************************
 
         binding.detalleRecyclerview.adapter = adapter
@@ -86,7 +94,7 @@ class DetalleUsuarioFragment : Fragment() {
             bindingDialog.buttonReiniciar.setOnClickListener {
                 detalleUsuarioViewModel.onReinicioRegistroHijos()
                 myDialog.dismiss()
-                Toast.makeText(requireContext(),"Reiniciado",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Reiniciado", Toast.LENGTH_SHORT).show()
             }
         }
         return binding.root

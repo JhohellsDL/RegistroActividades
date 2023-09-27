@@ -36,8 +36,8 @@ class ItemUserAdapter(
             binding.textUserName.text = item.name
             //binding.imageItem.setImageResource(item.photoResourceId)
             binding.textCurrentMoney.text = item.currentMoney
-            binding.textRecentDate.text = item.recentDate
-            binding.textStartDate.text = item.date
+            //binding.textRecentDate.text = item.recentDate
+            //binding.textStartDate.text = item.date
             itemView.setOnClickListener { onClickListener(item) }
 
         }
