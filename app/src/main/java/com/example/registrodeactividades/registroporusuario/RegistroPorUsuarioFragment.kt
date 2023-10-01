@@ -65,7 +65,7 @@ class RegistroPorUsuarioFragment : Fragment() {
         binding.buttonRegistar.setOnClickListener {
             it.findNavController().navigate(
                 RegistroPorUsuarioFragmentDirections.actionRegistroPorUsuarioFragmentToActividadesFragment(
-                    args.userId
+                    args.userId.toString()
                 )
             )
         }

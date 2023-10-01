@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient" >
+            android:background="@drawable/gradient">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -28,12 +28,12 @@
             android:layout_height="340dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="-70dp"
-            app:cardCornerRadius="70dp"
-            app:strokeWidth="2dp"
             android:elevation="6dp"
-            app:strokeColor="@color/teal_200"
+            app:cardCornerRadius="70dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/teal_200"
+            app:strokeWidth="2dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/foto_item"
@@ -72,6 +72,7 @@
             app:layout_constraintStart_toEndOf="@id/card_user_photo"
             app:layout_constraintTop_toBottomOf="@id/text_user_name"
             tools:text="S/. 54.00" />
+
         <TextView
             android:id="@+id/label_current_money"
             android:layout_width="wrap_content"
@@ -97,6 +98,7 @@
             app:layout_constraintStart_toEndOf="@id/card_user_photo"
             app:layout_constraintTop_toBottomOf="@id/label_current_money"
             tools:text="S/. 54.00" />
+
         <TextView
             android:id="@+id/label_lost_money"
             android:layout_width="wrap_content"
@@ -122,6 +124,7 @@
             app:layout_constraintStart_toEndOf="@id/card_user_photo"
             app:layout_constraintTop_toBottomOf="@id/label_lost_money"
             tools:text="S/. 54.00" />
+
         <TextView
             android:id="@+id/label_recent_money"
             android:layout_width="wrap_content"
@@ -138,32 +141,35 @@
             android:id="@+id/layout_lives"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="16dp"
             android:gravity="center|center_horizontal"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@id/card_user_photo"
             app:layout_constraintStart_toStartOf="@id/card_user_photo"
             app:layout_constraintTop_toBottomOf="@id/card_user_photo">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_live_three"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/baseline_favorite"
-                android:tint="@color/purple_200"/>
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image_live_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_weight="1"
                 android:src="@drawable/baseline_favorite"
                 android:tint="@color/purple_200" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_live_two"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:src="@drawable/baseline_favorite"
+                android:tint="@color/purple_200" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_live_one"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_favorite_border"
+                android:src="@drawable/baseline_favorite"
                 android:tint="@color/purple_200" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -426,6 +432,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_lives"
             android:layout_width="wrap_content"
@@ -435,6 +442,7 @@
             android:tint="@color/purple_200"
             app:layout_constraintStart_toStartOf="@id/card_button_add_lives"
             app:layout_constraintTop_toBottomOf="@id/card_button_add_lives" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_lives"
             android:layout_width="wrap_content"
@@ -447,6 +455,7 @@
             app:layout_constraintStart_toEndOf="@id/image_lives"
             app:layout_constraintTop_toTopOf="@id/image_lives"
             tools:text="@string/_21" />
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_button_remove_lives"
             android:layout_width="100dp"
@@ -486,9 +495,9 @@
             android:layout_weight="1"
             android:backgroundTint="@color/transparente_total"
             app:cardCornerRadius="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:strokeWidth="2dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -499,13 +508,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Registar"
-                    android:textStyle="bold"
                     android:textColor="@color/white_new"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/image_button_register"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/image_button_register"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image_button_register"

@@ -1,28 +1,37 @@
 package com.example.registrodeactividades.actividades
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.registrodeactividades.database.Hijo
-import com.example.contadorcasino.database.HijosDataBaseDao
 import com.example.registrodeactividades.database.DataSource
+import com.example.registrodeactividades.database.Hijo
 import com.example.registrodeactividades.model.AccionNegativa
 import com.example.registrodeactividades.model.AccionPositiva
+import com.example.registrodeactividades.model.UserData
+import com.example.registrodeactividades.model.mapToUserData
+import com.example.registrodeactividades.providers.UserProvider
 import com.example.registrodeactividades.utils.Precios
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ActividadesViewModel(
-    private val dataBaseDao: HijosDataBaseDao,
-    private val userId: Long
+    private val userProvider: UserProvider,
+    private val userId: String
 ) : ViewModel() {
+
+    private var _currentUser = MutableLiveData<UserData>()
+    val currentUser: LiveData<UserData>
+        get() = _currentUser
 
     private var _user = MutableLiveData<Hijo>()
     val user: LiveData<Hijo>
         get() = _user
 
     private var _ptsGanados = MutableLiveData<Int>()
-    val ptsGanados: LiveData<Int>
+    val  ptsGanados: LiveData<Int>
         get() = _ptsGanados
 
     private var _ptsPerdidos = MutableLiveData<Int>()
@@ -85,11 +94,21 @@ class ActividadesViewModel(
 
     private fun initializeUser() {
         uiScope.launch {
-            _user.value = getUserFromDataBase()
-            _dineroAntes.value = _user.value?.dinero
+            getCurrentUser(userId)
         }
     }
 
+    private fun getCurrentUser(userId: String) {
+        userProvider.getUserData(userId).addOnSuccessListener { it2 ->
+            if (it2.exists()) {
+                it2.data?.let {
+                    _currentUser.value = mapToUserData(it)
+                }
+            }
+        }
+    }
+
+    /*
     private suspend fun getUserFromDataBase(): Hijo {
         return withContext(Dispatchers.IO) {
             val pUser = dataBaseDao.get(userId)
@@ -99,9 +118,26 @@ class ActividadesViewModel(
         }
     }
 
+     */
+
     //************ editar**********************************
+    fun updateMoneyInUser(currentMoney: String, lostMoney: String, recentMoney: String) {
+        _currentUser.value.let {
+            val updateUser = it?.copy(
+                currentMoney = currentMoney,
+                lostMoney = lostMoney,
+                recentMoney = recentMoney
+            )
+            userProvider.updateCurrentUser(userId, updateUser!!)
+        }
+    }
+
     private fun registroDatos() {
         uiScope.launch {
+            _currentUser.value.let {
+
+            }
+            /*
             val register = get(userId)
             register.puntosPremio = register.puntosPremio + _ptsGanados.value!!
             register.puntosCastigo = register.puntosCastigo + _ptsPerdidos.value!!
@@ -112,6 +148,8 @@ class ActividadesViewModel(
             update(register)
             initializeUser()
             iniciarEnCero()
+
+             */
         }
     }
 
@@ -123,6 +161,7 @@ class ActividadesViewModel(
         _dineroPerdido.value = 0f
     }
 
+    /*
     private suspend fun get(id: Long): Hijo {
         return withContext(Dispatchers.IO) {
             val userAux = dataBaseDao.get(id)
@@ -130,9 +169,11 @@ class ActividadesViewModel(
         }
     }
 
+     */
+
     private suspend fun update(registro: Hijo) {
         withContext(Dispatchers.IO) {
-            dataBaseDao.update(registro)
+            //dataBaseDao.update(registro)
         }
     }
     //*****************************************************

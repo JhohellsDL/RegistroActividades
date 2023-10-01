@@ -34,6 +34,34 @@ class UserDetailViewModel(
         }
     }
 
+    fun updateUser(newUser: UserData) {
+        userProvider.updateCurrentUser(userId, newUser)
+    }
+
+    fun updateLivesInUser(newLives: Int) {
+        _currentUser.value.let {
+            val updateUser = it?.copy(lives = newLives)
+            userProvider.updateCurrentUser(userId, updateUser!!)
+        }
+    }
+
+    fun updateDailyLivesInUser(newDailyLives: Int) {
+        _currentUser.value.let {
+            val updateUser = it?.copy(dailyLives = newDailyLives)
+            userProvider.updateCurrentUser(userId, updateUser!!)
+        }
+    }
+
+    fun updateAllLivesInUser(newLives: Int, newDailyLives: Int) {
+        _currentUser.value.let {
+            val updateUser = it?.copy(
+                lives = newLives,
+                dailyLives = newDailyLives
+            )
+            userProvider.updateCurrentUser(userId, updateUser!!)
+        }
+    }
+
     fun setIsAdmin(value: Boolean) {
         _isAdmin.value = value
     }

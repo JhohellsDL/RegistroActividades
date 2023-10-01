@@ -57,7 +57,7 @@
         tools:layout="@layout/fragment_actividades" >
         <argument
             android:name="userId"
-            app:argType="long" />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/detalleAguaFragment"
@@ -91,5 +91,8 @@
         <argument
             android:name="userId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_userDetailFragment_to_actividadesFragment"
+            app:destination="@id/actividadesFragment" />
     </fragment>
 </navigation>

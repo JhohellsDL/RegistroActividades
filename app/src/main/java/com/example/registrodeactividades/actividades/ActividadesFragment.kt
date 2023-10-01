@@ -1,6 +1,7 @@
 package com.example.registrodeactividades.actividades
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,21 +12,32 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.registrodeactividades.R
-import com.example.registrodeactividades.database.HijosDataBase
 import com.example.registrodeactividades.database.DataSource
 import com.example.registrodeactividades.databinding.FragmentActividadesBinding
+import com.example.registrodeactividades.providers.AuthProvider
+import com.example.registrodeactividades.providers.UserProvider
 import com.google.android.material.snackbar.Snackbar
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.Locale
 
 
 class ActividadesFragment : Fragment() {
 
+    private val userProvider = UserProvider()
+    private val authProvider = AuthProvider()
     private lateinit var binding: FragmentActividadesBinding
     private val myPositiveDataset = DataSource().loadPositiveActions()
     private val myNegativeDataset = DataSource().loadNegativeActions()
 
-    private var dineroInicial: Float = 0f
-    private var dineroFinal: Float = 0f
+    private var recentlyMoney: Float = 00.00f
+    private var startMoney: Float = 00.00f
+    private var endMoney: Float = 00.00f
+
+    private var moneyEarned: Float = 00.00f
+    private var moneyLost: Float = 00.00f
+    private var pointsEarned: Int = 0
+    private var pointsLost: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,13 +47,7 @@ class ActividadesFragment : Fragment() {
 
         //--------------------------------- Para el RECIBIR DATOS-----------------------------------------------------------
         val args = ActividadesFragmentArgs.fromBundle(requireArguments())
-        //-------------------------------------------------------------------------------------------------------------------
-
-        //--------------------------------- Para el VIEWMODEL --------------------------------------------------------------
-        val application = requireActivity()
-        val dataSource = HijosDataBase.getInstance(application).hijosDataBaseDao
-        val viewModelFactory = ActividadesViewModelFactory(args.userId, dataSource)
-
+        val viewModelFactory = ActividadesViewModelFactory(userProvider, args.userId)
         val actividadesViewModel =
             ViewModelProvider(this, viewModelFactory)[ActividadesViewModel::class.java]
         binding.actividadesViewModel = actividadesViewModel
@@ -51,10 +57,14 @@ class ActividadesFragment : Fragment() {
         //--------------------------------- Para el RECYCLERVIEW --------------------------------------------------------------
         val adapterAccionesPositivas = ActividadesPositivasAdapter(
             onClickListener = {
+                Log.d("asdasd", "contador antes: ${it.contador}")
                 it.contador = it.contador + 1
+                Log.d("asdasd", "contador despues: ${it.contador}")
                 myPositiveDataset.forEach { newAction ->
+                    Log.d("asdasd", "contador despues new resource: ${newAction.stringResourceId}")
                     if (newAction.stringResourceId == it.stringResourceId) {
                         newAction.contador = it.contador
+                        Log.d("asdasd", "contador despuesnew : ${newAction.contador}")
                         actividadesViewModel.setItemPositiveList(myPositiveDataset)
                     }
                 }
@@ -88,31 +98,42 @@ class ActividadesFragment : Fragment() {
         binding.listaNegativas.layoutManager = manager2
         //-----------------------------------------------------------------------------------------------------------------------------------
 
+        actividadesViewModel.currentUser.observe(viewLifecycleOwner) {
+            //binding.fotoItem.setImageResource(it.photoResourceId)
+            binding.textStartMoney.text = it.currentMoney
+            startMoney = it.currentMoney.toFloat()
 
-        actividadesViewModel.user.observe(viewLifecycleOwner) {
-            binding.fotoItem.setImageResource(it.photoResourceId)
-            binding.textDineroActual.text = formatDecimalNumber(it.dinero)
-            dineroInicial = it.dinero
+            binding.textRecentlyMoney.text = recentlyMoney.toString()
+            binding.textMoneyNow.text = (it.currentMoney.toFloat() + recentlyMoney).toString()
+
+            binding.textPointsEarned.text = pointsEarned.toString()
+            binding.textPointsLost.text = pointsLost.toString()
+            binding.textMoneyEarned.text = moneyEarned.toString()
+            binding.textMoneyLost.text = moneyLost.toString()
         }
 
         actividadesViewModel.ptsGanados.observe(viewLifecycleOwner) {
-            binding.textPuntosGanados.text = it.toString()
+            binding.textPointsEarned.text = it.toString()
         }
         actividadesViewModel.ptsPerdidos.observe(viewLifecycleOwner) {
-            binding.textPuntosPerdidos.text = it.toString()
-        }
-        actividadesViewModel.dineroGanado.observe(viewLifecycleOwner) {
-            binding.textDineroGanado.text = formatDecimalNumber(it)
-        }
-        actividadesViewModel.dineroPerdido.observe(viewLifecycleOwner) {
-            binding.textDineroPerdido.text = formatDecimalNumber(it)
+            binding.textPointsLost.text = it.toString()
         }
 
-        actividadesViewModel.dineroTotal.observe(viewLifecycleOwner) {
-            binding.textDineroTotal.text = formatDecimalNumber(it)
-            dineroFinal = it + dineroInicial
-            binding.textDineroSuma.text = formatDecimalNumber(dineroFinal)
-        }
+       actividadesViewModel.dineroGanado.observe(viewLifecycleOwner) {
+           binding.textMoneyEarned.text = formatDecimalNumber(it)
+       }
+       actividadesViewModel.dineroPerdido.observe(viewLifecycleOwner) {
+           binding.textMoneyLost.text = formatDecimalNumber(it)
+       }
+
+       actividadesViewModel.dineroTotal.observe(viewLifecycleOwner) {
+           binding.textRecentlyMoney.text = formatDecimalNumber(it)
+           recentlyMoney = it + startMoney
+           Log.d("asdasd", "recentrly money: $recentlyMoney")
+           binding.textMoneyNow.text = formatDecimalNumber(recentlyMoney)
+           Log.d("asdasd", "recentrly money format: ${formatDecimalNumber(recentlyMoney)}")
+       }
+
 
         actividadesViewModel.myPositiveDataset.observe(viewLifecycleOwner) {
             it?.let {
@@ -128,7 +149,16 @@ class ActividadesFragment : Fragment() {
         }
 
         binding.buttonGuardar.setOnClickListener {
-            actividadesViewModel.saveDatos()
+            val current = binding.textMoneyNow.text.toString()
+            val lost = binding.textStartMoney.text.toString()
+            val recently = binding.textRecentlyMoney.text.toString()
+
+            Log.d("asdasd", "current: $current")
+            Log.d("asdasd", "lost: $lost")
+            Log.d("asdasd", "recently: $recently")
+
+            actividadesViewModel.updateMoneyInUser(current, lost, recently)
+            //actividadesViewModel.saveDatos()
             Snackbar.make(binding.root, "Guardado correctamente", Toast.LENGTH_SHORT)
                 .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.orange_new))
                 .show()
@@ -138,7 +168,7 @@ class ActividadesFragment : Fragment() {
     }
 
     private fun formatDecimalNumber(number: Float): String {
-        val df = DecimalFormat("#.###")
+        val df = DecimalFormat("#.###", DecimalFormatSymbols(Locale.US))
         return df.format(number)
     }
 }
