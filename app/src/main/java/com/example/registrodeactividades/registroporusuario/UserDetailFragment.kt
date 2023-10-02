@@ -28,6 +28,8 @@ class UserDetailFragment : Fragment() {
     private var liveTwo = false
     private var liveThree = false
     private var dailyLives = 0
+    private var consumeWater = 0
+    private var initializeConsumeWater = 0
     private var initializeDailyLives = 0
 
     override fun onCreateView(
@@ -53,14 +55,14 @@ class UserDetailFragment : Fragment() {
 
         viewModel.currentUser.observe(viewLifecycleOwner) {
             Log.d("asdasd", "user user user: ${it.name}")
+            uploadPhotoUser(it.name)
             binding.textUserName.text = it.name
             binding.textCurrentMoney.text = getString(R.string.format_text_money, it.currentMoney)
             binding.textLostMoney.text = getString(R.string.format_text_money, it.lostMoney)
             binding.textRecentMoney.text = getString(R.string.format_text_money, it.recentMoney)
             binding.textRecentDate.text =
                 SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US).format(it.recentDate)
-            binding.textStartDate.text =
-                SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US).format(it.date!!)
+            binding.textStartDate.text = it.date
             binding.textPointsEarned.text = getString(R.string.format_text_points, it.pointsEarned)
             binding.textPointsGames.text = getString(R.string.format_text_points, it.pointsGames)
             binding.textPointsExtras.text = getString(R.string.format_text_points, it.extras)
@@ -72,6 +74,10 @@ class UserDetailFragment : Fragment() {
             dailyLives = it.dailyLives
             initializeDailyLives = it.dailyLives
             initializeDailyLives()
+
+            binding.textConsumeWater.text = it.consumeWater.toString()
+            consumeWater = it.consumeWater
+            initializeConsumeWater = it.consumeWater
         }
 
         viewModel.isAdmin.observe(viewLifecycleOwner) {
@@ -88,15 +94,24 @@ class UserDetailFragment : Fragment() {
             binding.textLives.text = currentLives.toString()
         }
 
+        binding.cardButtonConsumeWater.setOnClickListener {
+            consumeWater--
+            binding.textConsumeWater.text = consumeWater.toString()
+        }
+
 
         binding.imageLiveOne.setOnClickListener {
             if (liveOne) {
                 binding.imageLiveOne.setImageResource(R.drawable.baseline_favorite)
                 dailyLives++
+                currentLives++
+                binding.textLives.text = currentLives.toString()
                 Log.d("asdasd", "daily initialLives button: $dailyLives")
             } else {
                 binding.imageLiveOne.setImageResource(R.drawable.baseline_favorite_border)
                 dailyLives--
+                currentLives--
+                binding.textLives.text = currentLives.toString()
                 Log.d("asdasd", "daily initialLives button: $dailyLives")
             }
             liveOne = !liveOne
@@ -105,10 +120,14 @@ class UserDetailFragment : Fragment() {
             if (liveTwo) {
                 binding.imageLiveTwo.setImageResource(R.drawable.baseline_favorite)
                 dailyLives++
+                currentLives++
+                binding.textLives.text = currentLives.toString()
                 Log.d("asdasd", "daily initialLives button: $dailyLives")
             } else {
                 binding.imageLiveTwo.setImageResource(R.drawable.baseline_favorite_border)
                 dailyLives--
+                currentLives--
+                binding.textLives.text = currentLives.toString()
                 Log.d("asdasd", "daily initialLives button: $dailyLives")
             }
             liveTwo = !liveTwo
@@ -117,10 +136,14 @@ class UserDetailFragment : Fragment() {
             if (liveThree) {
                 binding.imageLiveThree.setImageResource(R.drawable.baseline_favorite)
                 dailyLives++
+                currentLives++
+                binding.textLives.text = currentLives.toString()
                 Log.d("asdasd", "daily initialLives button: $dailyLives")
             } else {
                 binding.imageLiveThree.setImageResource(R.drawable.baseline_favorite_border)
                 dailyLives--
+                currentLives--
+                binding.textLives.text = currentLives.toString()
                 Log.d("asdasd", "daily initialLives button: $dailyLives")
             }
             liveThree = !liveThree
@@ -135,18 +158,37 @@ class UserDetailFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (initialLives != currentLives && initializeDailyLives != dailyLives){
                 viewModel.updateAllLivesInUser(currentLives, dailyLives)
-                Utils.SnackbarUtils.showSnackBar(binding.root, "son diferentes!!!")
+                Utils.SnackbarUtils.showSnackBar(binding.root, "Vidas Actualizadas")
             } else if (initialLives != currentLives) {
                 viewModel.updateLivesInUser(currentLives)
-                Utils.SnackbarUtils.showSnackBar(binding.root, "son lives!!!")
+                Utils.SnackbarUtils.showSnackBar(binding.root, "Vidas Diarias Actualizadas")
             } else if (initializeDailyLives != dailyLives) {
                 viewModel.updateDailyLivesInUser(dailyLives)
-                Utils.SnackbarUtils.showSnackBar(binding.root, "son daily lives!!!")
+                Utils.SnackbarUtils.showSnackBar(binding.root, "Vidas Actualizadas")
+            } else if (initializeConsumeWater != consumeWater) {
+                viewModel.updateConsumeWaterUser(consumeWater)
+                Utils.SnackbarUtils.showSnackBar(binding.root, "Consumo de agua actualizado")
             }
             findNavController().popBackStack()
         }
 
         return binding.root
+    }
+
+    private fun uploadPhotoUser(name: String) {
+        when (name) {
+            "Andrew Alfredo Dianderas Apaza" -> {
+                binding.imagePhotoUser.setImageResource(R.drawable.andrew)
+            }
+
+            "Matthew Fabian Dianderas Apaza" -> {
+                binding.imagePhotoUser.setImageResource(R.drawable.matthew)
+            }
+
+            else -> {
+                binding.imagePhotoUser.setImageResource(R.drawable.user)
+            }
+        }
     }
 
     private fun obtainPermissionAdminForButtons(it: Boolean) {

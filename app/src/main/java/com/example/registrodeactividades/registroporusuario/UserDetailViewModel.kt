@@ -1,5 +1,6 @@
 package com.example.registrodeactividades.registroporusuario
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,6 +30,8 @@ class UserDetailViewModel(
             if (it2.exists()) {
                 it2.data?.let {
                     _currentUser.value = mapToUserData(it)
+                    Log.d("asdasd", "name: ${_currentUser.value!!.name}")
+                    Log.d("asdasd", "water: ${_currentUser.value!!.consumeWater}")
                 }
             }
         }
@@ -48,6 +51,13 @@ class UserDetailViewModel(
     fun updateDailyLivesInUser(newDailyLives: Int) {
         _currentUser.value.let {
             val updateUser = it?.copy(dailyLives = newDailyLives)
+            userProvider.updateCurrentUser(userId, updateUser!!)
+        }
+    }
+
+    fun updateConsumeWaterUser(consumeWater: Int) {
+        _currentUser.value.let {
+            val updateUser = it?.copy(consumeWater = consumeWater)
             userProvider.updateCurrentUser(userId, updateUser!!)
         }
     }

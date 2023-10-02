@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="registroPorUsuarioViewModel"
             type="com.example.registrodeactividades.registroporusuario.RegistroPorUsuarioViewModel" />
@@ -36,7 +35,7 @@
             app:strokeWidth="2dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/foto_item"
+                android:id="@+id/image_photo_user"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -479,6 +478,50 @@
                     android:layout_marginStart="10dp"
                     android:src="@drawable/baseline_remove_circle_outline"
                     android:tint="@color/white_new"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_button_consume_water"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="46dp"
+            android:layout_marginEnd="-25dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/transparente_total"
+            app:cardCornerRadius="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_button_remove_lives"
+            app:strokeWidth="2dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_consume_water"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="@color/teal_200"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/image_consume_water"
+                    tools:text="2" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_consume_water"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/gota_agua"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

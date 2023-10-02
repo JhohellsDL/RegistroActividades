@@ -4,9 +4,10 @@ import java.util.Date
 
 data class UserData(
     val id: String = "",
+    var consumeWater: Int = 0,
     var currentMoney: String = "00.00",
     var dailyLives: Int = 0,
-    var date: Date? = null,
+    var date: String? = "",
     var recentDate: Date = Date(),
     var extras: Int = 0,
     var lives: Int = 0,
@@ -22,9 +23,10 @@ data class UserData(
 fun mapToUserData(data: Map<String, Any>): UserData {
     return UserData(
         id = data["id"] as? String ?: "",
+        consumeWater = (data["consumeWater"] as? Long)?.toInt() ?: 0,
         currentMoney = data["currentMoney"] as? String ?: "00.00",
         dailyLives = (data["dailyLives"] as? Long)?.toInt() ?: 0,
-        date = data["date"] as? Date ?: Date(),
+        date = data["date"] as? String ?: "",
         recentDate = data["recentDate"] as? Date ?: Date(),
         extras = (data["extras"] as? Long)?.toInt() ?: 0,
         lives = (data["lives"] as? Long)?.toInt() ?: 0,

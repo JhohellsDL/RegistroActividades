@@ -3,9 +3,12 @@ package com.example.registrodeactividades.detalleusuario
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.registrodeactividades.R
 import com.example.registrodeactividades.databinding.ItemUserNewBinding
 import com.example.registrodeactividades.model.UserData
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ItemUserAdapter(
     private val onClickListener: (UserData) -> Unit
@@ -33,13 +36,53 @@ class ItemUserAdapter(
             item: UserData,
             onClickListener: (UserData) -> Unit
         ) {
+            uploadPhotoUser(item.name)
             binding.textUserName.text = item.name
-            //binding.imageItem.setImageResource(item.photoResourceId)
-            binding.textCurrentMoney.text = item.currentMoney
-            //binding.textRecentDate.text = item.recentDate
-            //binding.textStartDate.text = item.date
-            itemView.setOnClickListener { onClickListener(item) }
+            binding.textStartDate.text = item.date
+            binding.textRecentDate.text =
+                SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US).format(item.recentDate)
+            binding.textCurrentMoney.text =
+                "S/. ${formatDecimalNumber(item.currentMoney.toFloat())}"
 
+            uploadDailyLives(item.dailyLives)
+
+            itemView.setOnClickListener { onClickListener(item) }
+        }
+
+        private fun uploadDailyLives(dailyLives: Int) {
+            if (dailyLives == 0) {
+                binding.imageLiveOne.setImageResource(R.drawable.baseline_favorite_border)
+                binding.imageLiveTwo.setImageResource(R.drawable.baseline_favorite_border)
+                binding.imageLiveThree.setImageResource(R.drawable.baseline_favorite_border)
+            } else if (dailyLives == 1) {
+                binding.imageLiveOne.setImageResource(R.drawable.baseline_favorite)
+                binding.imageLiveTwo.setImageResource(R.drawable.baseline_favorite_border)
+                binding.imageLiveThree.setImageResource(R.drawable.baseline_favorite_border)
+            } else if (dailyLives == 2) {
+                binding.imageLiveOne.setImageResource(R.drawable.baseline_favorite)
+                binding.imageLiveTwo.setImageResource(R.drawable.baseline_favorite)
+                binding.imageLiveThree.setImageResource(R.drawable.baseline_favorite_border)
+            } else {
+                binding.imageLiveOne.setImageResource(R.drawable.baseline_favorite)
+                binding.imageLiveTwo.setImageResource(R.drawable.baseline_favorite)
+                binding.imageLiveThree.setImageResource(R.drawable.baseline_favorite)
+            }
+        }
+
+        private fun uploadPhotoUser(name: String) {
+            when (name) {
+                "Andrew Alfredo Dianderas Apaza" -> {
+                    binding.imageItem.setImageResource(R.drawable.andrew)
+                }
+
+                "Matthew Fabian Dianderas Apaza" -> {
+                    binding.imageItem.setImageResource(R.drawable.matthew)
+                }
+
+                else -> {
+                    binding.imageItem.setImageResource(R.drawable.user)
+                }
+            }
         }
 
         private fun formatDecimalNumber(number: Float): String {

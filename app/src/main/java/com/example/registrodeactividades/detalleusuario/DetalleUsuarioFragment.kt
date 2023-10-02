@@ -83,7 +83,7 @@ class DetalleUsuarioFragment : Fragment() {
         }
         //-----------------------------------------------------------------------------------------------------------------------------------
 
-        binding.buttonReiniciar.setOnClickListener {
+        binding.cardButtonRestartUsers.setOnClickListener {
             bindingDialog = CardAlertReiniciarBinding.inflate(layoutInflater)
             val myDialog = Dialog(it.context)
             myDialog.setContentView(bindingDialog.root)
