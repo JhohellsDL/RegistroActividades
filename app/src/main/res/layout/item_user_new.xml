@@ -41,60 +41,66 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_water_three"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginVertical="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="4dp"
                 android:src="@drawable/gota_agua"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_water_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginVertical="16dp"
                 android:layout_marginEnd="4dp"
                 android:src="@drawable/gota_agua"
                 app:layout_constraintStart_toEndOf="@id/image_water_three"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_water_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginVertical="16dp"
                 android:src="@drawable/gota_agua_border"
                 app:layout_constraintStart_toEndOf="@id/image_water_two"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_duolingo"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/image_duolingo_border"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_live_three"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginVertical="16dp"
                 android:layout_marginEnd="4dp"
                 android:src="@drawable/baseline_favorite"
                 android:tint="@color/purple_200"
                 app:layout_constraintEnd_toStartOf="@id/image_live_two"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_live_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginVertical="16dp"
                 android:layout_marginEnd="4dp"
                 android:src="@drawable/baseline_favorite"
                 android:tint="@color/purple_200"
                 app:layout_constraintEnd_toStartOf="@id/image_live_one"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_live_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginVertical="16dp"
                 android:layout_marginEnd="16dp"
                 android:src="@drawable/baseline_favorite_border"

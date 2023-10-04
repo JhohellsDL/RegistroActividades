@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +17,7 @@ import com.example.registrodeactividades.database.HijosDataBase
 import com.example.registrodeactividades.databinding.CardAlertReiniciarBinding
 import com.example.registrodeactividades.databinding.FragmentDetalleUsuarioBinding
 import com.example.registrodeactividades.providers.UserProvider
+import com.example.registrodeactividades.utils.Utils
 
 class DetalleUsuarioFragment : Fragment() {
 
@@ -92,9 +92,10 @@ class DetalleUsuarioFragment : Fragment() {
             myDialog.show()
 
             bindingDialog.buttonReiniciar.setOnClickListener {
-                detalleUsuarioViewModel.onReinicioRegistroHijos()
+                itemUseViewModel.resetUserAndrew()
+                itemUseViewModel.resetUserMatthew()
                 myDialog.dismiss()
-                Toast.makeText(requireContext(), "Reiniciado", Toast.LENGTH_SHORT).show()
+                Utils.SnackbarUtils.showSnackBar(binding.root, "Reiniciado")
             }
         }
         return binding.root

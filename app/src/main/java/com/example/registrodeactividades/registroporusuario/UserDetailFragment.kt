@@ -31,6 +31,8 @@ class UserDetailFragment : Fragment() {
     private var consumeWater = 0
     private var initializeConsumeWater = 0
     private var initializeDailyLives = 0
+    private var currentDuolingo = false
+    private var duolingo = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +68,7 @@ class UserDetailFragment : Fragment() {
             binding.textPointsEarned.text = getString(R.string.format_text_points, it.pointsEarned)
             binding.textPointsGames.text = getString(R.string.format_text_points, it.pointsGames)
             binding.textPointsExtras.text = getString(R.string.format_text_points, it.extras)
+            binding.textPointsLost.text = getString(R.string.format_text_points, it.pointsLost)
 
             binding.textLives.text = it.lives.toString()
             initialLives = it.lives
@@ -78,6 +81,11 @@ class UserDetailFragment : Fragment() {
             binding.textConsumeWater.text = it.consumeWater.toString()
             consumeWater = it.consumeWater
             initializeConsumeWater = it.consumeWater
+
+            duolingo = it.duolingo!!
+            currentDuolingo = it.duolingo!!
+            initializeDuolingo()
+
         }
 
         viewModel.isAdmin.observe(viewLifecycleOwner) {
@@ -97,6 +105,12 @@ class UserDetailFragment : Fragment() {
         binding.cardButtonConsumeWater.setOnClickListener {
             consumeWater--
             binding.textConsumeWater.text = consumeWater.toString()
+        }
+
+        binding.cardButtonDuolingo.setOnClickListener {
+            currentDuolingo = !currentDuolingo
+            initializeDuolingo()
+            Log.d("asdasd", "duolingo valor!. : $currentDuolingo")
         }
 
 
@@ -156,9 +170,17 @@ class UserDetailFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            if (initialLives != currentLives && initializeDailyLives != dailyLives){
+            if (initialLives != currentLives && initializeDailyLives != dailyLives && initializeConsumeWater != consumeWater && currentDuolingo != duolingo) {
+                viewModel.updateAllFeatures(currentLives, dailyLives, consumeWater, currentDuolingo)
+                Utils.SnackbarUtils.showSnackBar(
+                    binding.root,
+                    "Todos los datos fueron actualizados"
+                )
+            } else if (initialLives != currentLives && initializeDailyLives != dailyLives) {
                 viewModel.updateAllLivesInUser(currentLives, dailyLives)
-                Utils.SnackbarUtils.showSnackBar(binding.root, "Vidas Actualizadas")
+                Utils.SnackbarUtils.showSnackBar(
+                    binding.root, "Vidas actualizadas"
+                )
             } else if (initialLives != currentLives) {
                 viewModel.updateLivesInUser(currentLives)
                 Utils.SnackbarUtils.showSnackBar(binding.root, "Vidas Diarias Actualizadas")
@@ -168,11 +190,22 @@ class UserDetailFragment : Fragment() {
             } else if (initializeConsumeWater != consumeWater) {
                 viewModel.updateConsumeWaterUser(consumeWater)
                 Utils.SnackbarUtils.showSnackBar(binding.root, "Consumo de agua actualizado")
+            } else if (currentDuolingo != duolingo) {
+                viewModel.updateDuolingo(currentDuolingo)
+                Utils.SnackbarUtils.showSnackBar(binding.root, "Duolingo actualizado")
             }
             findNavController().popBackStack()
         }
 
         return binding.root
+    }
+
+    private fun initializeDuolingo() {
+        if (currentDuolingo) {
+            binding.imageDuolingo.setImageResource(R.drawable.image_dulingo)
+        } else {
+            binding.imageDuolingo.setImageResource(R.drawable.image_duolingo_border)
+        }
     }
 
     private fun uploadPhotoUser(name: String) {

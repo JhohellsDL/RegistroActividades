@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="registroPorUsuarioViewModel"
             type="com.example.registrodeactividades.registroporusuario.RegistroPorUsuarioViewModel" />
@@ -227,7 +228,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="36dp"
                 android:src="@drawable/baseline_date_range"
                 android:tint="@color/teal_200"
@@ -268,7 +269,7 @@
                 android:id="@+id/divider7"
                 android:layout_width="250dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layout_start_date" />
@@ -284,7 +285,6 @@
                 android:tint="@color/teal_200"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image_start_date" />
-
             <LinearLayout
                 android:id="@+id/layout_points_earned"
                 android:layout_width="wrap_content"
@@ -316,16 +316,57 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_points_lost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="36dp"
+                android:src="@drawable/baseline_mood_sad"
+                android:tint="@color/teal_200"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_points_earned" />
+            <LinearLayout
+                android:id="@+id/layout_points_lost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@id/image_points_lost"
+                app:layout_constraintStart_toEndOf="@id/image_points_lost"
+                app:layout_constraintTop_toTopOf="@id/image_points_lost">
+
+                <TextView
+                    android:id="@+id/label_points_lost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Puntos perdidos"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/text_points_lost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white_new"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    tools:text="10 puntos" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_points_games"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="36dp"
                 android:src="@drawable/baseline_videogame"
                 android:tint="@color/teal_200"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_points_earned" />
+                app:layout_constraintTop_toBottomOf="@id/image_points_lost" />
 
             <LinearLayout
                 android:id="@+id/layout_points_games"
@@ -362,13 +403,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="36dp"
                 android:src="@drawable/baseline_local_extras"
                 android:tint="@color/teal_200"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_points_games" />
+                app:layout_constraintTop_toBottomOf="@id/image_points_games" />
 
             <LinearLayout
                 android:id="@+id/layout_points_extras"
@@ -512,8 +553,8 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/image_consume_water"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="2" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -531,15 +572,46 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_button_duolingo"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="46dp"
+            android:layout_marginEnd="-25dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/transparente_total"
+            app:cardCornerRadius="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_button_consume_water"
+            app:strokeWidth="2dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_duolingo"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/image_dulingo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_button_register"
             android:layout_width="200dp"
             android:layout_height="50dp"
+            android:layout_marginStart="32dp"
             android:layout_marginBottom="32dp"
             android:layout_weight="1"
             android:backgroundTint="@color/transparente_total"
             app:cardCornerRadius="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:strokeWidth="2dp">
 

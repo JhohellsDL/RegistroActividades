@@ -132,6 +132,19 @@ class ActividadesViewModel(
         }
     }
 
+    fun updateMoneyAndPoints(currentMoney: String, lostMoney: String, recentMoney: String) {
+        _currentUser.value.let {
+            val updateUser = it?.copy(
+                currentMoney = currentMoney,
+                lostMoney = lostMoney,
+                recentMoney = recentMoney,
+                pointsEarned = 0,
+                pointsLost = 0
+            )
+            userProvider.updateCurrentUser(userId, updateUser!!)
+        }
+    }
+
     private fun registroDatos() {
         uiScope.launch {
             _currentUser.value.let {

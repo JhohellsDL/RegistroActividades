@@ -62,6 +62,26 @@ class UserDetailViewModel(
         }
     }
 
+    fun updateDuolingo(duolingo: Boolean) {
+        _currentUser.value.let {
+            val updateUser = it?.copy(duolingo = duolingo)
+            userProvider.updateCurrentUser(userId, updateUser!!)
+        }
+    }
+
+    fun updateAllFeatures(newLives: Int, newDailyLives: Int, consumeWater: Int, duolingo: Boolean) {
+        _currentUser.value.let {
+            val updateUser = it?.copy(
+                lives = newLives,
+                dailyLives = newDailyLives,
+                duolingo = duolingo,
+                consumeWater = consumeWater
+            )
+            userProvider.updateCurrentUser(userId, updateUser!!)
+        }
+    }
+
+
     fun updateAllLivesInUser(newLives: Int, newDailyLives: Int) {
         _currentUser.value.let {
             val updateUser = it?.copy(

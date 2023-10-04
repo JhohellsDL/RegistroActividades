@@ -1,5 +1,6 @@
 package com.example.registrodeactividades.detalleusuario
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -45,8 +46,40 @@ class ItemUserAdapter(
                 "S/. ${formatDecimalNumber(item.currentMoney.toFloat())}"
 
             uploadDailyLives(item.dailyLives)
+            uploadConsumeWater(item.consumeWater)
+            item.duolingo?.let {
+            Log.d("asdasd", "duolingo: ${item.name} es $it")
+                uploadDuolingo(it)
+            }
 
             itemView.setOnClickListener { onClickListener(item) }
+        }
+
+        private fun uploadDuolingo(value: Boolean) {
+            if (value) {
+                binding.imageDuolingo.setImageResource(R.drawable.image_dulingo)
+            } else {
+                binding.imageDuolingo.setImageResource(R.drawable.image_duolingo_border)
+            }
+        }
+        private fun uploadConsumeWater(dailyLives: Int) {
+            if (dailyLives == 0) {
+                binding.imageWaterOne.setImageResource(R.drawable.gota_agua_border)
+                binding.imageWaterTwo.setImageResource(R.drawable.gota_agua_border)
+                binding.imageWaterThree.setImageResource(R.drawable.gota_agua_border)
+            } else if (dailyLives == 1) {
+                binding.imageWaterOne.setImageResource(R.drawable.gota_agua_border)
+                binding.imageWaterTwo.setImageResource(R.drawable.gota_agua_border)
+                binding.imageWaterThree.setImageResource(R.drawable.gota_agua)
+            } else if (dailyLives == 2) {
+                binding.imageWaterOne.setImageResource(R.drawable.gota_agua_border)
+                binding.imageWaterTwo.setImageResource(R.drawable.gota_agua)
+                binding.imageWaterThree.setImageResource(R.drawable.gota_agua)
+            } else {
+                binding.imageWaterOne.setImageResource(R.drawable.gota_agua)
+                binding.imageWaterTwo.setImageResource(R.drawable.gota_agua)
+                binding.imageWaterThree.setImageResource(R.drawable.gota_agua)
+            }
         }
 
         private fun uploadDailyLives(dailyLives: Int) {
