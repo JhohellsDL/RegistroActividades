@@ -57,9 +57,9 @@ class ItemUserAdapter(
 
         private fun uploadDuolingo(value: Boolean) {
             if (value) {
-                binding.imageDuolingo.setImageResource(R.drawable.image_dulingo)
+                binding.imageDuolingo.setImageResource(R.drawable.duolingo_logo)
             } else {
-                binding.imageDuolingo.setImageResource(R.drawable.image_duolingo_border)
+                binding.imageDuolingo.setImageResource(R.drawable.duolingo_logo_border_blue)
             }
         }
         private fun uploadConsumeWater(dailyLives: Int) {
