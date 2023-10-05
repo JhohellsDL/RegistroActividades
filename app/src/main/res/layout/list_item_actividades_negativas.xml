@@ -19,26 +19,20 @@
         android:paddingHorizontal="4dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="82dp"
-            android:layout_height="68dp"
-            app:cardCornerRadius="12dp"
-            android:backgroundTint="@color/red_1_new"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
             android:layout_width="86dp"
             android:layout_height="70dp"
-            android:layout_marginTop="12dp"
-            android:padding="8dp"
-            app:cardCornerRadius="16dp"
             android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
             android:layout_marginBottom="3dp"
+            android:backgroundTint="@color/transparente_total"
+            android:padding="8dp"
+            android:shadowColor="@color/red_1_new"
+            app:cardCornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/red_1_new"
+            app:strokeWidth="2dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -58,26 +52,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
+                    android:fontFamily="@font/montserrat_alternates"
                     android:text="30 pts"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_alternates"
                     app:layout_constraintBottom_toBottomOf="@id/image_negativa"
-                    app:layout_constraintTop_toTopOf="@id/image_negativa"
-                    app:layout_constraintStart_toEndOf="@id/image_negativa"/>
+                    app:layout_constraintStart_toEndOf="@id/image_negativa"
+                    app:layout_constraintTop_toTopOf="@id/image_negativa" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_negativa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="No hablar en ingles"
-                    android:textSize="9sp"
                     android:fontFamily="@font/montserrat_alternates"
                     android:gravity="center"
+                    android:text="No hablar en ingles"
+                    android:textSize="9sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/image_negativa"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/image_negativa" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -89,22 +83,26 @@
             android:layout_height="22dp"
             app:cardCornerRadius="11dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/orange">
+                android:layout_height="match_parent">
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_contador_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textStyle="bold"
+                    android:textColor="@color/red_1_new"
                     android:textSize="12sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 

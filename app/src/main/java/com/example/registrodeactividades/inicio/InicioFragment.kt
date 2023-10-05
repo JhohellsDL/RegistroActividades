@@ -30,7 +30,7 @@ class InicioFragment : Fragment() {
         binding.nameUserActive.text = nameUser
 
 
-        binding.buttonLogout.setOnClickListener {
+        binding.cardButtonLogout.setOnClickListener {
             authProvider.auth.signOut()
             Toast.makeText(requireContext(), "Session cerrada", Toast.LENGTH_SHORT).show()
             goToLogin()
@@ -40,7 +40,7 @@ class InicioFragment : Fragment() {
         /*binding.button.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_vistaPrincipalFragment_to_actividadesPositivas)
         }*/
-        binding.buttonGotoActividades.setOnClickListener (
+        binding.cardButtonRegister.setOnClickListener (
             Navigation.createNavigateOnClickListener(R.id.action_inicioFragment_to_detalleUsuarioFragment)
         )
 
