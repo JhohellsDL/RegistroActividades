@@ -152,12 +152,15 @@ class ActividadesFragment : Fragment() {
             val current = binding.textMoneyNow.text.toString()
             val lost = binding.textStartMoney.text.toString()
             val recently = binding.textRecentlyMoney.text.toString()
+            val pointsEarned = binding.textPointsEarned.text.toString().toInt()
+            val pointsLost = binding.textPointsLost.text.toString().toInt()
 
             Log.d("asdasd", "current: $current")
             Log.d("asdasd", "lost: $lost")
             Log.d("asdasd", "recently: $recently")
 
             actividadesViewModel.updateMoneyInUser(current, lost, recently)
+            actividadesViewModel.updateMoneyAndPoints(current, lost, recently, pointsEarned, pointsLost)
             //actividadesViewModel.saveDatos()
             Snackbar.make(binding.root, "Guardado correctamente", Toast.LENGTH_SHORT)
                 .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.orange_new))

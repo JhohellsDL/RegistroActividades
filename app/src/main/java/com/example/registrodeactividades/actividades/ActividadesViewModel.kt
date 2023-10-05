@@ -132,14 +132,14 @@ class ActividadesViewModel(
         }
     }
 
-    fun updateMoneyAndPoints(currentMoney: String, lostMoney: String, recentMoney: String) {
+    fun updateMoneyAndPoints(currentMoney: String, lostMoney: String, recentMoney: String, pointsEarned: Int, pointsLost: Int) {
         _currentUser.value.let {
             val updateUser = it?.copy(
                 currentMoney = currentMoney,
                 lostMoney = lostMoney,
                 recentMoney = recentMoney,
-                pointsEarned = 0,
-                pointsLost = 0
+                pointsEarned = pointsEarned,
+                pointsLost = pointsLost
             )
             userProvider.updateCurrentUser(userId, updateUser!!)
         }
