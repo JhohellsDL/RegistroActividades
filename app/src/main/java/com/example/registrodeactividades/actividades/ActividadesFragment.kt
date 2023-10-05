@@ -13,7 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.registrodeactividades.R
 import com.example.registrodeactividades.database.DataSource
+import com.example.registrodeactividades.database.HijosDataBase
 import com.example.registrodeactividades.databinding.FragmentActividadesBinding
+import com.example.registrodeactividades.detalleusuario.DetalleUsuarioViewModel
+import com.example.registrodeactividades.detalleusuario.DetalleUsuarioViewModelFactory
 import com.example.registrodeactividades.model.AccionNegativa
 import com.example.registrodeactividades.model.AccionPositiva
 import com.example.registrodeactividades.providers.AuthProvider
@@ -59,6 +62,29 @@ class ActividadesFragment : Fragment() {
         binding.lifecycleOwner = this
         //-------------------------------------------------------------------------------------------------------------------
 
+        //--------------------------------- Para el VIEWMODEL --------------------------------------------------------------
+        val application = requireNotNull(this.activity).application
+        val dataAccionPositiva = HijosDataBase.getInstance(application).accionPositivaDao
+        val dataAccionNegativa = HijosDataBase.getInstance(application).accionNegativaDao
+        val dataAccionNegativaMatthew =
+            HijosDataBase.getInstance(application).accionNegativaMatthewDao
+        val dataAccionPositivaMatthew =
+            HijosDataBase.getInstance(application).accionPositivaMatthewDao
+        val viewModelFactory1 =
+            DetalleUsuarioViewModelFactory(
+                dataAccionPositiva,
+                dataAccionNegativa,
+                dataAccionPositivaMatthew,
+                dataAccionNegativaMatthew,
+                application
+            )
+
+        val detalleUsuarioViewModel =
+            ViewModelProvider(this, viewModelFactory1)[DetalleUsuarioViewModel::class.java]
+        binding.lifecycleOwner = this
+        //-----------------------------------------------------------------------------------------------------------------------------------
+
+
         //--------------------------------- Para el RECYCLERVIEW --------------------------------------------------------------
         val adapterAccionesPositivas = ActividadesPositivasAdapter(
             onClickListener = {
@@ -69,9 +95,23 @@ class ActividadesFragment : Fragment() {
                         actividadesViewModel.setItemPositiveList(myPositiveDataset)
                     }
                 }
-                listActionPositive.add(it)
+
+                if (args.userId == "2PDGhfqN0MyCYPzKNDiF") {
+                    Log.d("asdasd", "Elemento agregado a la lista de Andrew: ${it.stringResourceId}")
+                    detalleUsuarioViewModel.insertarAccionAndrew(
+                        it.copy(
+                            stringIdUser = args.userId
+                        )
+                    )
+                } else {
+                    Log.d("asdasd", "Elemento agregado a la lista de Matthew: ${it.stringResourceId}")
+                    detalleUsuarioViewModel.insertarAccionMatthew(
+                        it.toAccionPositivaMatthew().copy(
+                            stringIdUser = args.userId
+                        )
+                    )
+                }
                 actividadesViewModel.onAccionPositivaClicked(it.valor)
-                Log.d("asdasd", "Lista de acciones positivas: $listActionPositive")
             }
         )
 
@@ -84,9 +124,22 @@ class ActividadesFragment : Fragment() {
                         actividadesViewModel.setItemNegativeList(myNegativeDataset)
                     }
                 }
-                listActionNegative.add(it)
+                if (args.userId == "2PDGhfqN0MyCYPzKNDiF") {
+                    Log.d("asdasd", "Elemento agregado a la lista de Andrew: ${it.stringResourceId}")
+                    detalleUsuarioViewModel.insertarAccionNegativaAndrew(
+                        it.copy(
+                            stringIdUser = args.userId
+                        )
+                    )
+                } else {
+                    Log.d("asdasd", "Elemento agregado a la lista de Matthew: ${it.stringResourceId}")
+                    detalleUsuarioViewModel.insertarAccionNegativaMatthew(
+                        it.toAccionNegativaMatthew().copy(
+                            stringIdUser = args.userId
+                        )
+                    )
+                }
                 actividadesViewModel.onAccionNegativaClicked(it.valor)
-                Log.d("asdasd", "Lista de acciones negativas: $listActionNegative")
             }
         )
 
@@ -124,20 +177,20 @@ class ActividadesFragment : Fragment() {
             binding.textPointsLost.text = it.toString()
         }
 
-       actividadesViewModel.dineroGanado.observe(viewLifecycleOwner) {
-           binding.textMoneyEarned.text = formatDecimalNumber(it)
-       }
-       actividadesViewModel.dineroPerdido.observe(viewLifecycleOwner) {
-           binding.textMoneyLost.text = formatDecimalNumber(it)
-       }
+        actividadesViewModel.dineroGanado.observe(viewLifecycleOwner) {
+            binding.textMoneyEarned.text = formatDecimalNumber(it)
+        }
+        actividadesViewModel.dineroPerdido.observe(viewLifecycleOwner) {
+            binding.textMoneyLost.text = formatDecimalNumber(it)
+        }
 
-       actividadesViewModel.dineroTotal.observe(viewLifecycleOwner) {
-           binding.textRecentlyMoney.text = formatDecimalNumber(it)
-           recentlyMoney = it + startMoney
-           Log.d("asdasd", "recentrly money: $recentlyMoney")
-           binding.textMoneyNow.text = formatDecimalNumber(recentlyMoney)
-           Log.d("asdasd", "recentrly money format: ${formatDecimalNumber(recentlyMoney)}")
-       }
+        actividadesViewModel.dineroTotal.observe(viewLifecycleOwner) {
+            binding.textRecentlyMoney.text = formatDecimalNumber(it)
+            recentlyMoney = it + startMoney
+            Log.d("asdasd", "recentrly money: $recentlyMoney")
+            binding.textMoneyNow.text = formatDecimalNumber(recentlyMoney)
+            Log.d("asdasd", "recentrly money format: ${formatDecimalNumber(recentlyMoney)}")
+        }
 
 
         actividadesViewModel.myPositiveDataset.observe(viewLifecycleOwner) {
@@ -165,10 +218,21 @@ class ActividadesFragment : Fragment() {
             Log.d("asdasd", "recently: $recently")
 
             actividadesViewModel.updateMoneyInUser(current, lost, recently)
-            actividadesViewModel.updateMoneyAndPoints(current, lost, recently, pointsEarned, pointsLost)
+            actividadesViewModel.updateMoneyAndPoints(
+                current,
+                lost,
+                recently,
+                pointsEarned,
+                pointsLost
+            )
             actividadesViewModel.setListActionPositive(listActionPositive)
             actividadesViewModel.setListActionNegative(listActionNegative)
             //actividadesViewModel.saveDatos()
+
+            Log.d(
+                "asdasd",
+                "click en asdfasd fasd fael item ${detalleUsuarioViewModel.listaPositiva.size}"
+            )
             Snackbar.make(binding.root, "Guardado correctamente", Toast.LENGTH_SHORT)
                 .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.orange_new))
                 .show()

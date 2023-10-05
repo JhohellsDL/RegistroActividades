@@ -6,8 +6,20 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "accion_negativa")
 data class AccionNegativa(
     @PrimaryKey(autoGenerate = true) val id: Int,
+    val stringIdUser: String,
     val stringResourceId: Int,
     val imageResource: Int,
     val valor: Int,
     var contador: Int
-)
+) {
+    fun toAccionNegativaMatthew(): AccionNegativaMatthew {
+        return AccionNegativaMatthew(
+            id = id,
+            stringIdUser = stringIdUser,
+            stringResourceId = stringResourceId,
+            imageResource = imageResource,
+            valor = valor,
+            contador = contador
+        )
+    }
+}

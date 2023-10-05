@@ -33,8 +33,11 @@ class DetalleUsuarioFragment : Fragment() {
 
         //--------------------------------- Para el VIEWMODEL --------------------------------------------------------------
         val application = requireNotNull(this.activity).application
-        val datasource = HijosDataBase.getInstance(application).hijosDataBaseDao
-        val viewModelFactory = DetalleUsuarioViewModelFactory(datasource, application)
+        val dataAccionPositiva = HijosDataBase.getInstance(application).accionPositivaDao
+        val dataAccionNegativa = HijosDataBase.getInstance(application).accionNegativaDao
+        val dataAccionNegativaMatthew = HijosDataBase.getInstance(application).accionNegativaMatthewDao
+        val dataAccionPositivaMatthew = HijosDataBase.getInstance(application).accionPositivaMatthewDao
+        val viewModelFactory = DetalleUsuarioViewModelFactory(dataAccionPositiva, dataAccionNegativa, dataAccionPositivaMatthew, dataAccionNegativaMatthew, application)
 
         val detalleUsuarioViewModel =
             ViewModelProvider(this, viewModelFactory)[DetalleUsuarioViewModel::class.java]
@@ -61,6 +64,8 @@ class DetalleUsuarioFragment : Fragment() {
                     )
                 }
             })
+
+        Log.d("asdasd", "click en asdfasd fasd fael item ${detalleUsuarioViewModel.listaPositiva.size}")
 
         //*********** PARA NAVEGACION *****************************
         detalleUsuarioViewModel.idUserForNavigation.observe(
