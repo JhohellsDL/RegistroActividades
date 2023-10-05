@@ -75,6 +75,14 @@ class ActividadesViewModel(
         get() = _recyclerNegativoVisible
 
 
+    private val _myCurrentListPositive = MutableLiveData<List<AccionPositiva>>()
+    val myCurrentListPositive: LiveData<List<AccionPositiva>>
+        get() = _myCurrentListPositive
+
+    private val _myCurrentListNegative = MutableLiveData<List<AccionNegativa>>()
+    val myCurrentListNegative: LiveData<List<AccionNegativa>>
+        get() = _myCurrentListNegative
+
     //-----------------------------------para coroutinas------------------------------------------------
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -248,5 +256,12 @@ class ActividadesViewModel(
                 "PTS HOY: ${userAux.dineroUltimo}\n" +
                 "DINERO: ${userAux.dinero}\n" +
                 "VIDAS: ${userAux.vidas}"
+    }
+
+    fun setListActionPositive(listActionPositive: MutableList<AccionPositiva>) {
+        _myCurrentListPositive.value = listActionPositive
+    }
+    fun setListActionNegative(listActionNegative: MutableList<AccionNegativa>) {
+        _myCurrentListNegative.value = listActionNegative
     }
 }

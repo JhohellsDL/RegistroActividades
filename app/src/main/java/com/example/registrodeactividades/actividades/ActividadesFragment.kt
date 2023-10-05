@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.registrodeactividades.R
 import com.example.registrodeactividades.database.DataSource
 import com.example.registrodeactividades.databinding.FragmentActividadesBinding
+import com.example.registrodeactividades.model.AccionNegativa
+import com.example.registrodeactividades.model.AccionPositiva
 import com.example.registrodeactividades.providers.AuthProvider
 import com.example.registrodeactividades.providers.UserProvider
 import com.google.android.material.snackbar.Snackbar
@@ -39,6 +41,9 @@ class ActividadesFragment : Fragment() {
     private var pointsEarned: Int = 0
     private var pointsLost: Int = 0
 
+    private var listActionPositive: MutableList<AccionPositiva> = mutableListOf()
+    private var listActionNegative: MutableList<AccionNegativa> = mutableListOf()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,18 +62,16 @@ class ActividadesFragment : Fragment() {
         //--------------------------------- Para el RECYCLERVIEW --------------------------------------------------------------
         val adapterAccionesPositivas = ActividadesPositivasAdapter(
             onClickListener = {
-                Log.d("asdasd", "contador antes: ${it.contador}")
                 it.contador = it.contador + 1
-                Log.d("asdasd", "contador despues: ${it.contador}")
                 myPositiveDataset.forEach { newAction ->
-                    Log.d("asdasd", "contador despues new resource: ${newAction.stringResourceId}")
                     if (newAction.stringResourceId == it.stringResourceId) {
                         newAction.contador = it.contador
-                        Log.d("asdasd", "contador despuesnew : ${newAction.contador}")
                         actividadesViewModel.setItemPositiveList(myPositiveDataset)
                     }
                 }
+                listActionPositive.add(it)
                 actividadesViewModel.onAccionPositivaClicked(it.valor)
+                Log.d("asdasd", "Lista de acciones positivas: $listActionPositive")
             }
         )
 
@@ -81,7 +84,9 @@ class ActividadesFragment : Fragment() {
                         actividadesViewModel.setItemNegativeList(myNegativeDataset)
                     }
                 }
+                listActionNegative.add(it)
                 actividadesViewModel.onAccionNegativaClicked(it.valor)
+                Log.d("asdasd", "Lista de acciones negativas: $listActionNegative")
             }
         )
 
@@ -161,6 +166,8 @@ class ActividadesFragment : Fragment() {
 
             actividadesViewModel.updateMoneyInUser(current, lost, recently)
             actividadesViewModel.updateMoneyAndPoints(current, lost, recently, pointsEarned, pointsLost)
+            actividadesViewModel.setListActionPositive(listActionPositive)
+            actividadesViewModel.setListActionNegative(listActionNegative)
             //actividadesViewModel.saveDatos()
             Snackbar.make(binding.root, "Guardado correctamente", Toast.LENGTH_SHORT)
                 .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.orange_new))

@@ -6,10 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.registrodeactividades.databinding.ListItemActividadesNegativasBinding
-import com.example.registrodeactividades.databinding.ListItemActividadesPositivasBinding
-import com.example.registrodeactividades.generated.callback.OnClickListener
 import com.example.registrodeactividades.model.AccionNegativa
-import com.example.registrodeactividades.model.AccionPositiva
 
 class ActividadesNegativasAdapter(
     private val onClickListener: (AccionNegativa) -> Unit
