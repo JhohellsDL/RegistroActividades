@@ -16,11 +16,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.registrodeactividades.database.HijosDataBase
 import com.example.registrodeactividades.databinding.CardAlertReiniciarBinding
 import com.example.registrodeactividades.databinding.FragmentDetalleUsuarioBinding
+import com.example.registrodeactividades.providers.AuthProvider
 import com.example.registrodeactividades.providers.UserProvider
 import com.example.registrodeactividades.utils.Utils
 
 class DetalleUsuarioFragment : Fragment() {
 
+    private val authProvider = AuthProvider()
     private lateinit var binding: FragmentDetalleUsuarioBinding
     private lateinit var bindingDialog: CardAlertReiniciarBinding
 
@@ -51,7 +53,13 @@ class DetalleUsuarioFragment : Fragment() {
         binding.lifecycleOwner = this
 
         //-----------------------------------------------------------------------------------------------------------------------------------
-
+        if (authProvider.getCurrentUser()?.email == "jhohellserick@gmail.com" ||
+            authProvider.getCurrentUser()?.email == "rudyjudithapazamendoza@gmail.com"
+        ) {
+            detalleUsuarioViewModel.setIsAdmin(true)
+        } else {
+            detalleUsuarioViewModel.setIsAdmin(false)
+        }
         //--------------------------------- Para el RECYCLERVIEW --------------------------------------------------------------
         val adapter = ItemUserAdapter(
             onClickListener = {
@@ -64,8 +72,6 @@ class DetalleUsuarioFragment : Fragment() {
                     )
                 }
             })
-
-        Log.d("asdasd", "click en asdfasd fasd fael item ${detalleUsuarioViewModel.listaPositiva.size}")
 
         //*********** PARA NAVEGACION *****************************
         detalleUsuarioViewModel.idUserForNavigation.observe(
@@ -103,6 +109,15 @@ class DetalleUsuarioFragment : Fragment() {
                 Utils.SnackbarUtils.showSnackBar(binding.root, "Reiniciado")
             }
         }
+
+        detalleUsuarioViewModel.isAdmin.observe(viewLifecycleOwner) {
+            obtainPermissionAdminForButtons(it)
+        }
+
+
         return binding.root
+    }
+    private fun obtainPermissionAdminForButtons(it: Boolean) {
+        binding.cardButtonRestartUsers.isClickable = it
     }
 }

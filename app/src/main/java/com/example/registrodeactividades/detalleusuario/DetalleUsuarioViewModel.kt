@@ -51,6 +51,10 @@ class DetalleUsuarioViewModel(
     val listNegativasMatthew: LiveData<List<AccionNegativaMatthew>>
         get() = _listNegativasMatthew
 
+    private var _isAdmin = MutableLiveData<Boolean>()
+    val isAdmin: LiveData<Boolean>
+        get() = _isAdmin
+
 
     var listaPositiva = listOf<AccionPositiva>()
 
@@ -83,22 +87,24 @@ class DetalleUsuarioViewModel(
             listaPosAndrew
         }
     }
+
     private suspend fun getListNegativas(): List<AccionNegativa> {
         return withContext(Dispatchers.IO) {
             dataAccionNegativaDao.getAll()
         }
     }
+
     private suspend fun getListPositivasMatthew(): List<AccionPositivaMatthew> {
         return withContext(Dispatchers.IO) {
             dataAccionPositivaMatthewDao.getAll()
         }
     }
+
     private suspend fun getListNegativasMatthew(): List<AccionNegativaMatthew> {
         return withContext(Dispatchers.IO) {
             dataAccionNegativaMatthewDao.getAll()
         }
     }
-
 
 
     fun insertarAccionAndrew(accionPositiva: AccionPositiva) {
@@ -171,6 +177,10 @@ class DetalleUsuarioViewModel(
 
     fun onUserClickedNavigated() {
         _idUserForNavigation.value = null
+    }
+
+    fun setIsAdmin(value: Boolean) {
+        _isAdmin.value = value
     }
 
     override fun onCleared() {

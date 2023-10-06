@@ -29,8 +29,11 @@ import java.io.IOException
 import java.io.OutputStream
 
 class CurrentListUserFragment : Fragment() {
+
     private val userProvider = UserProvider()
     private lateinit var binding: FragmentCurrentListUserBinding
+    private var currentNameUser: String = ""
+    private var currentDate: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +66,6 @@ class CurrentListUserFragment : Fragment() {
                 dataAccionNegativaMatthew,
                 application
             )
-
         val detalleUsuarioViewModel =
             ViewModelProvider(this, viewModelFactory1)[DetalleUsuarioViewModel::class.java]
         binding.lifecycleOwner = this
@@ -96,6 +98,9 @@ class CurrentListUserFragment : Fragment() {
 
         //-----------------------------------------------------------------------------------------------------------------------------------
         actividadesViewModel.currentUser.observe(viewLifecycleOwner) { userData ->
+            currentDate = userData.date.toString()
+            currentNameUser = userData.name
+
             uploadPhotoUser(userData.name)
             binding.labelCurrentDate.text = userData.recentDate.toString()
             binding.labelUserName.text = userData.name
@@ -104,7 +109,6 @@ class CurrentListUserFragment : Fragment() {
             when (userData.name) {
                 "Andrew Alfredo Dianderas Apaza" -> {
                     detalleUsuarioViewModel.listPositivasAndrew.observe(viewLifecycleOwner) {
-                        Log.d("asdasd", "lista para el adapter: $it")
                         adapterAccionesPositivas.submitList(it)
                     }
                     detalleUsuarioViewModel.listNegativasAndrew.observe(viewLifecycleOwner) {
@@ -114,14 +118,12 @@ class CurrentListUserFragment : Fragment() {
 
                 "Matthew Fabian Dianderas Apaza" -> {
                     detalleUsuarioViewModel.listPositivasMatthew.observe(viewLifecycleOwner) {
-                        Log.d("asdasd", "lista para el adapter: $it")
                         adapterAccionesPositivasMatthew.submitList(it)
                     }
                     detalleUsuarioViewModel.listNegativasMatthew.observe(viewLifecycleOwner) {
                         adapterAccionesNegativasMatthew.submitList(it)
                     }
                 }
-
                 else -> {
                     binding.fotoItem.setImageResource(R.drawable.user)
                 }
@@ -140,11 +142,9 @@ class CurrentListUserFragment : Fragment() {
             "Andrew Alfredo Dianderas Apaza" -> {
                 binding.fotoItem.setImageResource(R.drawable.andrew)
             }
-
             "Matthew Fabian Dianderas Apaza" -> {
                 binding.fotoItem.setImageResource(R.drawable.matthew)
             }
-
             else -> {
                 binding.fotoItem.setImageResource(R.drawable.user)
             }
@@ -153,9 +153,7 @@ class CurrentListUserFragment : Fragment() {
 
     private fun captureAndSaveImage() {
 
-        var message =
-            "¡Hoy tuve una increíble sesión de lectura en mi app! Mejoré mi comprensión de lectura. ¡Siento cómo mi habilidad está creciendo día a día! #Lectura #Mejora #Aprendizaje\n\n¡Echa un vistazo a esta increíble aplicación\n"
-        message += "https://play.google.com/store/apps/details?id=com.jdlstudios.lecturakids"
+        val message = "Este es el registro de $currentNameUser a la fecha: $currentDate"
 
         val screenshot = captureFragmentScreen(requireParentFragment())
         val imagePath = screenshot?.let {
