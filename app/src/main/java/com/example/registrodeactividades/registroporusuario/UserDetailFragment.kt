@@ -1,6 +1,8 @@
 package com.example.registrodeactividades.registroporusuario
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -173,6 +175,13 @@ class UserDetailFragment : Fragment() {
             it.findNavController().navigate(
                 UserDetailFragmentDirections.actionUserDetailFragmentToCurrentListUserFragment(args.userId)
             )
+        }
+
+        binding.swipeRefreshUserDetail.setOnRefreshListener {
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.swipeRefreshUserDetail.isRefreshing = false
+                viewModel.getCurrentUser(args.userId)
+            }, 1000)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {

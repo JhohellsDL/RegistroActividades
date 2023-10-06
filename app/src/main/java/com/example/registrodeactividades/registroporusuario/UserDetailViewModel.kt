@@ -25,7 +25,7 @@ class UserDetailViewModel(
         getCurrentUser(userId)
     }
 
-    private fun getCurrentUser(userId: String) {
+    fun getCurrentUser(userId: String) {
         userProvider.getUserData(userId).addOnSuccessListener { it2 ->
             if (it2.exists()) {
                 it2.data?.let {
