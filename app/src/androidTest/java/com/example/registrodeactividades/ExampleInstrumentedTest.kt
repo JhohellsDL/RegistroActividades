@@ -1,18 +1,16 @@
 package com.example.registrodeactividades
 
 import androidx.room.Room
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import com.example.contadorcasino.database.HijosDataBaseDao
 import com.example.registrodeactividades.database.Hijo
 import com.example.registrodeactividades.database.HijosDataBase
-import com.example.contadorcasino.database.HijosDataBaseDao
 import org.junit.After
-
-import org.junit.Test
-import org.junit.runner.RunWith
-
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
 import java.io.IOException
 
 /**
@@ -31,7 +29,6 @@ class ExampleInstrumentedTest {
         db = Room.inMemoryDatabaseBuilder(context, HijosDataBase::class.java)
             .allowMainThreadQueries()
             .build()
-        sleepDao = db.hijosDataBaseDao
     }
 
     @After
