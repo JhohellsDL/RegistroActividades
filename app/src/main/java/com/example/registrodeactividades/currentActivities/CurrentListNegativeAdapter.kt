@@ -5,21 +5,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.registrodeactividades.databinding.ListItemActividadesNegativasBinding
+import com.example.registrodeactividades.databinding.ListItemActividadesNeagtivasRecientesBinding
 import com.example.registrodeactividades.model.AccionNegativa
 
 class CurrentListNegativeAdapter(
     private val onClickListener: (AccionNegativa) -> Unit
-): ListAdapter<AccionNegativa, CurrentListNegativeAdapter.ActividadesNegativasViewHolder>(AccionNegativaDiffCallback()) {
+) : ListAdapter<AccionNegativa, CurrentListNegativeAdapter.ActividadesNegativasViewHolder>(
+    AccionNegativaDiffCallback()
+) {
 
-    class ActividadesNegativasViewHolder private constructor(val binding: ListItemActividadesNegativasBinding) :
-        RecyclerView.ViewHolder(binding.root){
+    class ActividadesNegativasViewHolder private constructor(val binding: ListItemActividadesNeagtivasRecientesBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(
             item: AccionNegativa,
             onClickListener: (AccionNegativa) -> Unit
-        ){
+        ) {
+            binding.textRecentDate.text = item.fecha
             binding.textValorNegativo.text = "${item.valor} pts"
-            binding.textNegativa.setText(item.stringResourceId)
+            binding.textNegative.setText(item.stringResourceId)
             binding.imageNegativa.setImageResource(item.imageResource)
             binding.textContadorItem.text = item.contador.toString()
             itemView.setOnClickListener { onClickListener(item) }
@@ -29,7 +32,11 @@ class CurrentListNegativeAdapter(
 
             fun from(parent: ViewGroup): ActividadesNegativasViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ListItemActividadesNegativasBinding.inflate(layoutInflater, parent, false)
+                val binding = ListItemActividadesNeagtivasRecientesBinding.inflate(
+                    layoutInflater,
+                    parent,
+                    false
+                )
                 return ActividadesNegativasViewHolder(binding)
             }
         }

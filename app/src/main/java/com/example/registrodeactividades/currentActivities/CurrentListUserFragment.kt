@@ -1,10 +1,18 @@
 package com.example.registrodeactividades.currentActivities
 
+import android.content.ContentValues
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +25,8 @@ import com.example.registrodeactividades.databinding.FragmentCurrentListUserBind
 import com.example.registrodeactividades.detalleusuario.DetalleUsuarioViewModel
 import com.example.registrodeactividades.detalleusuario.DetalleUsuarioViewModelFactory
 import com.example.registrodeactividades.providers.UserProvider
+import java.io.IOException
+import java.io.OutputStream
 
 class CurrentListUserFragment : Fragment() {
     private val userProvider = UserProvider()
@@ -89,7 +99,7 @@ class CurrentListUserFragment : Fragment() {
             uploadPhotoUser(userData.name)
             binding.labelCurrentDate.text = userData.recentDate.toString()
             binding.labelUserName.text = userData.name
-            binding.textStartMoney.text = userData.currentMoney
+            binding.textRecentMoney.text = userData.recentMoney
 
             when (userData.name) {
                 "Andrew Alfredo Dianderas Apaza" -> {
@@ -118,6 +128,10 @@ class CurrentListUserFragment : Fragment() {
             }
         }
 
+        binding.buttonShared.setOnClickListener {
+            captureAndSaveImage()
+        }
+
         return binding.root
     }
 
@@ -135,6 +149,83 @@ class CurrentListUserFragment : Fragment() {
                 binding.fotoItem.setImageResource(R.drawable.user)
             }
         }
+    }
+
+    private fun captureAndSaveImage() {
+
+        var message =
+            "¡Hoy tuve una increíble sesión de lectura en mi app! Mejoré mi comprensión de lectura. ¡Siento cómo mi habilidad está creciendo día a día! #Lectura #Mejora #Aprendizaje\n\n¡Echa un vistazo a esta increíble aplicación\n"
+        message += "https://play.google.com/store/apps/details?id=com.jdlstudios.lecturakids"
+
+        val screenshot = captureFragmentScreen(requireParentFragment())
+        val imagePath = screenshot?.let {
+            saveImage(it)
+        }
+        if (imagePath != null) {
+            shareImage(imagePath, message)
+        } else {
+            Toast.makeText(requireContext(), "Oops!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun captureFragmentScreen(fragment: Fragment): Bitmap? {
+
+        val view = fragment.view
+
+        val bitmap =
+            view?.let { Bitmap.createBitmap(it.width, view.height - 500, Bitmap.Config.ARGB_8888) }
+
+        val canvas = bitmap?.let { Canvas(it) }
+        if (view != null) {
+            view.draw(canvas)
+        } else {
+            Log.i("asd", "-- no hay captura dentro!")
+        }
+
+        return bitmap
+    }
+
+    private fun saveImage(image: Bitmap): Uri? {
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, "screenshot.jpg")
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            put(
+                MediaStore.MediaColumns.RELATIVE_PATH,
+                Environment.DIRECTORY_PICTURES + "/MyAppScreenshots"
+            )
+        }
+
+        val resolver = requireContext().contentResolver
+        var outputStream: OutputStream? = null
+        val imageUri: Uri?
+        try {
+            val contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            imageUri = resolver.insert(contentUri, contentValues)
+            imageUri?.let {
+                outputStream = resolver.openOutputStream(it)
+                image.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+                outputStream?.flush()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+            return null
+        } finally {
+            try {
+                outputStream?.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        return imageUri
+    }
+
+    private fun shareImage(imagePath: Uri, message: String) {
+        val intent = Intent(Intent.ACTION_SEND_MULTIPLE)
+        intent.type = "image/jpeg"
+        intent.putExtra(Intent.EXTRA_STREAM, imagePath)
+        intent.putExtra(Intent.EXTRA_TEXT, message)
+        startActivity(Intent.createChooser(intent, "Compartir imagen"))
     }
 
 }

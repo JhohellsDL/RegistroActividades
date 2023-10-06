@@ -224,6 +224,8 @@ class ActividadesFragment : Fragment() {
             Log.d("asdasd", "current: $current")
             Log.d("asdasd", "lost: $lost")
             Log.d("asdasd", "recently: $recently")
+            Log.d("asdasd", "points earned: $pointsEarned")
+            Log.d("asdasd", "points lost: $pointsLost")
 
             actividadesViewModel.updateMoneyInUser(current, lost, recently)
             actividadesViewModel.updateMoneyAndPoints(

@@ -49,9 +49,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/card_foto_user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/card_foto_user"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@id/card_foto_user">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -88,15 +89,13 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linear_layout_buttons"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="wrap_content"
             android:padding="16dp"
             app:layout_constraintTop_toBottomOf="@id/card_foto_user">
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="120dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
                 android:backgroundTint="@color/transparente_total"
                 android:onClick="@{() -> actividadesViewModel.onVisibleBuenas()}"
                 app:cardCornerRadius="20dp"
@@ -108,100 +107,57 @@
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_buena_card"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="16dp"
-                        android:src="@drawable/buenas2"
+                        android:id="@+id/image_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_marginBottom="36dp"
+                        android:src="@drawable/baseline_local_extras"
+                        android:tint="@color/teal_200"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/label_buenas" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
-                    <TextView
-                        android:id="@+id/label_pts_hoy"
+                    <LinearLayout
+                        android:id="@+id/layout_points_extras"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_alternates"
-                        android:text="@string/signo_soles"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_marginStart="20dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="@id/image_money"
+                        app:layout_constraintStart_toEndOf="@id/image_money"
+                        app:layout_constraintTop_toTopOf="@id/image_money">
 
-                    <TextView
-                        android:id="@+id/text_start_money"
+                        <TextView
+                            android:id="@+id/label_points_extras"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Dinero ganado"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/text_recent_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/white_new"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            tools:text="S/. 4.58" />
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/button_shared"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/montserrat_alternates"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@id/label_pts_hoy"
-                        app:layout_constraintTop_toTopOf="@id/label_pts_hoy"
-                        tools:text="154.00" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/label_buenas"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="12dp"
-                        android:fontFamily="@font/montserrat_alternates"
-                        android:gravity="center"
-                        android:text="@string/buenas_acciones"
-                        android:textColor="@color/white_new2"
-                        android:textSize="11sp"
+                        android:src="@drawable/baseline_share"
+                        android:tint="@color/purple_200"
+                        android:layout_margin="16dp"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/text_points_earned"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:fontFamily="@font/montserrat_alternates"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toEndOf="@id/image_buena_card"
-                        app:layout_constraintTop_toTopOf="@id/image_buena_card"
-                        tools:text="122" />
-
-                    <TextView
-                        android:id="@+id/label_puntos_ganados"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/montserrat_alternates"
-                        android:text="@string/pts"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toEndOf="@id/text_points_earned"
-                        app:layout_constraintTop_toTopOf="@id/text_points_earned" />
-
-                    <TextView
-                        android:id="@+id/label_money_earned"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_alternates"
-                        android:text="@string/signo_soles"
-                        android:textColor="@color/white"
-                        android:textSize="11sp"
-                        app:layout_constraintBottom_toBottomOf="@id/image_buena_card"
-                        app:layout_constraintStart_toStartOf="@id/text_points_earned"
-                        app:layout_constraintTop_toBottomOf="@id/text_points_earned" />
-
-                    <TextView
-                        android:id="@+id/text_money_earned"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/montserrat_alternates"
-                        android:textColor="@color/white"
-                        android:textSize="11sp"
-                        app:layout_constraintBottom_toBottomOf="@id/image_buena_card"
-                        app:layout_constraintStart_toEndOf="@id/label_money_earned"
-                        app:layout_constraintTop_toBottomOf="@id/text_points_earned"
-                        tools:text="444" />
+                        app:layout_constraintBottom_toBottomOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -231,7 +187,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:listitem="@layout/list_item_actividades_negativas" />
+                tools:listitem="@layout/list_item_actividades_neagtivas_recientes" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

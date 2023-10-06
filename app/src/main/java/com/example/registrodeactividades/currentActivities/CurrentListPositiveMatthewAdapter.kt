@@ -4,19 +4,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.registrodeactividades.databinding.ListItemActividadesPositivasBinding
+import com.example.registrodeactividades.databinding.ListItemActividadesPositivasRecientesBinding
 import com.example.registrodeactividades.model.AccionPositivaMatthew
 
-class CurrentListPositiveMatthewAdapter (
+class CurrentListPositiveMatthewAdapter(
     private val onClickListener: (AccionPositivaMatthew) -> Unit
-): androidx.recyclerview.widget.ListAdapter<AccionPositivaMatthew, CurrentListPositiveMatthewAdapter.ActividadesPositivasViewHolder>(AccionPoditivaDiffCallback()) {
+) : androidx.recyclerview.widget.ListAdapter<AccionPositivaMatthew, CurrentListPositiveMatthewAdapter.ActividadesPositivasViewHolder>(
+    AccionPoditivaDiffCallback()
+) {
 
-    class ActividadesPositivasViewHolder private constructor(val binding: ListItemActividadesPositivasBinding) :
+    class ActividadesPositivasViewHolder private constructor(val binding: ListItemActividadesPositivasRecientesBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
             item: AccionPositivaMatthew,
             onClickListener: (AccionPositivaMatthew) -> Unit
         ) {
+            binding.textRecentDate.text = item.fecha
             binding.textPositive.text = item.fecha
             binding.textValorPositive.text = "${item.valor} pts"
             binding.imagePositive.setImageResource(item.imageResource)
@@ -27,7 +30,11 @@ class CurrentListPositiveMatthewAdapter (
         companion object {
             fun from(parent: ViewGroup): ActividadesPositivasViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ListItemActividadesPositivasBinding.inflate(layoutInflater, parent, false)
+                val binding = ListItemActividadesPositivasRecientesBinding.inflate(
+                    layoutInflater,
+                    parent,
+                    false
+                )
                 return ActividadesPositivasViewHolder(binding)
             }
         }
@@ -47,11 +54,17 @@ class CurrentListPositiveMatthewAdapter (
 
     class AccionPoditivaDiffCallback :
         DiffUtil.ItemCallback<AccionPositivaMatthew>() {
-        override fun areItemsTheSame(oldItem: AccionPositivaMatthew, newItem: AccionPositivaMatthew): Boolean {
+        override fun areItemsTheSame(
+            oldItem: AccionPositivaMatthew,
+            newItem: AccionPositivaMatthew
+        ): Boolean {
             return newItem.contador == oldItem.contador
         }
 
-        override fun areContentsTheSame(oldItem: AccionPositivaMatthew, newItem: AccionPositivaMatthew): Boolean {
+        override fun areContentsTheSame(
+            oldItem: AccionPositivaMatthew,
+            newItem: AccionPositivaMatthew
+        ): Boolean {
             return oldItem == newItem
         }
     }
