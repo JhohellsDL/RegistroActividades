@@ -97,6 +97,7 @@ class CurrentListUserFragment : Fragment() {
 
 
         //-----------------------------------------------------------------------------------------------------------------------------------
+
         actividadesViewModel.currentUser.observe(viewLifecycleOwner) { userData ->
             currentDate = userData.date.toString()
             currentNameUser = userData.name
@@ -108,6 +109,8 @@ class CurrentListUserFragment : Fragment() {
 
             when (userData.name) {
                 "Andrew Alfredo Dianderas Apaza" -> {
+                    detalleUsuarioViewModel.getlistasAndrew()
+
                     detalleUsuarioViewModel.listPositivasAndrew.observe(viewLifecycleOwner) {
                         adapterAccionesPositivas.submitList(it)
                     }
@@ -117,6 +120,8 @@ class CurrentListUserFragment : Fragment() {
                 }
 
                 "Matthew Fabian Dianderas Apaza" -> {
+                    detalleUsuarioViewModel.getListasMatthew()
+
                     detalleUsuarioViewModel.listPositivasMatthew.observe(viewLifecycleOwner) {
                         adapterAccionesPositivasMatthew.submitList(it)
                     }

@@ -64,7 +64,7 @@ class DetalleUsuarioViewModel(
     //--------------------------------------------------------------------------------------------------
 
     init {
-        getlistasAndrew()
+        //getlistasAndrew()
     }
 
     fun getlistasAndrew() {
