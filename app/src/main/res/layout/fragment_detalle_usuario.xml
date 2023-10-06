@@ -32,17 +32,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/detalle_recyclerview"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshList"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_height="600dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_title"
-            tools:itemCount="3"
-            tools:listitem="@layout/item_user_new" />
+            app:layout_constraintTop_toBottomOf="@id/label_title">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detalle_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_title"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_user_new" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_button_restart_users"
@@ -52,7 +60,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/transparente_total"
             app:cardCornerRadius="25dp"
-            app:layout_constraintTop_toBottomOf="@id/detalle_recyclerview"
+            app:layout_constraintTop_toBottomOf="@id/swipeRefreshList"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

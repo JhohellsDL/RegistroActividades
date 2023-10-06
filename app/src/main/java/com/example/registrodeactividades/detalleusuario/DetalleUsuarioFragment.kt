@@ -5,6 +5,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -37,9 +39,17 @@ class DetalleUsuarioFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataAccionPositiva = HijosDataBase.getInstance(application).accionPositivaDao
         val dataAccionNegativa = HijosDataBase.getInstance(application).accionNegativaDao
-        val dataAccionNegativaMatthew = HijosDataBase.getInstance(application).accionNegativaMatthewDao
-        val dataAccionPositivaMatthew = HijosDataBase.getInstance(application).accionPositivaMatthewDao
-        val viewModelFactory = DetalleUsuarioViewModelFactory(dataAccionPositiva, dataAccionNegativa, dataAccionPositivaMatthew, dataAccionNegativaMatthew, application)
+        val dataAccionNegativaMatthew =
+            HijosDataBase.getInstance(application).accionNegativaMatthewDao
+        val dataAccionPositivaMatthew =
+            HijosDataBase.getInstance(application).accionPositivaMatthewDao
+        val viewModelFactory = DetalleUsuarioViewModelFactory(
+            dataAccionPositiva,
+            dataAccionNegativa,
+            dataAccionPositivaMatthew,
+            dataAccionNegativaMatthew,
+            application
+        )
 
         val detalleUsuarioViewModel =
             ViewModelProvider(this, viewModelFactory)[DetalleUsuarioViewModel::class.java]
@@ -51,7 +61,6 @@ class DetalleUsuarioFragment : Fragment() {
         val itemUseViewModel =
             ViewModelProvider(this, viewModelFactoryNew)[ItemUserViewModel::class.java]
         binding.lifecycleOwner = this
-
         //-----------------------------------------------------------------------------------------------------------------------------------
         if (authProvider.getCurrentUser()?.email == "jhohellserick@gmail.com" ||
             authProvider.getCurrentUser()?.email == "rudyjudithapazamendoza@gmail.com"
@@ -90,7 +99,9 @@ class DetalleUsuarioFragment : Fragment() {
 
         binding.detalleRecyclerview.adapter = adapter
         itemUseViewModel.listUsers.observe(viewLifecycleOwner) {
-            adapter.data = it
+            it.let {
+                adapter.data = it
+            }
         }
         //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -110,6 +121,18 @@ class DetalleUsuarioFragment : Fragment() {
             }
         }
 
+        binding.swipeRefreshList.setOnRefreshListener {
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.swipeRefreshList.isRefreshing = false
+                itemUseViewModel.getUsers()
+                itemUseViewModel.listUsers.observe(viewLifecycleOwner) {
+                    it.let {
+                        adapter.data = it
+                    }
+                }
+            }, 1000)
+        }
+
         detalleUsuarioViewModel.isAdmin.observe(viewLifecycleOwner) {
             obtainPermissionAdminForButtons(it)
         }
@@ -117,6 +140,7 @@ class DetalleUsuarioFragment : Fragment() {
 
         return binding.root
     }
+
     private fun obtainPermissionAdminForButtons(it: Boolean) {
         binding.cardButtonRestartUsers.isClickable = it
     }

@@ -30,8 +30,6 @@ class ItemUserViewModel(
     val listUsers: LiveData<List<UserData>>
         get() = _listUsers
 
-    private val listUsersAux = mutableListOf<UserData>()
-
     //-----------------------------------para coroutinas------------------------------------------------
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -67,14 +65,13 @@ class ItemUserViewModel(
         }
     }
 
-    private fun getUsers() {
-        Log.d("asdasd", " GetUsers!!")
+    fun getUsers() {
+        val listUsersAux = mutableListOf<UserData>()
         userProvider.getUserData("k9PABZm7tdsr5c6ATtT1").addOnSuccessListener { document ->
             if (document.exists()) {
                 document.data?.let {
                     _userMatthew.value = mapToUserData(it)
                     listUsersAux.add(_userMatthew.value!!)
-                    Log.d("asdasd", " GetUsers!! matt ${_userMatthew.value!!.duolingo}")
                     _listUsers.value = listUsersAux
                 }
             }
@@ -84,7 +81,6 @@ class ItemUserViewModel(
                 document.data?.let {
                     _userAndrew.value = mapToUserData(it)
                     listUsersAux.add(_userAndrew.value!!)
-                    Log.d("asdasd", " GetUsers!! drew ${_userAndrew.value!!.duolingo}")
                     _listUsers.value = listUsersAux
                 }
             }

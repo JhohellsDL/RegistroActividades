@@ -19,7 +19,6 @@ import com.example.registrodeactividades.detalleusuario.DetalleUsuarioViewModel
 import com.example.registrodeactividades.detalleusuario.DetalleUsuarioViewModelFactory
 import com.example.registrodeactividades.model.AccionNegativa
 import com.example.registrodeactividades.model.AccionPositiva
-import com.example.registrodeactividades.providers.AuthProvider
 import com.example.registrodeactividades.providers.UserProvider
 import com.google.android.material.snackbar.Snackbar
 import java.text.DecimalFormat
@@ -30,7 +29,6 @@ import java.util.Locale
 class ActividadesFragment : Fragment() {
 
     private val userProvider = UserProvider()
-    private val authProvider = AuthProvider()
     private lateinit var binding: FragmentActividadesBinding
     private val myPositiveDataset = DataSource().loadPositiveActions()
     private val myNegativeDataset = DataSource().loadNegativeActions()
