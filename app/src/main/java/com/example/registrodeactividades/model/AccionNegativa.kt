@@ -10,7 +10,8 @@ data class AccionNegativa(
     val stringResourceId: Int,
     val imageResource: Int,
     val valor: Int,
-    var contador: Int
+    var contador: Int,
+    var fecha: String
 ) {
     fun toAccionNegativaMatthew(): AccionNegativaMatthew {
         return AccionNegativaMatthew(
@@ -19,7 +20,8 @@ data class AccionNegativa(
             stringResourceId = stringResourceId,
             imageResource = imageResource,
             valor = valor,
-            contador = contador
+            contador = contador,
+            fecha = fecha
         )
     }
 }

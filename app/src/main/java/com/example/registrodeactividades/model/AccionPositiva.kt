@@ -10,7 +10,8 @@ data class AccionPositiva(
     val stringResourceId: Int,
     val imageResource: Int,
     val valor: Int,
-    var contador: Int
+    var contador: Int,
+    var fecha: String
 ) {
     fun toAccionPositivaMatthew(): AccionPositivaMatthew {
         return AccionPositivaMatthew(
@@ -19,7 +20,8 @@ data class AccionPositiva(
             stringResourceId = stringResourceId,
             imageResource = imageResource,
             valor = valor,
-            contador = contador
+            contador = contador,
+            fecha = fecha
         )
     }
 }

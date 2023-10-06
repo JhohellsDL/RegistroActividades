@@ -47,6 +47,8 @@ class ActividadesFragment : Fragment() {
     private var listActionPositive: MutableList<AccionPositiva> = mutableListOf()
     private var listActionNegative: MutableList<AccionNegativa> = mutableListOf()
 
+    private var currentFecha: String = "no date"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -100,14 +102,16 @@ class ActividadesFragment : Fragment() {
                     Log.d("asdasd", "Elemento agregado a la lista de Andrew: ${it.stringResourceId}")
                     detalleUsuarioViewModel.insertarAccionAndrew(
                         it.copy(
-                            stringIdUser = args.userId
+                            stringIdUser = args.userId,
+                            fecha = currentFecha
                         )
                     )
                 } else {
                     Log.d("asdasd", "Elemento agregado a la lista de Matthew: ${it.stringResourceId}")
                     detalleUsuarioViewModel.insertarAccionMatthew(
                         it.toAccionPositivaMatthew().copy(
-                            stringIdUser = args.userId
+                            stringIdUser = args.userId,
+                            fecha = currentFecha
                         )
                     )
                 }
@@ -128,14 +132,16 @@ class ActividadesFragment : Fragment() {
                     Log.d("asdasd", "Elemento agregado a la lista de Andrew: ${it.stringResourceId}")
                     detalleUsuarioViewModel.insertarAccionNegativaAndrew(
                         it.copy(
-                            stringIdUser = args.userId
+                            stringIdUser = args.userId,
+                            fecha = currentFecha
                         )
                     )
                 } else {
                     Log.d("asdasd", "Elemento agregado a la lista de Matthew: ${it.stringResourceId}")
                     detalleUsuarioViewModel.insertarAccionNegativaMatthew(
                         it.toAccionNegativaMatthew().copy(
-                            stringIdUser = args.userId
+                            stringIdUser = args.userId,
+                            fecha = currentFecha
                         )
                     )
                 }
@@ -157,7 +163,9 @@ class ActividadesFragment : Fragment() {
         //-----------------------------------------------------------------------------------------------------------------------------------
 
         actividadesViewModel.currentUser.observe(viewLifecycleOwner) {
-            //binding.fotoItem.setImageResource(it.photoResourceId)
+
+            uploadPhotoUser(it.name)
+            currentFecha = it.recentDate.toString()
             binding.textStartMoney.text = it.currentMoney
             startMoney = it.currentMoney.toFloat()
 
@@ -239,6 +247,22 @@ class ActividadesFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun uploadPhotoUser(name: String) {
+        when (name) {
+            "Andrew Alfredo Dianderas Apaza" -> {
+                binding.fotoItem.setImageResource(R.drawable.andrew)
+            }
+
+            "Matthew Fabian Dianderas Apaza" -> {
+                binding.fotoItem.setImageResource(R.drawable.matthew)
+            }
+
+            else -> {
+                binding.fotoItem.setImageResource(R.drawable.user)
+            }
+        }
     }
 
     private fun formatDecimalNumber(number: Float): String {

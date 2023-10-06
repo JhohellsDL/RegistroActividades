@@ -192,7 +192,6 @@
                 android:tint="@color/teal_200"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <LinearLayout
                 android:id="@+id/layout_recent_date"
                 android:layout_width="wrap_content"

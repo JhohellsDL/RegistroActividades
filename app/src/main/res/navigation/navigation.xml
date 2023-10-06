@@ -94,5 +94,17 @@
         <action
             android:id="@+id/action_userDetailFragment_to_actividadesFragment"
             app:destination="@id/actividadesFragment" />
+        <action
+            android:id="@+id/action_userDetailFragment_to_currentListUserFragment"
+            app:destination="@id/currentListUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currentListUserFragment"
+        android:name="com.example.registrodeactividades.currentActivities.CurrentListUserFragment"
+        android:label="CurrentListUserFragment"
+        tools:layout="@layout/fragment_current_list_user">
+        <argument
+            android:name="userId"
+            app:argType="string" />
     </fragment>
 </navigation>

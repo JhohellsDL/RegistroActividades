@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <!--<variable
+            name="hijo"
+            type="com.example.registrodeactividades.database.Hijo" />
+        <variable
+            name="clickListener"
+            type="com.example.registrodeactividades.detalleusuario.ItemListener"/>-->
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingHorizontal="4dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="3dp"
+            android:backgroundTint="@color/transparente_total"
+            android:padding="8dp"
+            android:shadowColor="@color/green_new"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/green_new_2"
+            app:strokeWidth="2dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_positive"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/lavando_platos"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_positive"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_alternates"
+                    android:gravity="center"
+                    android:layout_marginStart="4dp"
+                    tools:text="Lavar los platos bien lavados"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    app:layout_constraintEnd_toStartOf="@id/text_valor_positive"
+                    app:layout_constraintStart_toEndOf="@id/image_positive"
+                    app:layout_constraintTop_toTopOf="@id/image_positive"
+                    app:layout_constraintBottom_toBottomOf="@id/image_positive"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_valor_positive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/montserrat_alternates"
+                    android:text="30 pts"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/image_positive"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/image_positive" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_recent_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat_alternates"
+                    android:gravity="center"
+                    tools:text="Thu Oct 05 20:40:02 GMT-05:00 2023"
+                    android:textColor="@color/white"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/image_positive" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            app:cardCornerRadius="11dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_contador_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_alternates"
+                    tools:text="0"
+                    android:textColor="@color/green_new_2"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

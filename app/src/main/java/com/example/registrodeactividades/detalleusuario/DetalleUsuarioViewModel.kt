@@ -35,20 +35,20 @@ class DetalleUsuarioViewModel(
     val hMatthew: LiveData<Hijo>
         get() = _hMatthew
 
-    private var _listPositivasAndrew = listOf<AccionPositiva>()
-    val listPositivasAndrew: List<AccionPositiva>
+    private var _listPositivasAndrew = MutableLiveData<List<AccionPositiva>>()
+    val listPositivasAndrew: LiveData<List<AccionPositiva>>
         get() = _listPositivasAndrew
 
-    private var _listPositivasMatthew = listOf<AccionPositivaMatthew>()
-    val listPositivasMatthew: List<AccionPositivaMatthew>
+    private var _listPositivasMatthew = MutableLiveData<List<AccionPositivaMatthew>>()
+    val listPositivasMatthew: LiveData<List<AccionPositivaMatthew>>
         get() = _listPositivasMatthew
 
-    private var _listNegativasAndrew = listOf<AccionNegativa>()
-    val listNegativasAndrew: List<AccionNegativa>
+    private var _listNegativasAndrew = MutableLiveData<List<AccionNegativa>>()
+    val listNegativasAndrew: LiveData<List<AccionNegativa>>
         get() = _listNegativasAndrew
 
-    private var _listNegativasMatthew = listOf<AccionNegativaMatthew>()
-    val listNegativasMatthew: List<AccionNegativaMatthew>
+    private var _listNegativasMatthew = MutableLiveData<List<AccionNegativaMatthew>>()
+    val listNegativasMatthew: LiveData<List<AccionNegativaMatthew>>
         get() = _listNegativasMatthew
 
 
@@ -65,15 +65,15 @@ class DetalleUsuarioViewModel(
 
     fun getlistasAndrew() {
         uiScope.launch {
-            _listPositivasAndrew = getListPositivas()
-            _listNegativasAndrew = getListNegativas()
+            _listPositivasAndrew.postValue(getListPositivas())
+            _listNegativasAndrew.postValue(getListNegativas())
         }
     }
 
     fun getListasMatthew() {
         uiScope.launch {
-            _listPositivasMatthew = getListPositivasMatthew()
-            _listNegativasMatthew = getListNegativasMatthew()
+            _listPositivasMatthew.postValue(getListPositivasMatthew())
+            _listNegativasMatthew.postValue(getListNegativasMatthew())
         }
     }
 

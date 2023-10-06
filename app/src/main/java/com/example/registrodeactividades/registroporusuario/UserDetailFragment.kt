@@ -169,6 +169,12 @@ class UserDetailFragment : Fragment() {
             )
         }
 
+        binding.layoutRecentDate.setOnClickListener {
+            it.findNavController().navigate(
+                UserDetailFragmentDirections.actionUserDetailFragmentToCurrentListUserFragment(args.userId)
+            )
+        }
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (initialLives != currentLives && initializeDailyLives != dailyLives && initializeConsumeWater != consumeWater && currentDuolingo != duolingo) {
                 viewModel.updateAllFeatures(currentLives, dailyLives, consumeWater, currentDuolingo)

@@ -10,5 +10,6 @@ data class AccionNegativaMatthew(
     val stringResourceId: Int,
     val imageResource: Int,
     val valor: Int,
-    var contador: Int
+    var contador: Int,
+    var fecha: String
 )
