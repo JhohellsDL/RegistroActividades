@@ -1,6 +1,7 @@
 package com.example.registrodeactividades.detalleusuario
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -71,6 +72,7 @@ class DetalleUsuarioViewModel(
         uiScope.launch {
             _listPositivasAndrew.postValue(getListPositivas())
             _listNegativasAndrew.postValue(getListNegativas())
+            Log.d("asdasd", "lista andrew ${_listPositivasAndrew.value!!.size}")
         }
     }
 
@@ -78,6 +80,7 @@ class DetalleUsuarioViewModel(
         uiScope.launch {
             _listPositivasMatthew.postValue(getListPositivasMatthew())
             _listNegativasMatthew.postValue(getListNegativasMatthew())
+            Log.d("asdasd", "lista matthew ${_listPositivasMatthew.value!!.size}")
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.registrodeactividades.currentActivities
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -19,6 +20,7 @@ class CurrentListPositiveAdapter(
             item: AccionPositiva,
             onClickListener: (AccionPositiva) -> Unit
         ) {
+            Log.d("asdasd", "lista matthew item ${item.stringIdUser}")
             binding.textPositive.setText(item.stringResourceId)
             binding.textRecentDate.text = item.fecha
             binding.textValorPositive.text = "${item.valor} pts"

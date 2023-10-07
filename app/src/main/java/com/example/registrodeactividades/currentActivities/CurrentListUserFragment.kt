@@ -87,9 +87,6 @@ class CurrentListUserFragment : Fragment() {
             onClickListener = {}
         )
 
-        binding.listaPositivas.adapter = adapterAccionesPositivas
-        binding.listaNegativas.adapter = adapterAccionesNegativas
-
         val manager = LinearLayoutManager(activity)
         binding.listaPositivas.layoutManager = manager
         val manager2 = LinearLayoutManager(activity)
@@ -109,6 +106,8 @@ class CurrentListUserFragment : Fragment() {
 
             when (userData.name) {
                 "Andrew Alfredo Dianderas Apaza" -> {
+                    binding.listaPositivas.adapter = adapterAccionesPositivas
+                    binding.listaNegativas.adapter = adapterAccionesNegativas
                     detalleUsuarioViewModel.getlistasAndrew()
 
                     detalleUsuarioViewModel.listPositivasAndrew.observe(viewLifecycleOwner) {
@@ -120,9 +119,12 @@ class CurrentListUserFragment : Fragment() {
                 }
 
                 "Matthew Fabian Dianderas Apaza" -> {
+                    binding.listaPositivas.adapter = adapterAccionesPositivasMatthew
+                    binding.listaNegativas.adapter = adapterAccionesNegativasMatthew
                     detalleUsuarioViewModel.getListasMatthew()
 
                     detalleUsuarioViewModel.listPositivasMatthew.observe(viewLifecycleOwner) {
+                        Log.d("asdasd", "lista matthew frgament ${it.size}")
                         adapterAccionesPositivasMatthew.submitList(it)
                     }
                     detalleUsuarioViewModel.listNegativasMatthew.observe(viewLifecycleOwner) {
