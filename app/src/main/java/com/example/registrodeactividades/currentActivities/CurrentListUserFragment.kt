@@ -34,6 +34,7 @@ class CurrentListUserFragment : Fragment() {
     private lateinit var binding: FragmentCurrentListUserBinding
     private var currentNameUser: String = ""
     private var currentDate: String = ""
+    private var registerDate: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -97,10 +98,14 @@ class CurrentListUserFragment : Fragment() {
 
         actividadesViewModel.currentUser.observe(viewLifecycleOwner) { userData ->
             currentDate = userData.date.toString()
+            registerDate = userData.registerDate.toString()
             currentNameUser = userData.name
 
+            Log.d("asdasd", "fecha ahorita: $currentDate")
+            Log.d("asdasd", "fecha ahorita registerDate: ${userData.registerDate}")
+
             uploadPhotoUser(userData.name)
-            binding.labelCurrentDate.text = userData.recentDate.toString()
+            binding.labelCurrentDate.text = userData.registerDate.toString()
             binding.labelUserName.text = userData.name
             binding.textRecentMoney.text = userData.recentMoney
 

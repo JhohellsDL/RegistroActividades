@@ -21,4 +21,7 @@ interface AccionPositivaDao {
 
     @Delete
     fun delete(accionPositiva: AccionPositiva)
+
+    @Query("DELETE FROM accion_positiva")
+    fun deleteAll()
 }

@@ -13,10 +13,10 @@ interface AccionNegativaMatthewDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(accionNegativa: AccionNegativaMatthew)
 
-    @Query("SELECT * FROM accion_negativa")
+    @Query("SELECT * FROM accion_negativa_matthew")
     fun getAll(): List<AccionNegativaMatthew>
 
-    @Query("SELECT * FROM accion_negativa WHERE id = :id")
+    @Query("SELECT * FROM accion_negativa_matthew WHERE id = :id")
     fun getById(id: Int): AccionNegativaMatthew?
 
     @Update
@@ -24,4 +24,7 @@ interface AccionNegativaMatthewDao {
 
     @Delete
     fun delete(accionNegativa: AccionNegativaMatthew)
+
+    @Query("DELETE FROM accion_negativa_matthew")
+    fun deleteAll()
 }

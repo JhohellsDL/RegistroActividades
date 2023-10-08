@@ -47,6 +47,9 @@ class ActividadesFragment : Fragment() {
 
     private var currentFecha: String = "no date"
 
+    private var currentDate: String = ""
+    private var registerDate: String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -162,6 +165,9 @@ class ActividadesFragment : Fragment() {
 
         actividadesViewModel.currentUser.observe(viewLifecycleOwner) {
 
+            currentDate = it.recentDate.toString()
+            registerDate = it.registerDate.toString()
+
             uploadPhotoUser(it.name)
             currentFecha = it.recentDate.toString()
             binding.textStartMoney.text = it.currentMoney
@@ -213,6 +219,12 @@ class ActividadesFragment : Fragment() {
         }
 
         binding.buttonGuardar.setOnClickListener {
+            if (registerDate == currentDate) {
+                Log.d("asdasd", "diferencia de fechas: si $registerDate - $currentDate")
+            } else {
+                Log.d("asdasd", "diferencia de fechas: no $registerDate - $currentDate")
+            }
+
             val current = binding.textMoneyNow.text.toString()
             val lost = binding.textStartMoney.text.toString()
             val recently = binding.textRecentlyMoney.text.toString()

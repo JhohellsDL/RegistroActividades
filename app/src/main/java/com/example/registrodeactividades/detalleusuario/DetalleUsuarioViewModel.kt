@@ -86,26 +86,33 @@ class DetalleUsuarioViewModel(
 
     private suspend fun getListPositivas(): List<AccionPositiva> {
         return withContext(Dispatchers.IO) {
-            val listaPosAndrew = dataAccionPositivaDao.getAll()
-            listaPosAndrew
+            dataAccionPositivaDao.getAll().let {
+                return@let it
+            }
         }
     }
 
     private suspend fun getListNegativas(): List<AccionNegativa> {
         return withContext(Dispatchers.IO) {
-            dataAccionNegativaDao.getAll()
+            dataAccionNegativaDao.getAll().let {
+                return@let it
+            }
         }
     }
 
     private suspend fun getListPositivasMatthew(): List<AccionPositivaMatthew> {
         return withContext(Dispatchers.IO) {
-            dataAccionPositivaMatthewDao.getAll()
+            dataAccionPositivaMatthewDao.getAll().let {
+                return@let it
+            }
         }
     }
 
     private suspend fun getListNegativasMatthew(): List<AccionNegativaMatthew> {
         return withContext(Dispatchers.IO) {
-            dataAccionNegativaMatthewDao.getAll()
+            dataAccionNegativaMatthewDao.getAll().let {
+                return@let it
+            }
         }
     }
 
@@ -160,13 +167,13 @@ class DetalleUsuarioViewModel(
 
     private suspend fun limpiarRegistroAndrew() {
         withContext(Dispatchers.IO) {
-
+            dataAccionPositivaDao.deleteAll()
         }
     }
 
-    private suspend fun limpiarRegistroMatthew() {
+    fun limpiarListaAndrew() {
         uiScope.launch {
-
+            limpiarRegistroAndrew()
         }
     }
 

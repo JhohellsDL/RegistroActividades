@@ -18,6 +18,7 @@ data class UserData(
     var pointsGames: Int = 0,
     var pointsLost: Int = 0,
     var recentMoney: String = "00.00",
+    var registerDate: String? = "",
     var song: Int = 0
 )
 
@@ -38,6 +39,7 @@ fun mapToUserData(data: Map<String, Any>): UserData {
         pointsGames = (data["pointsGames"] as? Long)?.toInt() ?: 0,
         pointsLost = (data["pointsLost"] as? Long)?.toInt() ?: 0,
         recentMoney = data["recentMoney"] as? String ?: "00.00",
+        registerDate = data["registerDate"] as? String ?: "",
         song = (data["song"] as? Long)?.toInt() ?: 0
     )
 }
