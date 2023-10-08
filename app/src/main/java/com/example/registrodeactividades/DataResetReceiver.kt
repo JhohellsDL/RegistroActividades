@@ -28,7 +28,7 @@ class DataResetReceiver : BroadcastReceiver() {
         val notification = NotificationCompat.Builder(
             context, "myChannel"
         )
-            .setSmallIcon(R.drawable.actividad_register_icon)
+            .setSmallIcon(R.drawable.documento_registro)
             .setContentTitle("Tomar agua")
             .setContentText("Toma tu agua ahorita")
             .setStyle(NotificationCompat.BigTextStyle()
